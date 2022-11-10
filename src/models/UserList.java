@@ -1,28 +1,41 @@
 package models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class UserList {
 
-	private User usersList;
-
+	List<User> userList = new ArrayList<>();
+        private User userSelected;
+        
 	public UserList(){
 
 	}
 
 	public void addUser(User user){
-		return null;
+		userList.add(user);
 	}
 
 	
-	public void editUser(User user){
-		return null;
+	public void editUser(User user, String userName, String password){
+                user.setUserName(userName);
+		user.setPassword(password);
+                user.setStatus(2);
 	}
 
 	
-	public 3 removeUser(User user){
-		return null;
+	public void removeUser(User user){
+		user.setStatus(3);
 	}
 
-	public User searchUser(User user){
-		return null;
+	public User searchUser(String name){
+		for(User userName : userList){
+                if(userName.getUserName() == name){
+                    userSelected = userName;
+                }
+            }
+            return userSelected;
 	}
+        
+        
 }//end UserList
