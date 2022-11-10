@@ -4,8 +4,8 @@ public class Product {
 
 	private String color;
 	private int idProduct;
-	private double price;
-	private double size;
+	private float price;
+	private String size;
 	private int status = 4;
 	private int stock;
 	private String type;
@@ -14,7 +14,7 @@ public class Product {
 
 	}
 
-    public Product(String color, int idProduct, double price, double size, int stock, String type) {
+    public Product(String color, int idProduct, float price, String size, int stock, String type) {
         this.color = color;
         this.idProduct = idProduct;
         this.price = price;
@@ -43,15 +43,15 @@ public class Product {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(float price) {
         this.price = price;
     }
 
-    public double getSize() {
+    public String getSize() {
         return size;
     }
 
-    public void setSize(double size) {
+    public void setSize(String size) {
         this.size = size;
     }
 

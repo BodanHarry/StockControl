@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductList {
-        List<Product> productList = new ArrayList<>();
+        private List<Product> productList = new ArrayList<>();
         private Product productSelected;
 
 	public ProductList(){
 
 	}
-
+        
+        
 	public void addProduct(Product product){
 		productList.add(product);
 	}
@@ -30,7 +31,7 @@ public class ProductList {
 		for(Product product : productList){
                     if(product.getIdProduct() == idProduct){
                         product.setColor(newProduct.getColor());
-                        product.setPrice(newProduct.getSize());
+                        product.setPrice((float) newProduct.getPrice());
                         product.setSize(newProduct.getSize());
                         product.setStatus(2);
                         product.setStock(newProduct.getStock());
@@ -58,4 +59,20 @@ public class ProductList {
             }
             return productSelected; 
 	}
+
+    public List<Product> getProductList() {
+        return productList;
+    }
+
+    public void setProductList(List<Product> productList) {
+        this.productList = productList;
+    }
+
+    public Product getProductSelected() {
+        return productSelected;
+    }
+
+    public void setProductSelected(Product productSelected) {
+        this.productSelected = productSelected;
+    }
 }
