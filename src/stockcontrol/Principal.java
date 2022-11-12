@@ -24,5 +24,4 @@ public class Principal {
         main.setVisible(true);
         main.setLocationRelativeTo(null);
     }
-    
 }
