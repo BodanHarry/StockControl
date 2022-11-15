@@ -1,10 +1,10 @@
-package entity;
+package modelos;
 
 
 /**
  * @author hebod
  * @version 1.0
- * @created 14-nov-2022 7:55:01 PM
+ * @created 14-nov-2022 9:08:51 PM
  */
 public class Category {
 

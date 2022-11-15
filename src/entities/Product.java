@@ -1,15 +1,14 @@
-package entity;
+package modelos;
 
 
 /**
  * @author hebod
  * @version 1.0
- * @created 14-nov-2022 7:47:02 PM
+ * @created 14-nov-2022 9:08:51 PM
  */
 public class Product {
 
 	private String productName;
-	private String productDescription;
 	private String productColor;
 	private int idProduct;
 	private double productPrice;

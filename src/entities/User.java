@@ -1,15 +1,13 @@
-package entity;
-
-
+package modelos;
 /**
  * @author hebod
  * @version 1.0
- * @created 14-nov-2022 7:47:02 PM
+ * @created 14-nov-2022 9:08:52 PM
  */
 public class User {
 
-	private String userEmail;
 	private String userName;
+	private String userEmail;
 	private String userPassword;
 
 	public User(){

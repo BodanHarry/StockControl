@@ -1,4 +1,4 @@
-package entity;
+package modelos;
 
 import java.util.Date;
 
@@ -6,7 +6,7 @@ import java.util.Date;
 /**
  * @author hebod
  * @version 1.0
- * @created 14-nov-2022 7:47:02 PM
+ * @created 14-nov-2022 9:08:52 PM
  */
 public class Output {
 
