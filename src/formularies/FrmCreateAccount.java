@@ -24,13 +24,13 @@ public class FrmCreateAccount extends javax.swing.JFrame {
 
         jMainPanelCreateAccount = new javax.swing.JPanel();
         jLbCreateEmail = new javax.swing.JLabel();
-        jTfCreateEmail = new javax.swing.JTextField();
+        jTfCreateUser = new javax.swing.JTextField();
         jSpCreateEmail = new javax.swing.JSeparator();
         jLbCreatePassword = new javax.swing.JLabel();
-        jPfCreatePassword = new javax.swing.JPasswordField();
         jSpCreatePassword = new javax.swing.JSeparator();
         jBtnVerify = new javax.swing.JPanel();
         jLbVerify = new javax.swing.JLabel();
+        jTfCreateEmail = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(290, 200));
@@ -45,30 +45,30 @@ public class FrmCreateAccount extends javax.swing.JFrame {
 
         jLbCreateEmail.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jLbCreateEmail.setForeground(new java.awt.Color(1, 97, 112));
-        jLbCreateEmail.setText("Correo Electrónico");
+        jLbCreateEmail.setText("Nombre de Usuario");
         jMainPanelCreateAccount.add(jLbCreateEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        jTfCreateEmail.setBackground(new java.awt.Color(255, 255, 255));
-        jTfCreateEmail.setFont(new java.awt.Font("SansSerif", 0, 10)); // NOI18N
-        jTfCreateEmail.setForeground(new java.awt.Color(0, 147, 147));
-        jTfCreateEmail.setText("Ingrese su correo electrónico");
-        jTfCreateEmail.setBorder(null);
-        jTfCreateEmail.addFocusListener(new java.awt.event.FocusAdapter() {
+        jTfCreateUser.setBackground(new java.awt.Color(255, 255, 255));
+        jTfCreateUser.setFont(new java.awt.Font("SansSerif", 0, 10)); // NOI18N
+        jTfCreateUser.setForeground(new java.awt.Color(0, 147, 147));
+        jTfCreateUser.setText("Ingrese su nombre de usuario");
+        jTfCreateUser.setBorder(null);
+        jTfCreateUser.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jTfCreateEmailFocusGained(evt);
+                jTfCreateUserFocusGained(evt);
             }
         });
-        jTfCreateEmail.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTfCreateUser.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jTfCreateEmailMousePressed(evt);
+                jTfCreateUserMousePressed(evt);
             }
         });
-        jTfCreateEmail.addActionListener(new java.awt.event.ActionListener() {
+        jTfCreateUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTfCreateEmailActionPerformed(evt);
+                jTfCreateUserActionPerformed(evt);
             }
         });
-        jMainPanelCreateAccount.add(jTfCreateEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 270, 30));
+        jMainPanelCreateAccount.add(jTfCreateUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 270, 30));
 
         jSpCreateEmail.setBackground(new java.awt.Color(1, 97, 112));
         jSpCreateEmail.setForeground(new java.awt.Color(1, 97, 112));
@@ -78,29 +78,8 @@ public class FrmCreateAccount extends javax.swing.JFrame {
 
         jLbCreatePassword.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jLbCreatePassword.setForeground(new java.awt.Color(1, 97, 112));
-        jLbCreatePassword.setText("Contraseña");
-        jLbCreatePassword.setMaximumSize(new java.awt.Dimension(133, 19));
-        jLbCreatePassword.setMinimumSize(new java.awt.Dimension(133, 19));
-        jLbCreatePassword.setPreferredSize(new java.awt.Dimension(133, 19));
+        jLbCreatePassword.setText("Correo Electrónico");
         jMainPanelCreateAccount.add(jLbCreatePassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, -1, -1));
-
-        jPfCreatePassword.setBackground(new java.awt.Color(255, 255, 255));
-        jPfCreatePassword.setFont(new java.awt.Font("SansSerif", 0, 10)); // NOI18N
-        jPfCreatePassword.setForeground(new java.awt.Color(0, 147, 147));
-        jPfCreatePassword.setText("****************");
-        jPfCreatePassword.setBorder(null);
-        jPfCreatePassword.setPreferredSize(new java.awt.Dimension(153, 16));
-        jPfCreatePassword.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                jPfCreatePasswordFocusGained(evt);
-            }
-        });
-        jPfCreatePassword.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jPfCreatePasswordMousePressed(evt);
-            }
-        });
-        jMainPanelCreateAccount.add(jPfCreatePassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 270, 30));
 
         jSpCreatePassword.setBackground(new java.awt.Color(1, 97, 112));
         jSpCreatePassword.setForeground(new java.awt.Color(1, 97, 112));
@@ -142,6 +121,28 @@ public class FrmCreateAccount extends javax.swing.JFrame {
 
         jMainPanelCreateAccount.add(jBtnVerify, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 160, -1, 20));
 
+        jTfCreateEmail.setBackground(new java.awt.Color(255, 255, 255));
+        jTfCreateEmail.setFont(new java.awt.Font("SansSerif", 0, 10)); // NOI18N
+        jTfCreateEmail.setForeground(new java.awt.Color(0, 147, 147));
+        jTfCreateEmail.setText("Ingrese su correo electrónico");
+        jTfCreateEmail.setBorder(null);
+        jTfCreateEmail.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTfCreateEmailFocusGained(evt);
+            }
+        });
+        jTfCreateEmail.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTfCreateEmailMousePressed(evt);
+            }
+        });
+        jTfCreateEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTfCreateEmailActionPerformed(evt);
+            }
+        });
+        jMainPanelCreateAccount.add(jTfCreateEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 270, 30));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -162,47 +163,31 @@ public class FrmCreateAccount extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTfCreateEmailFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTfCreateEmailFocusGained
-        jTfCreateEmail.setText("");
-    }//GEN-LAST:event_jTfCreateEmailFocusGained
+    private void jTfCreateUserFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTfCreateUserFocusGained
+        jTfCreateUser.setText("");
+    }//GEN-LAST:event_jTfCreateUserFocusGained
     
     public JPanel getFondo() {
         return jMainPanelCreateAccount;
     }
-    private void jTfCreateEmailMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTfCreateEmailMousePressed
-        if(jTfCreateEmail.getText().equals("Ingrese su correo electrónico")){
-            jTfCreateEmail.setText("");
-            jTfCreateEmail.setForeground(new Color(0,147,147));
-        }
-
-        if(String.valueOf(jPfCreatePassword.getPassword()).equals("")){
-            jPfCreatePassword.setText("****************");
-            jPfCreatePassword.setForeground(new Color(0,147,147));
-        }
-    }//GEN-LAST:event_jTfCreateEmailMousePressed
-
-    private void jTfCreateEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTfCreateEmailActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTfCreateEmailActionPerformed
-
-    private void jPfCreatePasswordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPfCreatePasswordFocusGained
-        jPfCreatePassword.setText("");
-    }//GEN-LAST:event_jPfCreatePasswordFocusGained
-
-    private void jPfCreatePasswordMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPfCreatePasswordMousePressed
-        if(jPfCreatePassword.getPassword().equals("****************")){
-            jPfCreatePassword.setText("");
-            jPfCreatePassword.setForeground(new Color(0,147,147));
+    private void jTfCreateUserMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTfCreateUserMousePressed
+        if(jTfCreateUser.getText().equals("Ingrese su nombre de usuario")){
+            jTfCreateUser.setText("");
+            jTfCreateUser.setForeground(new Color(0,147,147));
         }
 
         if(String.valueOf(jTfCreateEmail.getText()).equals("")){
-            jTfCreateEmail.setText("Ingrese su correo electrónico");
+            jTfCreateEmail.setText("Ingrese su correco electrónico");
             jTfCreateEmail.setForeground(new Color(0,147,147));
         }
-    }//GEN-LAST:event_jPfCreatePasswordMousePressed
+    }//GEN-LAST:event_jTfCreateUserMousePressed
+
+    private void jTfCreateUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTfCreateUserActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTfCreateUserActionPerformed
 
     private void jBtnVerifyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnVerifyMouseClicked
-        JOptionPane.showMessageDialog(this, "Intento de login con los datos:\nUsuario: " + jTfCreateEmail.getText() + "\nContraseña: " + String.valueOf(jPfCreatePassword.getPassword()));
+        JOptionPane.showMessageDialog(this, "Intento de login con los datos:\nUsuario: " + jTfCreateUser.getText() + "\nCorreo: " + String.valueOf(jTfCreateEmail.getText()));
         String email = jTfCreateEmail.getText();
         String temporaryPassword = sendEmail.createEmail(email);
         sendEmail.SendEmail();
@@ -215,6 +200,26 @@ public class FrmCreateAccount extends javax.swing.JFrame {
     private void jBtnVerifyMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnVerifyMouseExited
         jBtnVerify.setBackground(new Color(0,147,147));
     }//GEN-LAST:event_jBtnVerifyMouseExited
+
+    private void jTfCreateEmailFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTfCreateEmailFocusGained
+        jTfCreateEmail.setText("");
+    }//GEN-LAST:event_jTfCreateEmailFocusGained
+
+    private void jTfCreateEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTfCreateEmailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTfCreateEmailActionPerformed
+
+    private void jTfCreateEmailMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTfCreateEmailMousePressed
+        if(jTfCreateUser.getText().equals("")){
+            jTfCreateUser.setText("Ingrese su nombre de usuario");
+            jTfCreateUser.setForeground(new Color(0,147,147));
+        }
+
+        if(String.valueOf(jTfCreateEmail.getText()).equals("Ingrese su correco electrónico")){
+            jTfCreateEmail.setText("");
+            jTfCreateEmail.setForeground(new Color(0,147,147));
+        }
+    }//GEN-LAST:event_jTfCreateEmailMousePressed
 
     /**
      * @param args the command line arguments
@@ -257,9 +262,9 @@ public class FrmCreateAccount extends javax.swing.JFrame {
     private javax.swing.JLabel jLbCreatePassword;
     private javax.swing.JLabel jLbVerify;
     private javax.swing.JPanel jMainPanelCreateAccount;
-    private javax.swing.JPasswordField jPfCreatePassword;
     private javax.swing.JSeparator jSpCreateEmail;
     private javax.swing.JSeparator jSpCreatePassword;
     private javax.swing.JTextField jTfCreateEmail;
+    private javax.swing.JTextField jTfCreateUser;
     // End of variables declaration//GEN-END:variables
 }

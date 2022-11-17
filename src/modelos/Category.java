@@ -24,31 +24,6 @@ public class Category {
         this.productSize = productSize;
     }
 
-	
-	/**
-	 * 
-	 * @param category
-	 */
-	public boolean addCategory(Category category){
-		return false;
-	}
-
-	/**
-	 * 
-	 * @param idCategory
-	 */
-	public Category searchCategory(int idCategory){
-		return null;
-	}
-
-	/**
-	 * 
-	 * @param idCategory
-	 */
-	public boolean editCategory(int idCategory){
-		return false;
-	}
-
     public int getIdCategory() {
         return idCategory;
     }
@@ -80,4 +55,11 @@ public class Category {
     public void setProductSize(String productSize) {
         this.productSize = productSize;
     }
+
+    @Override
+    public String toString() {
+        return "Category{" + "idCategory=" + idCategory + ", productDescription=" + productDescription + ", productType=" + productType + ", productSize=" + productSize + '}';
+    }
+    
+    
 }//end Category
