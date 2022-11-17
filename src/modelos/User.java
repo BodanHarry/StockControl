@@ -25,9 +25,7 @@ public class User {
 	 * 
 	 * @param user
 	 */
-	public boolean addUser(User user){
-		return false;
-	}
+	
 
 	/**
 	 * 
@@ -41,9 +39,7 @@ public class User {
 	 * 
 	 * @param userName
 	 */
-	public void removeUser(String userName){
-
-	}
+	
 
 	/**
 	 * 
