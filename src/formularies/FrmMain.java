@@ -19,14 +19,14 @@ public class FrmMain extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
-        jBtnMin = new javax.swing.JPanel();
-        jLbMin = new javax.swing.JLabel();
         jSpCreateAccount = new javax.swing.JSeparator();
         jSpLogin = new javax.swing.JSeparator();
         jSpSeparator = new javax.swing.JSeparator();
         jBtnClose = new javax.swing.JPanel();
         jLbClose = new javax.swing.JLabel();
         jPanelBar = new javax.swing.JPanel();
+        jBtnMin = new javax.swing.JPanel();
+        jLbMin = new javax.swing.JLabel();
         jPanels = new javax.swing.JPanel();
         jLbCreateAccount = new javax.swing.JLabel();
         jBtnCreateAccount = new javax.swing.JPanel();
@@ -43,39 +43,6 @@ public class FrmMain extends javax.swing.JFrame {
         jPanel2.setForeground(new java.awt.Color(15, 23, 46));
         jPanel2.setMaximumSize(new java.awt.Dimension(560, 353));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jBtnMin.setBackground(new java.awt.Color(1, 97, 112));
-        jBtnMin.setForeground(new java.awt.Color(1, 97, 112));
-        jBtnMin.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jBtnMinMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jBtnMinMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jBtnMinMouseExited(evt);
-            }
-        });
-
-        jLbMin.setBackground(new java.awt.Color(255, 255, 255));
-        jLbMin.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        jLbMin.setForeground(new java.awt.Color(255, 255, 255));
-        jLbMin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLbMin.setText("-");
-
-        javax.swing.GroupLayout jBtnMinLayout = new javax.swing.GroupLayout(jBtnMin);
-        jBtnMin.setLayout(jBtnMinLayout);
-        jBtnMinLayout.setHorizontalGroup(
-            jBtnMinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLbMin, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-        );
-        jBtnMinLayout.setVerticalGroup(
-            jBtnMinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLbMin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
-        );
-
-        jPanel2.add(jBtnMin, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 0, 50, 20));
 
         jSpCreateAccount.setForeground(new java.awt.Color(255, 255, 255));
         jPanel2.add(jSpCreateAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 80, 100, 10));
@@ -112,11 +79,11 @@ public class FrmMain extends javax.swing.JFrame {
         jBtnClose.setLayout(jBtnCloseLayout);
         jBtnCloseLayout.setHorizontalGroup(
             jBtnCloseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLbClose, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+            .addComponent(jLbClose, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
         );
         jBtnCloseLayout.setVerticalGroup(
             jBtnCloseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLbClose, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
+            .addComponent(jLbClose, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
         );
 
         jPanel2.add(jBtnClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 0, 50, 20));
@@ -136,18 +103,57 @@ public class FrmMain extends javax.swing.JFrame {
             }
         });
 
+        jBtnMin.setBackground(new java.awt.Color(1, 97, 112));
+        jBtnMin.setForeground(new java.awt.Color(1, 97, 112));
+        jBtnMin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBtnMinMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jBtnMinMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jBtnMinMouseExited(evt);
+            }
+        });
+
+        jLbMin.setBackground(new java.awt.Color(255, 255, 255));
+        jLbMin.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        jLbMin.setForeground(new java.awt.Color(255, 255, 255));
+        jLbMin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLbMin.setText("-");
+
+        javax.swing.GroupLayout jBtnMinLayout = new javax.swing.GroupLayout(jBtnMin);
+        jBtnMin.setLayout(jBtnMinLayout);
+        jBtnMinLayout.setHorizontalGroup(
+            jBtnMinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jBtnMinLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLbMin, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jBtnMinLayout.setVerticalGroup(
+            jBtnMinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jBtnMinLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLbMin, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
         javax.swing.GroupLayout jPanelBarLayout = new javax.swing.GroupLayout(jPanelBar);
         jPanelBar.setLayout(jPanelBarLayout);
         jPanelBarLayout.setHorizontalGroup(
             jPanelBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 560, Short.MAX_VALUE)
+            .addGroup(jPanelBarLayout.createSequentialGroup()
+                .addComponent(jBtnMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 520, Short.MAX_VALUE))
         );
         jPanelBarLayout.setVerticalGroup(
             jPanelBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 20, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelBarLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jBtnMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jPanel2.add(jPanelBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, 20));
+        jPanel2.add(jPanelBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 570, 20));
 
         jPanels.setBackground(new java.awt.Color(255, 255, 255));
         jPanels.setForeground(new java.awt.Color(255, 255, 255));
