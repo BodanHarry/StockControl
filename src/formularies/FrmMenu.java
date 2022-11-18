@@ -35,6 +35,14 @@ public class FrmMenu extends javax.swing.JFrame {
         jBtnMin = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
+        jPanelNews = new javax.swing.JPanel();
+        jLbNews = new javax.swing.JLabel();
+        jPanelinput = new javax.swing.JPanel();
+        jPanelProduct = new javax.swing.JPanel();
+        jPanelCategory = new javax.swing.JPanel();
+        jPanelOutput = new javax.swing.JPanel();
+        jPanelUser = new javax.swing.JPanel();
+        jPanelOptions = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -155,15 +163,178 @@ public class FrmMenu extends javax.swing.JFrame {
         jPanel1.setForeground(new java.awt.Color(15, 23, 46));
         jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
+        jPanelNews.setBackground(new java.awt.Color(15, 23, 46));
+        jPanelNews.setForeground(new java.awt.Color(15, 23, 46));
+        jPanelNews.setToolTipText("");
+        jPanelNews.setMaximumSize(new java.awt.Dimension(140, 50));
+        jPanelNews.setMinimumSize(new java.awt.Dimension(140, 50));
+        jPanelNews.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jPanelNewsMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jPanelNewsMouseExited(evt);
+            }
+        });
+
+        jLbNews.setBackground(new java.awt.Color(255, 255, 255));
+        jLbNews.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jLbNews.setForeground(new java.awt.Color(255, 255, 255));
+        jLbNews.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLbNews.setText("Noticias");
+
+        javax.swing.GroupLayout jPanelNewsLayout = new javax.swing.GroupLayout(jPanelNews);
+        jPanelNews.setLayout(jPanelNewsLayout);
+        jPanelNewsLayout.setHorizontalGroup(
+            jPanelNewsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelNewsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLbNews, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanelNewsLayout.setVerticalGroup(
+            jPanelNewsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelNewsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLbNews, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jPanelinput.setBackground(new java.awt.Color(35, 112, 47));
+        jPanelinput.setForeground(new java.awt.Color(35, 112, 47));
+        jPanelinput.setMaximumSize(new java.awt.Dimension(140, 50));
+        jPanelinput.setMinimumSize(new java.awt.Dimension(140, 50));
+
+        javax.swing.GroupLayout jPanelinputLayout = new javax.swing.GroupLayout(jPanelinput);
+        jPanelinput.setLayout(jPanelinputLayout);
+        jPanelinputLayout.setHorizontalGroup(
+            jPanelinputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 140, Short.MAX_VALUE)
+        );
+        jPanelinputLayout.setVerticalGroup(
+            jPanelinputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
+
+        jPanelProduct.setBackground(new java.awt.Color(35, 67, 47));
+        jPanelProduct.setForeground(new java.awt.Color(35, 67, 47));
+        jPanelProduct.setMaximumSize(new java.awt.Dimension(140, 50));
+        jPanelProduct.setMinimumSize(new java.awt.Dimension(140, 50));
+
+        javax.swing.GroupLayout jPanelProductLayout = new javax.swing.GroupLayout(jPanelProduct);
+        jPanelProduct.setLayout(jPanelProductLayout);
+        jPanelProductLayout.setHorizontalGroup(
+            jPanelProductLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanelProductLayout.setVerticalGroup(
+            jPanelProductLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
+
+        jPanelCategory.setBackground(new java.awt.Color(100, 67, 47));
+        jPanelCategory.setForeground(new java.awt.Color(100, 67, 47));
+        jPanelCategory.setMaximumSize(new java.awt.Dimension(140, 50));
+        jPanelCategory.setMinimumSize(new java.awt.Dimension(140, 50));
+        jPanelCategory.setPreferredSize(new java.awt.Dimension(140, 50));
+
+        javax.swing.GroupLayout jPanelCategoryLayout = new javax.swing.GroupLayout(jPanelCategory);
+        jPanelCategory.setLayout(jPanelCategoryLayout);
+        jPanelCategoryLayout.setHorizontalGroup(
+            jPanelCategoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 140, Short.MAX_VALUE)
+        );
+        jPanelCategoryLayout.setVerticalGroup(
+            jPanelCategoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
+
+        jPanelOutput.setBackground(new java.awt.Color(200, 112, 47));
+        jPanelOutput.setForeground(new java.awt.Color(200, 112, 47));
+        jPanelOutput.setMaximumSize(new java.awt.Dimension(140, 50));
+        jPanelOutput.setMinimumSize(new java.awt.Dimension(140, 50));
+
+        javax.swing.GroupLayout jPanelOutputLayout = new javax.swing.GroupLayout(jPanelOutput);
+        jPanelOutput.setLayout(jPanelOutputLayout);
+        jPanelOutputLayout.setHorizontalGroup(
+            jPanelOutputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 140, Short.MAX_VALUE)
+        );
+        jPanelOutputLayout.setVerticalGroup(
+            jPanelOutputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
+
+        jPanelUser.setBackground(new java.awt.Color(200, 200, 47));
+        jPanelUser.setForeground(new java.awt.Color(200, 200, 47));
+        jPanelUser.setMaximumSize(new java.awt.Dimension(140, 50));
+        jPanelUser.setMinimumSize(new java.awt.Dimension(140, 50));
+        jPanelUser.setRequestFocusEnabled(false);
+        jPanelUser.setVerifyInputWhenFocusTarget(false);
+
+        javax.swing.GroupLayout jPanelUserLayout = new javax.swing.GroupLayout(jPanelUser);
+        jPanelUser.setLayout(jPanelUserLayout);
+        jPanelUserLayout.setHorizontalGroup(
+            jPanelUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 140, Short.MAX_VALUE)
+        );
+        jPanelUserLayout.setVerticalGroup(
+            jPanelUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
+
+        jPanelOptions.setBackground(new java.awt.Color(150, 34, 2));
+        jPanelOptions.setForeground(new java.awt.Color(150, 34, 2));
+        jPanelOptions.setToolTipText("");
+        jPanelOptions.setMaximumSize(new java.awt.Dimension(140, 50));
+        jPanelOptions.setMinimumSize(new java.awt.Dimension(140, 50));
+        jPanelOptions.setRequestFocusEnabled(false);
+        jPanelOptions.setVerifyInputWhenFocusTarget(false);
+
+        javax.swing.GroupLayout jPanelOptionsLayout = new javax.swing.GroupLayout(jPanelOptions);
+        jPanelOptions.setLayout(jPanelOptionsLayout);
+        jPanelOptionsLayout.setHorizontalGroup(
+            jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 140, Short.MAX_VALUE)
+        );
+        jPanelOptionsLayout.setVerticalGroup(
+            jPanelOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 140, Short.MAX_VALUE)
+            .addComponent(jPanelNews, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanelProduct, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanelOutput, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanelinput, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanelUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanelCategory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanelOptions, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 520, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(76, 76, 76)
+                .addComponent(jPanelNews, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanelProduct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanelCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanelinput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanelOutput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanelUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanelOptions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(58, Short.MAX_VALUE))
         );
 
         jPanelMenu.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 140, 520));
@@ -222,6 +393,16 @@ public class FrmMenu extends javax.swing.JFrame {
         jBtnClose.setBackground(new Color(255,102,102));
     }//GEN-LAST:event_jBtnCloseMouseExited
 
+    private void jPanelNewsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelNewsMouseEntered
+        jPanelNews.setBackground(new Color(255,255,255));
+        jLbNews.setForeground(new Color(15,23,46));
+    }//GEN-LAST:event_jPanelNewsMouseEntered
+
+    private void jPanelNewsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelNewsMouseExited
+        jPanelNews.setBackground(new Color(15,23,46));
+        jLbNews.setForeground(new Color(255,255,255));
+    }//GEN-LAST:event_jPanelNewsMouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -263,8 +444,16 @@ public class FrmMenu extends javax.swing.JFrame {
     private javax.swing.JPanel jBtnMin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLbNews;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanelCategory;
     private javax.swing.JPanel jPanelMenu;
+    private javax.swing.JPanel jPanelNews;
+    private javax.swing.JPanel jPanelOptions;
+    private javax.swing.JPanel jPanelOutput;
+    private javax.swing.JPanel jPanelProduct;
+    private javax.swing.JPanel jPanelUser;
+    private javax.swing.JPanel jPanelinput;
     // End of variables declaration//GEN-END:variables
 }
