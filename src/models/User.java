@@ -1,4 +1,4 @@
-package modelos;
+package models;
 /**
  * @author hebod
  * @version 1.0
@@ -19,35 +19,6 @@ public class User {
         this.userEmail = userEmail;
         this.userPassword = userPassword;
     }
-
-	
-	/**
-	 * 
-	 * @param user
-	 */
-	
-
-	/**
-	 * 
-	 * @param userName
-	 */
-	public boolean editUser(String userName){
-		return false;
-	}
-
-	/**
-	 * 
-	 * @param userName
-	 */
-	
-
-	/**
-	 * 
-	 * @param userName
-	 */
-	public User searchUser(String userName){
-		return null;
-	}
 
     public String getUserName() {
         return userName;
@@ -72,4 +43,10 @@ public class User {
     public void setUserPassword(String userPassword) {
         this.userPassword = userPassword;
     }
+
+    @Override
+    public String toString() {
+        return "User{" + "userName=" + userName + ", userEmail=" + userEmail + ", userPassword=" + userPassword + '}';
+    }
+    
 }//end User

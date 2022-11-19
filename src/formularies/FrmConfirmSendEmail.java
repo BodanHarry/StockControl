@@ -18,6 +18,7 @@ public class FrmConfirmSendEmail extends javax.swing.JFrame {
      */
     public FrmConfirmSendEmail() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**

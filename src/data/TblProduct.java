@@ -9,8 +9,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import modelos.Category;
-import modelos.Product;
+import models.Category;
+import models.Product;
 
 /**
  *

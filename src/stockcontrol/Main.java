@@ -11,17 +11,13 @@ import java.time.LocalDate;
  *
  * @author hebod
  */
-public class Principal {
+public class Main {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
         
         LocalDate hoy = LocalDate.now();
         System.out.println(hoy);
         FrmMain main = new FrmMain();
         main.setVisible(true);
-        main.setLocationRelativeTo(null);
     }
 }

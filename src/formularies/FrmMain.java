@@ -8,8 +8,10 @@ public class FrmMain extends javax.swing.JFrame {
     
     int xMouse, yMouse;
     
+    
     public FrmMain() {
         initComponents();
+        this.setLocationRelativeTo(null);
         FrmLogin start = new FrmLogin();
         showPanel(start.getFondo());
     }   

@@ -1,4 +1,4 @@
-package modelos;
+package models;
 
 import java.util.Date;
 
@@ -29,31 +29,6 @@ public class Input {
         this.m_Product = m_Product;
         this.m_User = m_User;
     }
-
-	
-	/**
-	 * 
-	 * @param input
-	 */
-	public boolean addInput(Input input){
-		return false;
-	}
-
-	/**
-	 * 
-	 * @param idInput
-	 */
-	public boolean editInput(int idInput){
-		return false;
-	}
-
-	/**
-	 * 
-	 * @param idInput
-	 */
-	public Input searchInput(int idInput){
-		return null;
-	}
 
     public int getIdInput() {
         return idInput;
@@ -101,6 +76,11 @@ public class Input {
 
     public void setM_User(User m_User) {
         this.m_User = m_User;
+    }
+
+    @Override
+    public String toString() {
+        return "Input{" + "idInput=" + idInput + ", inputDate=" + inputDate + ", inputPrice=" + inputPrice + ", inputQuantity=" + inputQuantity + ", m_Product=" + m_Product + ", m_User=" + m_User + '}';
     }
         
         

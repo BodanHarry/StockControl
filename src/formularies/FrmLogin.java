@@ -212,6 +212,10 @@ public class FrmLogin extends javax.swing.JFrame {
 
     private void jBtnLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnLoginMouseClicked
         JOptionPane.showMessageDialog(null, "Credenciales enviadas");
+        if(jTfEmail.getText().equals("aa") || jPfPassword.getPassword().equals("aa")){
+            FrmMenu menu = new FrmMenu();
+            menu.setVisible(true);
+        }
         jTfEmail.setText("");
         jPfPassword.setText("");
     }//GEN-LAST:event_jBtnLoginMouseClicked

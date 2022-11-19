@@ -1,4 +1,4 @@
-package modelos;
+package models;
 
 
 /**
@@ -25,39 +25,6 @@ public class Product {
         this.productPrice = productPrice;
         this.m_Category = m_Category;
     }
-
-	
-	/**
-	 * 
-	 * @param product
-	 */
-	public boolean addProduct(Product product){
-		return false;
-	}
-
-	/**
-	 * 
-	 * @param userName
-	 */
-	public Product searchProduct(String userName){
-		return null;
-	}
-
-	/**
-	 * 
-	 * @param idProduct
-	 */
-	public boolean editProduct(int idProduct){
-		return false;
-	}
-
-	/**
-	 * 
-	 * @param idProduct
-	 */
-	public boolean removeProduct(int idProduct){
-		return false;
-	}
 
     public String getProductName() {
         return productName;
@@ -98,4 +65,10 @@ public class Product {
     public void setM_Category(Category m_Category) {
         this.m_Category = m_Category;
     }
+
+    @Override
+    public String toString() {
+        return "Product{" + "productName=" + productName + ", productColor=" + productColor + ", idProduct=" + idProduct + ", productPrice=" + productPrice + ", m_Category=" + m_Category + '}';
+    }
+
 }//end Product

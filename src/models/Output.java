@@ -1,4 +1,4 @@
-package modelos;
+package models;
 
 import java.util.Date;
 
@@ -29,31 +29,6 @@ public class Output {
         this.m_Product = m_Product;
         this.m_User = m_User;
     }
-
-	
-	/**
-	 * 
-	 * @param output
-	 */
-	public boolean addOutput(Output output){
-		return false;
-	}
-
-	/**
-	 * 
-	 * @param idOutput
-	 */
-	public boolean editOutput(int idOutput){
-		return false;
-	}
-
-	/**
-	 * 
-	 * @param idOutput
-	 */
-	public Output searchOutput(int idOutput){
-		return null;
-	}
 
     public int getIdOutput() {
         return idOutput;
@@ -102,4 +77,10 @@ public class Output {
     public void setM_User(User m_User) {
         this.m_User = m_User;
     }
+
+    @Override
+    public String toString() {
+        return "Output{" + "idOutput=" + idOutput + ", outputDate=" + outputDate + ", outputPrice=" + outputPrice + ", outputQuantity=" + outputQuantity + ", m_Product=" + m_Product + ", m_User=" + m_User + '}';
+    }
+    
 }//end Output
