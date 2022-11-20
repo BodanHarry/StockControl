@@ -24,7 +24,7 @@ public class TblUser {
     public void getReg() throws SQLException {
         try {
             conn = Conexion.getConnection();
-            String tSQL = "Select * from User";
+            String tSQL = "Select * from [stockControl].[dbo].[User]";
             ps = conn.prepareStatement(tSQL, ResultSet.TYPE_SCROLL_SENSITIVE,
                     ResultSet.CONCUR_UPDATABLE
                     + ResultSet.HOLD_CURSORS_OVER_COMMIT
@@ -35,12 +35,12 @@ public class TblUser {
         }
     }
 
-    public ArrayList<User> listaAutor() {
-        ArrayList<User> lista = new ArrayList<>();
+    public ArrayList<User> listaUser() {
+        ArrayList<User> list = new ArrayList<>();
         try {
             this.getReg();
             while (rs.next()) {
-                lista.add(new User(
+                list.add(new User(
                         rs.getString("Username"),
                         rs.getString("Useremail"),
                         rs.getString("Userpassword")
@@ -68,7 +68,7 @@ public class TblUser {
 
         }
 
-        return lista;
+        return list;
 
     }
 
@@ -186,7 +186,7 @@ public class TblUser {
             this.getReg();
             rs.beforeFirst();
             while (rs.next()) {
-                if (rs.getString("Username") == username) {
+                if (rs.getString("Username").equals(username)) {
                     rs.deleteRow();
                     resp = true;
                     break;
@@ -215,13 +215,13 @@ public class TblUser {
         }
         return resp;
     }
-    
+
     public User getUser(String username) {
-        User user =  new User();
+        User user = new User();
         try {
             this.getReg();
             while (rs.next()) {
-                if (rs.getString("Username") == username) {
+                if (rs.getString("Username").equals(username)) {
                     user = new User(
                             rs.getString("Username"),
                             rs.getString("Useremail"),
