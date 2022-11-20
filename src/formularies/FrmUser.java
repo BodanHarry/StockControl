@@ -5,6 +5,9 @@
 package formularies;
 
 import data.TblUser;
+import java.awt.HeadlessException;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.BorderFactory;
@@ -35,7 +38,7 @@ public class FrmUser extends javax.swing.JFrame {
         this.dataPanel.setBorder(BorderFactory.createEmptyBorder());
         this.RegPanel.setBorder(BorderFactory.createEmptyBorder());
         jTblReg.setBorder(BorderFactory.createEmptyBorder());
-        this.llenarTabla();
+        this.fillTable();
     }
 
     public void clear() {
@@ -59,16 +62,17 @@ public class FrmUser extends javax.swing.JFrame {
         userList = dUser.listaUser();
     }
 
-    private void llenarTabla() {
+    private void fillTable() {
         fillList();
         DefaultTableModel dtm = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
+            
 
         };
-        String titulos[] = {"UserId", "Username", "UserEmail"};
+        String titulos[] = {"Username", "Email", "Password"};
         dtm.setColumnIdentifiers(titulos);
         for (User user : userList) {
             Object[] row = new Object[]{
@@ -83,6 +87,7 @@ public class FrmUser extends javax.swing.JFrame {
 
     private void filtrarTabla() {
         trsFiltro.setRowFilter(RowFilter.regexFilter(this.jTFBuscar.getText(), 0));
+       
     }
 
     private void foundData() {
@@ -98,24 +103,26 @@ public class FrmUser extends javax.swing.JFrame {
         BtnEliminar.setEnabled(true);
         jTFUsername.requestFocus();
     }
-    
-    private void verificarDatosVacios(){
-        if(jTFUsername.getText().equals("") || jTFUsername.getText().length() == 0){
-            JOptionPane.showMessageDialog(this,"Por favor verifique los nombres "+
-                    "no esten vacios.", "Autor", JOptionPane.WARNING_MESSAGE);
+
+    private void verificarDatosVacios() {
+        if (jTFUsername.getText().equals("") || jTFUsername.getText().length() == 0) {
+            JOptionPane.showMessageDialog(this, "Por favor verifique los nombres "
+                    + "no esten vacios.", "Autor", JOptionPane.WARNING_MESSAGE);
             jTFUsername.requestFocus();
         }
-        if(jTFEmail.getText().equals("") || jTFEmail.getText().length() == 0){
-            JOptionPane.showMessageDialog(this,"Por favor verifique los apellidos "+
-                    "no esten vacios.", "Autor", JOptionPane.WARNING_MESSAGE);
+        if (jTFEmail.getText().equals("") || jTFEmail.getText().length() == 0) {
+            JOptionPane.showMessageDialog(this, "Por favor verifique los apellidos "
+                    + "no esten vacios.", "Autor", JOptionPane.WARNING_MESSAGE);
             jTFEmail.requestFocus();
-        }if(JTFPassword.getText().equals("") || JTFPassword.getText().length() == 0){
-            JOptionPane.showMessageDialog(this,"Por favor verifique los apellidos "+
-                    "no esten vacios.", "Autor", JOptionPane.WARNING_MESSAGE);
+        }
+        if (JTFPassword.getText().equals("") || JTFPassword.getText().length() == 0) {
+            JOptionPane.showMessageDialog(this, "Por favor verifique los apellidos "
+                    + "no esten vacios.", "Autor", JOptionPane.WARNING_MESSAGE);
             JTFPassword.requestFocus();
-        }if(JTFPassword2.getText().equals("") || JTFPassword2.getText().length() == 0){
-            JOptionPane.showMessageDialog(this,"Por favor verifique los apellidos "+
-                    "no esten vacios.", "Autor", JOptionPane.WARNING_MESSAGE);
+        }
+        if (JTFPassword2.getText().equals("") || JTFPassword2.getText().length() == 0) {
+            JOptionPane.showMessageDialog(this, "Por favor verifique los apellidos "
+                    + "no esten vacios.", "Autor", JOptionPane.WARNING_MESSAGE);
             JTFPassword2.requestFocus();
         }
     }
@@ -244,6 +251,11 @@ public class FrmUser extends javax.swing.JFrame {
         BtnGuardar.setForeground(new java.awt.Color(255, 255, 255));
         BtnGuardar.setText("Guardar");
         BtnGuardar.setBorder(null);
+        BtnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnGuardarActionPerformed(evt);
+            }
+        });
         dataPanel.add(BtnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 380, 130, 40));
 
         BtnNuevo.setBackground(new java.awt.Color(0, 153, 153));
@@ -263,6 +275,11 @@ public class FrmUser extends javax.swing.JFrame {
         BtnEliminar.setForeground(new java.awt.Color(255, 255, 255));
         BtnEliminar.setText("Eliminar");
         BtnEliminar.setBorder(null);
+        BtnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnEliminarActionPerformed(evt);
+            }
+        });
         dataPanel.add(BtnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 380, 130, 40));
 
         BtnEditar.setBackground(new java.awt.Color(0, 153, 153));
@@ -270,6 +287,11 @@ public class FrmUser extends javax.swing.JFrame {
         BtnEditar.setForeground(new java.awt.Color(255, 255, 255));
         BtnEditar.setText("Editar");
         BtnEditar.setBorder(null);
+        BtnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnEditarActionPerformed(evt);
+            }
+        });
         dataPanel.add(BtnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 380, 130, 40));
 
         JTBP.addTab("Datos", dataPanel);
@@ -283,6 +305,14 @@ public class FrmUser extends javax.swing.JFrame {
         jTFBuscar.setForeground(new java.awt.Color(255, 255, 255));
         jTFBuscar.setBorder(null);
         jTFBuscar.setCaretColor(new java.awt.Color(255, 255, 255));
+        jTFBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTFBuscarKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTFBuscarKeyTyped(evt);
+            }
+        });
         RegPanel.add(jTFBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 50, 450, 30));
 
         jLabel6.setFont(new java.awt.Font("Inter SemiBold", 0, 18)); // NOI18N
@@ -315,6 +345,11 @@ public class FrmUser extends javax.swing.JFrame {
         jTblReg.setSelectionForeground(new java.awt.Color(255, 255, 255));
         jTblReg.setShowHorizontalLines(false);
         jTblReg.setShowVerticalLines(false);
+        jTblReg.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTblRegMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTblReg);
 
         jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 880, 460));
@@ -345,11 +380,123 @@ public class FrmUser extends javax.swing.JFrame {
 
     private void BtnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNuevoActionPerformed
         // TODO add your handling code here:
-
+        clear();
+        this.JTBP.setSelectedIndex(0);
     }//GEN-LAST:event_BtnNuevoActionPerformed
+
+    private void BtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarActionPerformed
+        // TODO add your handling code here:
+        this.verificarDatosVacios();
+        int resp = JOptionPane.showConfirmDialog(this, "Desea eliminar este registro? ",
+                                            "User", JOptionPane.YES_NO_OPTION, 
+                                            JOptionPane.QUESTION_MESSAGE);
+         if (resp == 0){
+            if(dUser.removeUser(username)){
+                JOptionPane.showMessageDialog(this, "Registro eliminado", "Autor" , JOptionPane.INFORMATION_MESSAGE);
+            }else{
+                JOptionPane.showMessageDialog(this, "Error al eliminar ", "Autor", JOptionPane.WARNING_MESSAGE);
+            }
+        }
+         fillTable();
+    }//GEN-LAST:event_BtnEliminarActionPerformed
+
+    private String checkPass() {
+        Boolean flag = true;
+        while (flag) {
+            JTFPassword.requestFocus();
+            if (this.JTFPassword.getText().equals(this.JTFPassword2.getText())) {
+                flag = false;
+                return JTFPassword.getText();
+            } else {
+                JOptionPane.showMessageDialog(this, "Contraseñas inválidas",
+                        "Vuelva a intentar", JOptionPane.WARNING_MESSAGE);
+                flag = true;
+                this.clearPass();
+            }
+        }
+        return JTFPassword.getText();
+    }
+
+    public Boolean checking() {
+        Boolean flag = false;
+        if (this.JTFPassword.getText().equals(this.JTFPassword2.getText()) &&
+                JTFPassword.getText().length() != 0 &&
+                JTFPassword2.getText().length() != 0 ) {
+            flag = true;
+        }else{
+            flag = false;
+        }
+        return flag;
+    }
+
+    private void BtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGuardarActionPerformed
+        // TODO add your handling code here:
+        this.verificarDatosVacios();
+        try {
+            User user = new User(this.jTFUsername.getText(),
+                    this.jTFEmail.getText(), this.checkPass());
+            if (checking() == true && dUser.addUser(user)) {
+                JOptionPane.showMessageDialog(this, "Registro Guardado",
+                         "User", JOptionPane.INFORMATION_MESSAGE);
+                this.fillTable();
+                this.JTBP.setSelectedIndex(1);
+            } else {
+                JOptionPane.showMessageDialog(this, "Error al guardar");
+            }
+        } catch (HeadlessException es) {
+            System.out.println("Error al intentar guardar" + es.getMessage());
+        }
+    }//GEN-LAST:event_BtnGuardarActionPerformed
+
+    private void BtnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditarActionPerformed
+        // TODO add your handling code here:
+        this.verificarDatosVacios();
+        User user = new User(this.jTFUsername.getText(),
+                this.jTFEmail.getText(), this.checkPass()); 
+        if(checking() == true && dUser.addUser(user)){
+           JOptionPane.showMessageDialog(this, "Registro editado");
+           fillTable();
+           this.JTBP.setSelectedIndex(1);
+           
+        }else{
+            JOptionPane.showMessageDialog(this, "Error al editar");
+        }
+    }//GEN-LAST:event_BtnEditarActionPerformed
+
+    private void jTFBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFBuscarKeyTyped
+        // TODO add your handling code here:
+        this.jTFBuscar.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(final KeyEvent e) {
+                filtrarTabla();
+            }
+        });
+        trsFiltro = new TableRowSorter(this.jTblReg.getModel());
+        jTblReg.setRowSorter(trsFiltro);
+    }//GEN-LAST:event_jTFBuscarKeyTyped
+
+    private void jTFBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFBuscarKeyReleased
+        // TODO add your handling code here:
+                filtrarTabla();
+        trsFiltro = new TableRowSorter(jTblReg.getModel());
+        jTblReg.setRowSorter(trsFiltro);
+    }//GEN-LAST:event_jTFBuscarKeyReleased
+
+    private void jTblRegMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTblRegMouseClicked
+        // TODO add your handling code here:
+        jTblReg.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent click) {
+                if (click.getClickCount() == 2) {
+                   foundData();
+                }
+            }
+        });
+    }//GEN-LAST:event_jTblRegMouseClicked
 
     public JPanel getFondo() {
         return jMainPanelUser;
+
     }
 
     /**

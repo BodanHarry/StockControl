@@ -81,6 +81,7 @@ public class TblUser {
             rs.updateString("Useremail", user.getUserEmail());
             rs.updateString("Userpassword", user.getUserPassword());
             rs.insertRow();
+            guardado = true;
             rs.moveToCurrentRow();
         } catch (SQLException ex) {
             System.out.println("Error al guardar autor" + ex.getMessage());
