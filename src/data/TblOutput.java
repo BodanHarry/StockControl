@@ -9,7 +9,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import models.Product;
+import models.User;
 
 /**
  *
@@ -21,7 +26,7 @@ public class TblOutput {
     private PreparedStatement ps = null;
     private ResultSet rs = null;
 
-    public void getOutput() throws SQLException {
+    public void getReg() throws SQLException {
         try {
             conn = Conexion.getConnection();
             String tSQL = "Select * from Output";
@@ -35,16 +40,29 @@ public class TblOutput {
         }
     }
 
-    public ArrayList<Output> outputList() {
+    public ArrayList<Output> outputList() throws ParseException {
         ArrayList<Output> list = new ArrayList<>();
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy"); 
+        TblProduct products = new TblProduct();
+        Product product;
+        TblUser users = new TblUser();
+        User user;
+
         try {
-            this.getOutput();
+            this.getReg();
             while (rs.next()) {
+                Date dataFormat = format.parse(rs.getString("Outputdate"));
+                int idProduct = Integer.parseInt(rs.getString("ProductID"));
+                product = products.getProduct(idProduct);
+                String username = rs.getString("Username");
+                user = users.getUser(username);
                 list.add(new Output(
-                        rs.getInt("idOutput"),
-                        rs.getDate("outputDate"),
-                        rs.getDouble("outputPrice"),
-                        rs.getInt("outputQuantity")
+                        Integer.parseInt(rs.getString("OutputID")),
+                        dataFormat,
+                        Double.parseDouble(rs.getString("Outputprice")),
+                        Integer.parseInt(rs.getString("Outputquantity")),
+                        product,
+                        user
                 ));
             }
         } catch (SQLException ex) {
@@ -71,19 +89,21 @@ public class TblOutput {
         return list;
     }
 
-    public boolean searchOutput(int id) {
-        boolean resp = false;
-        this.getOutput();
+    public boolean addInput(Output output, Product product, User user) {
+        boolean saved = false;
         try {
-            rs.beforeFirst();
-            while (rs.next()) {
-                if (rs.getInt("idOutput") == id) {
-                    resp = true;
-                    break;
-                }
-            }
+            this.getReg();
+            rs.moveToInsertRow();
+            rs.updateString("OutputID", String.valueOf(output.getIdOutput()));
+            rs.updateString("Outputdate", String.valueOf(output.getOutputDate()));
+            rs.updateString("Outputprice", String.valueOf(output.getOutputPrice()));
+            rs.updateString("Outputquantity", String.valueOf(output.getOutputQuantity()));
+            rs.updateString("ProductID", String.valueOf(product.getIdProduct()));
+            rs.updateString("OutputID", String.valueOf(user.getUserName()));
+            rs.insertRow();
+            rs.moveToCurrentRow();
         } catch (SQLException ex) {
-            System.out.println("Error al buscar la salidad: " + ex.getMessage());
+            System.out.println("Error al guardar la entrada" + ex.getMessage());
         } finally {
 
             try {
@@ -91,33 +111,69 @@ public class TblOutput {
                     rs.close();
                 }
 
-                if (ps != null) {
+                if (rs != null) {
                     ps.close();
                 }
 
-                if (conn != null) {
+                if (rs != null) {
                     Conexion.closeConexion(conn);
-
                 }
             } catch (SQLException ex) {
                 System.out.println(ex.getMessage());
             }
+
         }
-        return resp;
+        return saved;
     }
-    public boolean editOutput(Output a){
-        boolean resp = false; 
-        this.getOutput();
+    
+    public Output getOutput(int idOutput) throws ParseException {
+        Output output =  new Output();
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy"); 
+        TblProduct products = new TblProduct();
+        Product product;
+        TblUser users = new TblUser();
+        User user;
         try {
-            rs.beforeFirst();
-            while (rs.next()){
-                if (rs.getInt("idOutput") == a.getIdOutput()){
-                    rs.updateDate("outputDate", a.getOutputDate());
-                    rs.updateDouble("outputPrice",  a.getOutputPrice());
-                    rs.updateInt("outputQuantity", a.getOutputQuantity());
-                    
+            this.getReg();
+            while (rs.next()) {
+                Date dataFormat = format.parse(rs.getString("Outputdate"));
+                int idProduct = Integer.parseInt(rs.getString("ProductID"));
+                product = products.getProduct(idProduct);
+                String username = rs.getString("Username");
+                if (Integer.parseInt(rs.getString("OutputID")) == idOutput){
+                user = users.getUser(username);
+                output = new Output(
+                        Integer.parseInt(rs.getString("OutputID")),
+                        dataFormat,
+                        Double.parseDouble(rs.getString("Outputprice")),
+                        Integer.parseInt(rs.getString("Outputquantity")),
+                        product,
+                        user
+                );
+                break;
                 }
             }
+        } catch (SQLException ex) {
+            System.out.println("Error al buscar producto: " + ex.getMessage());
+        } finally {
+
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+
+                if (rs != null) {
+                    ps.close();
+                }
+
+                if (rs != null) {
+                    Conexion.closeConexion(conn);
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+
         }
+        return output;
     }
 }

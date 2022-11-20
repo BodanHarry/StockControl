@@ -49,7 +49,7 @@ public class TblProduct {
                         rs.getString("Productname"),
                         rs.getString("Productcolor"),
                         Integer.parseInt(rs.getString("ProductID")),
-                        Double.parseDouble(rs.getString("")),
+                        Double.parseDouble(rs.getString("Productprice")),
                         category
                 )
                 );

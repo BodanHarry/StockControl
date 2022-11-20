@@ -47,7 +47,7 @@ public class TblUser {
                 ));
             }
         } catch (SQLException ex) {
-            System.out.println("Error al listar el autor: " + ex.getMessage());
+            System.out.println("Error al listar al usuario: " + ex.getMessage());
         } finally {
 
             try {
@@ -157,7 +157,7 @@ public class TblUser {
                 }
             }
         } catch (SQLException ex) {
-            System.out.println("Error al editar: " + ex.getMessage());
+            System.out.println("Error al editar al usuario: " + ex.getMessage());
         } finally {
 
             try {
@@ -194,7 +194,7 @@ public class TblUser {
             }
 
         } catch (SQLException ex) {
-            System.out.println("Error al eliminar autor: " + ex.getMessage());
+            System.out.println("Error al eliminar al usuario: " + ex.getMessage());
         } finally {
 
             try {
@@ -214,5 +214,43 @@ public class TblUser {
             }
         }
         return resp;
+    }
+    
+    public User getUser(String username) {
+        User user =  new User();
+        try {
+            this.getReg();
+            while (rs.next()) {
+                if (rs.getString("Username") == username) {
+                    user = new User(
+                            rs.getString("Username"),
+                            rs.getString("Useremail"),
+                            rs.getString("Userpassword")
+                    );
+                    break;
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al buscar producto: " + ex.getMessage());
+        } finally {
+
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+
+                if (rs != null) {
+                    ps.close();
+                }
+
+                if (rs != null) {
+                    Conexion.closeConexion(conn);
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+
+        }
+        return user;
     }
 }

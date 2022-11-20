@@ -4,19 +4,28 @@
  */
 package formularies;
 
+import data.TblCategory;
+import data.TblProduct;
+import java.util.ArrayList;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+import models.Category;
+import models.Product;
 
 /**
  *
  * @author hebod
  */
 public class FrmProduct extends javax.swing.JFrame {
-
+    private TblProduct tblProducts = new TblProduct();
+    private ArrayList<Product> productsList = new ArrayList<>();
+    private TblCategory tblCategories = new TblCategory();
     /**
      * Creates new form FrmProduct
      */
     public FrmProduct() {
         initComponents();
+        this.llenarTabla();
     }
 
     /**
@@ -30,6 +39,9 @@ public class FrmProduct extends javax.swing.JFrame {
 
         jMainPanelProducts = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableProducts = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(880, 520));
@@ -45,7 +57,27 @@ public class FrmProduct extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("SansSerif", 3, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Products");
-        jMainPanelProducts.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 220, -1, -1));
+        jMainPanelProducts.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 20, -1, -1));
+
+        jTableProducts.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane1.setViewportView(jTableProducts);
+
+        jMainPanelProducts.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 70, -1, -1));
+
+        jButton1.setText("Agregar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jMainPanelProducts.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -60,11 +92,48 @@ public class FrmProduct extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Category category = new Category(1,"Hamaca mediana", "Tipo xd", "Mediana");
+        Product product = new Product("Hamaca","Amarilla", 1, 12.57, category);
+        tblCategories.addCategory(category);
+        tblProducts.addProduct(product, category);
+    }//GEN-LAST:event_jButton1ActionPerformed
     
     public JPanel getFondo() {
         return jMainPanelProducts;
     }
     
+    private void llenarArrayList() {
+        if (!productsList.isEmpty()) {
+            productsList.clear();
+        }
+        productsList = tblProducts.productList();
+    }
+    
+    private void llenarTabla() {
+        llenarArrayList();
+        DefaultTableModel dtmProduct = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        String titles[] = {"Id Producto", "Nombre", "Color", "Precio", "Categoria"};
+        dtmProduct.setColumnIdentifiers(titles);
+        for (Product p : productsList) {
+            Object[] row = new Object[]{
+                p.getIdProduct(),
+                p.getProductName(),
+                p.getProductColor(),
+                p.getProductPrice(),
+                p.getM_Category().getIdCategory()
+            };
+            
+            dtmProduct.addRow(row);
+        }
+        this.jTableProducts.setModel(dtmProduct);
+    }
     /**
      * @param args the command line arguments
      */
@@ -101,7 +170,10 @@ public class FrmProduct extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jMainPanelProducts;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTableProducts;
     // End of variables declaration//GEN-END:variables
 }

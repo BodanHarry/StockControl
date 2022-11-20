@@ -594,63 +594,51 @@ public class FrmMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanelMenuMouseEntered
 
     private void jPanelProductsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelProductsMouseEntered
-        jPanelProducts.setBackground(new Color(255,255,255));
-        jLbProducts.setForeground(new Color(15,23,46));
+       
     }//GEN-LAST:event_jPanelProductsMouseEntered
 
     private void jPanelProductsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelProductsMouseExited
-        jPanelProducts.setBackground(new Color(15,23,46));
-        jLbProducts.setForeground(new Color(255,255,255));
+      
     }//GEN-LAST:event_jPanelProductsMouseExited
 
     private void jPanelCategoryMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelCategoryMouseEntered
-        jPanelCategory.setBackground(new Color(255,255,255));
-        jLbCategories.setForeground(new Color(15,23,46));
+    
     }//GEN-LAST:event_jPanelCategoryMouseEntered
 
     private void jPanelCategoryMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelCategoryMouseExited
-        jPanelCategory.setBackground(new Color(15,23,46));
-        jLbCategories.setForeground(new Color(255,255,255));
+   
     }//GEN-LAST:event_jPanelCategoryMouseExited
 
     private void jPanelNewsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelNewsMouseExited
-        jPanelNews.setBackground(new Color(15,23,46));
-        jLbNews.setForeground(new Color(255,255,255));
+      
     }//GEN-LAST:event_jPanelNewsMouseExited
 
     private void jPanelNewsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelNewsMouseEntered
-        jPanelNews.setBackground(new Color(255,255,255));
-        jLbNews.setForeground(new Color(15,23,46));
+
     }//GEN-LAST:event_jPanelNewsMouseEntered
 
     private void jPanelinputMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelinputMouseEntered
-        jPanelinput.setBackground(new Color(255,255,255));
-        jLbInputs.setForeground(new Color(15,23,46));
+
     }//GEN-LAST:event_jPanelinputMouseEntered
 
     private void jPanelinputMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelinputMouseExited
-        jPanelinput.setBackground(new Color(15,23,46));
-        jLbInputs.setForeground(new Color(255,255,255));
+    
     }//GEN-LAST:event_jPanelinputMouseExited
 
     private void jPanelOutputMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelOutputMouseEntered
-        jPanelOutput.setBackground(new Color(255,255,255));
-        jLbOutputs.setForeground(new Color(15,23,46));
+      
     }//GEN-LAST:event_jPanelOutputMouseEntered
 
     private void jPanelOutputMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelOutputMouseExited
-        jPanelOutput.setBackground(new Color(15,23,46));
-        jLbOutputs.setForeground(new Color(255,255,255));
+      
     }//GEN-LAST:event_jPanelOutputMouseExited
 
     private void jPanelUserMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelUserMouseEntered
-        jPanelUser.setBackground(new Color(255,255,255));
-        jLbUser.setForeground(new Color(15,23,46));
+  
     }//GEN-LAST:event_jPanelUserMouseEntered
 
     private void jPanelUserMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelUserMouseExited
-        jPanelUser.setBackground(new Color(15,23,46));
-        jLbUser.setForeground(new Color(255,255,255));
+   
     }//GEN-LAST:event_jPanelUserMouseExited
 
     private void jPanelUserMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelUserMousePressed
@@ -658,13 +646,11 @@ public class FrmMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanelUserMousePressed
 
     private void jPanelOptionsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelOptionsMouseEntered
-        jPanelOptions.setBackground(new Color(255,255,255));
-        jLbOptions.setForeground(new Color(15,23,46));
+    
     }//GEN-LAST:event_jPanelOptionsMouseEntered
 
     private void jPanelOptionsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelOptionsMouseExited
-        jPanelOptions.setBackground(new Color(15,23,46));
-        jLbOptions.setForeground(new Color(255,255,255));
+  
     }//GEN-LAST:event_jPanelOptionsMouseExited
 
     private void jPanelNewsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelNewsMouseClicked
