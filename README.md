@@ -1,12 +1,16 @@
 <h1 align = "center"> StockControl </h1>
+  <hr style="border-color:red">
 <h2 align= "center" > 💥Proyecto de DafultMasayaModel 💥</h2>
+  <hr style="border-color:red">
 <h2 align= "center"> Programadores: </h2>
   <h3 align= "center">🔵 Andre Enmanuel Joiner Angulo 🟠 </h3>
   <h3 align= "center">🟠 Bradly Antonio Gutiérrez Córdoba 🔵 </h3>
   <h3 align= "center">🔵 Eliseo Josias Paz Ocampo 🟠 </h3>
   <h3 align= "center">🟠 Harry Enrrique Bodán Navarro 🔵 </h3>
+  
   <hr style="border-color:red">
   <h3 align= "center"> 🔎TECNOLOGIAS USADAS📑</h3>
+  
 <p align="center"> 
 <a href="https://git-scm.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg" alt="git" width="65" height="60"/> </a>
 <a href="https://www.java.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg" alt="java" width="65" height="60"/> </a>
