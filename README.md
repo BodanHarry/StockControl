@@ -1,3 +1,5 @@
+<h1 align = "center"> Universidad Centroamericana </h1>
+  <hr style="color:red">
 <h1 align = "center"> StockControl </h1>
   <hr style="border-color:red">
 <h2 align= "center" > 💥Proyecto de DafultMasayaModel 💥</h2>
