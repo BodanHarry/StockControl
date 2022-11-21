@@ -1,5 +1,7 @@
-
-<h1 align = "center"> StockControl </h1>
+<script type="text/javascript">
+  alert("Bienvenido a stock control");
+</script>
+<h1 align = "center" font-color= "Blue"> StockControl </h1>
   <hr style="border-color:red">
   <h2 align = "center">🛠️⚖️ Universidad Centroamericana ⚖️🛠️</h2>
   <hr style="color:red">
