@@ -81,6 +81,7 @@ public class TblCategory {
             rs.updateString("Producttype", category.getProductType());
             rs.updateString("Productsize", category.getProductSize());
             rs.insertRow();
+            saved = true;
             rs.moveToCurrentRow();
         } catch (SQLException ex) {
             System.out.println("Error al guardar categoría" + ex.getMessage());
@@ -152,8 +153,6 @@ public class TblCategory {
                     rs.updateString("Productsize", category.getProductSize());
                     rs.updateRow();
                     result = true;
-                    break;
-
                 }
             }
         } catch (SQLException ex) {
