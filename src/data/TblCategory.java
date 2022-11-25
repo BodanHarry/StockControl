@@ -34,7 +34,7 @@ public class TblCategory {
         }
     }
 
-    public ArrayList<Category> CategoryList() {
+    public ArrayList<Category> categoryList() {
         ArrayList<Category> list = new ArrayList<>();
         try {
             this.getReg();
@@ -253,4 +253,46 @@ public class TblCategory {
         }
         return category;
     }
+    
+    public Category findCategoryByName(String name) {
+        Category category =  new Category();
+        String actualName;
+        try {
+            this.getReg();
+            while (rs.next()) {
+                actualName = rs.getString("Producttype") + rs.getString("Productsize");
+                if (actualName == name) {
+                    category = new Category(
+                            Integer.parseInt(rs.getString("CategoryID")),
+                            rs.getString("ProductDescription"),
+                            rs.getString("Producttype"),
+                            rs.getString("Productsize")
+                    );
+                    break;
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al buscar categoría: " + ex.getMessage());
+        } finally {
+
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+
+                if (rs != null) {
+                    ps.close();
+                }
+
+                if (rs != null) {
+                    Conexion.closeConexion(conn);
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+
+        }
+        return category;
+    }
+    
 }

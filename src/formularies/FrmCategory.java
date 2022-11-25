@@ -52,7 +52,7 @@ public class FrmCategory extends javax.swing.JFrame {
         if (!categoryList.isEmpty()) {
             categoryList.clear();
         }
-        categoryList = dCategory.CategoryList();
+        categoryList = dCategory.categoryList();
     }
 
     private void fillTable() {

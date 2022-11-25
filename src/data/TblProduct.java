@@ -80,15 +80,16 @@ public class TblProduct {
 
     }
 
-    public boolean addProduct(Product product, Category category) {
+    public boolean addProduct(Product product) {
         boolean saved = false;
         try {
             this.getReg();
             rs.moveToInsertRow();
+            float number = (float) product.getProductPrice();
             rs.updateString("Productname", product.getProductName());
             rs.updateString("Productcolor", product.getProductColor());
-            rs.updateString("productPrice", String.valueOf(product.getProductPrice()));
-            rs.updateString("CategoryID", String.valueOf(category.getIdCategory()));
+            rs.updateFloat("productPrice", number);
+            rs.updateInt("CategoryID", product.getM_Category().getIdCategory());
             rs.insertRow();
             rs.moveToCurrentRow();
         } catch (SQLException ex) {
@@ -149,7 +150,7 @@ public class TblProduct {
         return result;
     }
 
-    public boolean editProduct(Product product, Category category) {
+    public boolean editProduct(Product product) {
         boolean result = false;
         try {
             this.getReg();
@@ -159,7 +160,7 @@ public class TblProduct {
                     rs.updateString("Productname", product.getProductName());
                     rs.updateString("Productcolor", product.getProductColor());
                     rs.updateString("Productprice", String.valueOf(product.getProductPrice()));
-                    rs.updateString("CategoryID", String.valueOf(category.getIdCategory()));
+                    rs.updateString("CategoryID", String.valueOf(product.getM_Category().getIdCategory()));
                     rs.updateRow();
                     result = true;
                     break;
