@@ -126,6 +126,78 @@ public class TblOutput {
         return saved;
     }
     
+     public boolean existOuput(int idOutput){
+        boolean result = false;
+        try {
+            this.getReg();
+            while (rs.next()) {
+                if (Integer.parseInt(rs.getString("OutputID")) == idOutput) {
+                    result = true;
+                    break;
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al buscar la salida: " + ex.getMessage());
+        } finally {
+
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+
+                if (rs != null) {
+                    ps.close();
+                }
+
+                if (rs != null) {
+                    Conexion.closeConexion(conn);
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+
+        }
+        return result;
+    
+    }
+     
+    public boolean removeOutput(int idOutput){
+        boolean result = false;
+        try {
+            this.getReg();
+            rs.beforeFirst();
+            while (rs.next()) {
+                if (Integer.parseInt(rs.getString("OutputID")) == idOutput) {
+                    rs.deleteRow();
+                    result = true;
+                    break;
+                }
+            }
+
+        } catch (SQLException ex) {
+            System.out.println("Error al eliminar la salida: " + ex.getMessage());
+        } finally {
+
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+
+                if (rs != null) {
+                    ps.close();
+                }
+
+                if (rs != null) {
+                    Conexion.closeConexion(conn);
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+        return result;
+    
+    }
+    
     public Output getOutput(int idOutput) throws ParseException {
         Output output =  new Output();
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy"); 

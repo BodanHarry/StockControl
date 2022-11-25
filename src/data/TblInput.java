@@ -126,6 +126,78 @@ public class TblInput {
         return saved;
     }
     
+    public boolean existInput(int idInput){
+        boolean result = false;
+        try {
+            this.getReg();
+            while (rs.next()) {
+                if (Integer.parseInt(rs.getString("InputID")) == idInput) {
+                    result = true;
+                    break;
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al buscar la entrada: " + ex.getMessage());
+        } finally {
+
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+
+                if (rs != null) {
+                    ps.close();
+                }
+
+                if (rs != null) {
+                    Conexion.closeConexion(conn);
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+
+        }
+        return result;
+    
+    }
+    
+    public boolean removeInput(int idInput){
+        boolean result = false;
+        try {
+            this.getReg();
+            rs.beforeFirst();
+            while (rs.next()) {
+                if (Integer.parseInt(rs.getString("InputID")) == idInput) {
+                    rs.deleteRow();
+                    result = true;
+                    break;
+                }
+            }
+
+        } catch (SQLException ex) {
+            System.out.println("Error al eliminar entrada: " + ex.getMessage());
+        } finally {
+
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+
+                if (rs != null) {
+                    ps.close();
+                }
+
+                if (rs != null) {
+                    Conexion.closeConexion(conn);
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+        return result;
+    
+    }
+    
     public Input getInput(int idInput) throws ParseException{
         Input input = new Input();
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy"); 
