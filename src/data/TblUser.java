@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -27,8 +28,7 @@ public class TblUser {
             String tSQL = "Select * from [stockControl].[dbo].[User]";
             ps = conn.prepareStatement(tSQL, ResultSet.TYPE_SCROLL_SENSITIVE,
                     ResultSet.CONCUR_UPDATABLE
-                    + ResultSet.HOLD_CURSORS_OVER_COMMIT
-            );
+                    + ResultSet.HOLD_CURSORS_OVER_COMMIT);
             rs = ps.executeQuery();
         } catch (SQLException ex) {
             System.out.println("Error al obtener registros" + ex.getMessage());
@@ -112,7 +112,7 @@ public class TblUser {
         try {
             this.getReg();
             while (rs.next()) {
-                if (rs.getString("Username") == username) {
+                if (rs.getString("Username").equals(username)) {
                     resp = true;
                     break;
                 }
@@ -147,7 +147,7 @@ public class TblUser {
             this.getReg();
             rs.beforeFirst();
             while (rs.next()) {
-                if (rs.getString("Username") == user.getUserName()) {
+                if (rs.getString("Username").equals(user.getUserName())) {
                     rs.updateString("Useremail", user.getUserEmail());
                     rs.updateString("Username", user.getUserName());
                     rs.updateString("Userpassword", user.getUserPassword());
@@ -232,7 +232,7 @@ public class TblUser {
                 }
             }
         } catch (SQLException ex) {
-            System.out.println("Error al buscar producto: " + ex.getMessage());
+            System.out.println("Error al buscar usuario: " + ex.getMessage());
         } finally {
 
             try {
@@ -253,5 +253,85 @@ public class TblUser {
 
         }
         return user;
+    }
+
+    public String getUserName(String username) {
+        String valor = " ";
+        try {
+
+            this.getReg();
+            while (rs.next()) {
+                if (rs.getString("Username").equals(username)) {
+                    valor = rs.getString("Username");
+                    
+                    break;
+
+                }
+            }
+            
+
+        } catch (SQLException ex) {
+            System.out.println("Error al buscar usuario: " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "El correo es invalido ");
+        } finally {
+
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+
+                if (rs != null) {
+                    ps.close();
+                }
+
+                if (rs != null) {
+                    Conexion.closeConexion(conn);
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+
+        }
+
+        return valor;
+    }
+
+    public String getUserPassword(String username) {
+        String valor = " ";
+        try {
+            this.getReg();
+            while (rs.next()) {
+                if (rs.getString("Username").equals(username)) {
+                    valor = rs.getString("Userpassword");
+                    
+                    break;
+                } 
+                
+                
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al buscar usuario: " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "La contraseña es invalida ");
+        } finally {
+
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+
+                if (rs != null) {
+                    ps.close();
+                }
+
+                if (rs != null) {
+                    Conexion.closeConexion(conn);
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+
+        }
+
+        return valor;
     }
 }

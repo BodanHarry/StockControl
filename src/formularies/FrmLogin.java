@@ -4,6 +4,7 @@
  */
 package formularies;
 
+import data.TblUser;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -13,6 +14,8 @@ import javax.swing.JPanel;
  * @author hebod
  */
 public class FrmLogin extends javax.swing.JFrame {
+
+    private TblUser dUser = new TblUser();
 
     /**
      * Creates new form FrmStart
@@ -175,34 +178,34 @@ public class FrmLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_jTfEmailActionPerformed
 
     private void jTfEmailMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTfEmailMousePressed
-        if(jTfEmail.getText().equals("Ingrese su correo electrónico")){
+        if (jTfEmail.getText().equals("Ingrese su correo electrónico")) {
             jTfEmail.setText("");
-            jTfEmail.setForeground(new Color(0,147,147));
+            jTfEmail.setForeground(new Color(0, 147, 147));
         }
 
-        if(String.valueOf(jPfPassword.getPassword()).equals("")){
+        if (String.valueOf(jPfPassword.getPassword()).equals("")) {
             jPfPassword.setText("****************");
-            jPfPassword.setForeground(new Color(0,147,147));
+            jPfPassword.setForeground(new Color(0, 147, 147));
         }
     }//GEN-LAST:event_jTfEmailMousePressed
 
     private void jTfEmailFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTfEmailFocusGained
         jTfEmail.setText("");
     }//GEN-LAST:event_jTfEmailFocusGained
-    
+
     public JPanel getFondo() {
         return jMainPanelLogin;
     }
-    
+
     private void jPfPasswordMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPfPasswordMousePressed
-        if(jPfPassword.getPassword().equals("****************")){
+        if (jPfPassword.getPassword().equals("****************")) {
             jPfPassword.setText("");
-            jPfPassword.setForeground(new Color(0,147,147));
+            jPfPassword.setForeground(new Color(0, 147, 147));
         }
 
-        if(String.valueOf(jTfEmail.getText()).equals("")){
+        if (String.valueOf(jTfEmail.getText()).equals("")) {
             jTfEmail.setText("Ingrese su correo electrónico");
-            jTfEmail.setForeground(new Color(0,147,147));
+            jTfEmail.setForeground(new Color(0, 147, 147));
         }
     }//GEN-LAST:event_jPfPasswordMousePressed
 
@@ -212,21 +215,40 @@ public class FrmLogin extends javax.swing.JFrame {
 
     private void jBtnLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnLoginMouseClicked
         JOptionPane.showMessageDialog(null, "Credenciales enviadas");
-        if(jTfEmail.getText().equals("aa") || jPfPassword.getPassword().equals("aa")){
-            FrmMenu menu = new FrmMenu();
-            menu.setVisible(true);
-        }
-        jTfEmail.setText("");
-        jPfPassword.setText("");
+        //if(jTfEmail.getText().equals("aa") || jPfPassword.getPassword().equals("aa")){
+        //FrmMenu menu = new FrmMenu();
+        //menu.setVisible(true);
+        //}
+        //jTfEmail.setText("");
+        //jPfPassword.setText("");
+        checkUser(jTfEmail.getText(), String.valueOf(jPfPassword.getText()));
     }//GEN-LAST:event_jBtnLoginMouseClicked
 
+
     private void jBtnLoginMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnLoginMouseEntered
-        jBtnLogin.setBackground(new Color(0,224,147));
+        jBtnLogin.setBackground(new Color(0, 224, 147));
     }//GEN-LAST:event_jBtnLoginMouseEntered
 
     private void jBtnLoginMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnLoginMouseExited
-        jBtnLogin.setBackground(new Color(0,147,147));
+        jBtnLogin.setBackground(new Color(0, 147, 147));
     }//GEN-LAST:event_jBtnLoginMouseExited
+
+    private void checkUser(String username, String password) {
+        if (dUser.existUser(username)) {
+            dUser.getUser(username);
+            if (dUser.getUserName(username).equals(username)
+                    && dUser.getUserPassword(username).equals(password)) {
+                FrmMenu menu = new FrmMenu();
+                menu.setVisible(true);
+
+            } else {
+                JOptionPane.showMessageDialog(null, "La contraseña oe el "
+                        + "usuario es invalido, vuelva a intentar ");
+            }
+        }
+        jTfEmail.setText("");
+        jPfPassword.setText("");
+    }
 
     /**
      * @param args the command line arguments

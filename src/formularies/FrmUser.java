@@ -51,7 +51,7 @@ public class FrmUser extends javax.swing.JFrame {
     }
 
     public void clearPass() {
-        this.JTFPassword2.setText("");
+        this.JTFPassword1.setText("");
         this.JTFPassword2.setText("");
     }
 
@@ -72,13 +72,13 @@ public class FrmUser extends javax.swing.JFrame {
             
 
         };
-        String titulos[] = {"Username", "Email", "Password"};
+        String titulos[] = {"Username", "Email"};
         dtm.setColumnIdentifiers(titulos);
         for (User user : userList) {
             Object[] row = new Object[]{
                 user.getUserName(),
                 user.getUserEmail(),
-                user.getUserPassword()
+                
             };
             dtm.addRow(row);
         }
@@ -92,10 +92,10 @@ public class FrmUser extends javax.swing.JFrame {
 
     private void foundData() {
         int row = this.jTblReg.getSelectedRow();
-        username = userList.get(row).getUserPassword();
+        username = userList.get(row).getUserName();
         this.jTFUsername.setText(userList.get(row).getUserName());
         this.jTFEmail.setText(userList.get(row).getUserEmail());
-        this.JTFPassword2.setText(userList.get(row).getUserPassword());
+        this.JTFPassword1.setText(userList.get(row).getUserPassword());
         this.JTFPassword2.setText(userList.get(row).getUserPassword());
         this.JTBP.setSelectedIndex(0);
         BtnGuardar.setEnabled(true);
@@ -146,7 +146,6 @@ public class FrmUser extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jTFUsername = new javax.swing.JTextField();
         jTFEmail = new javax.swing.JTextField();
-        JTFPassword2 = new javax.swing.JTextField();
         BtnGuardar = new javax.swing.JButton();
         BtnNuevo = new javax.swing.JButton();
         BtnEliminar = new javax.swing.JButton();
@@ -156,7 +155,10 @@ public class FrmUser extends javax.swing.JFrame {
         jSeparator3 = new javax.swing.JSeparator();
         jSeparator4 = new javax.swing.JSeparator();
         jSeparator5 = new javax.swing.JSeparator();
-        JTFPassword1 = new javax.swing.JTextField();
+        JTFPassword1 = new javax.swing.JPasswordField();
+        JTFPassword2 = new javax.swing.JPasswordField();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         RegPanel = new javax.swing.JPanel();
         jTFBuscar = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
@@ -189,7 +191,7 @@ public class FrmUser extends javax.swing.JFrame {
         jLabel1.setText("Confirmar contraseña:");
         jLabel1.setMaximumSize(new java.awt.Dimension(5000, 15));
         jLabel1.setMinimumSize(new java.awt.Dimension(500, 15));
-        dataPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, 180, 40));
+        dataPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 210, 40));
 
         jLabel2.setFont(new java.awt.Font("Inter SemiBold", 0, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
@@ -203,42 +205,35 @@ public class FrmUser extends javax.swing.JFrame {
         jLabel3.setText("Nombre de Usuario: ");
         jLabel3.setMaximumSize(new java.awt.Dimension(5000, 15));
         jLabel3.setMinimumSize(new java.awt.Dimension(500, 15));
-        dataPanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 170, 40));
+        dataPanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 190, 40));
 
         jLabel4.setFont(new java.awt.Font("Inter SemiBold", 0, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Correo:");
         jLabel4.setMaximumSize(new java.awt.Dimension(5000, 15));
         jLabel4.setMinimumSize(new java.awt.Dimension(500, 15));
-        dataPanel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 160, 60, 40));
+        dataPanel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 160, 130, 40));
 
         jLabel5.setFont(new java.awt.Font("Inter SemiBold", 0, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Contraseña:");
         jLabel5.setMaximumSize(new java.awt.Dimension(5000, 15));
         jLabel5.setMinimumSize(new java.awt.Dimension(500, 15));
-        dataPanel.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 220, 100, 40));
+        dataPanel.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 220, 160, 40));
 
         jTFUsername.setBackground(new java.awt.Color(255, 255, 255));
         jTFUsername.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         jTFUsername.setForeground(new java.awt.Color(0, 0, 0));
         jTFUsername.setBorder(null);
-        jTFUsername.setCaretColor(new java.awt.Color(255, 255, 255));
+        jTFUsername.setCaretColor(new java.awt.Color(0, 0, 0));
         dataPanel.add(jTFUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 110, 450, 30));
 
         jTFEmail.setBackground(new java.awt.Color(255, 255, 255));
         jTFEmail.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         jTFEmail.setForeground(new java.awt.Color(0, 0, 0));
         jTFEmail.setBorder(null);
-        jTFEmail.setCaretColor(new java.awt.Color(255, 255, 255));
+        jTFEmail.setCaretColor(new java.awt.Color(0, 0, 0));
         dataPanel.add(jTFEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 170, 450, 30));
-
-        JTFPassword2.setBackground(new java.awt.Color(255, 255, 255));
-        JTFPassword2.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
-        JTFPassword2.setForeground(new java.awt.Color(0, 0, 0));
-        JTFPassword2.setBorder(null);
-        JTFPassword2.setCaretColor(new java.awt.Color(255, 255, 255));
-        dataPanel.add(JTFPassword2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 290, 450, 30));
 
         BtnGuardar.setBackground(new java.awt.Color(0, 153, 153));
         BtnGuardar.setFont(new java.awt.Font("Inter Black", 0, 15)); // NOI18N
@@ -306,11 +301,46 @@ public class FrmUser extends javax.swing.JFrame {
         dataPanel.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 320, 450, 30));
 
         JTFPassword1.setBackground(new java.awt.Color(255, 255, 255));
-        JTFPassword1.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         JTFPassword1.setForeground(new java.awt.Color(0, 0, 0));
         JTFPassword1.setBorder(null);
-        JTFPassword1.setCaretColor(new java.awt.Color(255, 255, 255));
-        dataPanel.add(JTFPassword1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 230, 450, 30));
+        JTFPassword1.setCaretColor(new java.awt.Color(0, 0, 0));
+        JTFPassword1.setDisabledTextColor(new java.awt.Color(255, 255, 255));
+        dataPanel.add(JTFPassword1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 229, 450, 30));
+
+        JTFPassword2.setBackground(new java.awt.Color(255, 255, 255));
+        JTFPassword2.setForeground(new java.awt.Color(0, 0, 0));
+        JTFPassword2.setBorder(null);
+        JTFPassword2.setCaretColor(new java.awt.Color(0, 0, 0));
+        JTFPassword2.setDisabledTextColor(new java.awt.Color(255, 255, 255));
+        JTFPassword2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JTFPassword2ActionPerformed(evt);
+            }
+        });
+        dataPanel.add(JTFPassword2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 289, 450, 30));
+
+        jButton1.setBackground(new java.awt.Color(255, 255, 255));
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/ver.png"))); // NOI18N
+        jButton1.setToolTipText("");
+        jButton1.setBorder(null);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        dataPanel.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 280, -1, -1));
+
+        jButton2.setBackground(new java.awt.Color(255, 255, 255));
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/no-visible.png"))); // NOI18N
+        jButton2.setBorder(null);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        dataPanel.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 290, -1, 20));
 
         JTBP.addTab("Datos", dataPanel);
 
@@ -398,7 +428,6 @@ public class FrmUser extends javax.swing.JFrame {
 
     private void BtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarActionPerformed
         // TODO add your handling code here:
-        this.verificarDatosVacios();
         int resp = JOptionPane.showConfirmDialog(this, "Desea eliminar este registro? ",
                                             "User", JOptionPane.YES_NO_OPTION, 
                                             JOptionPane.QUESTION_MESSAGE);
@@ -410,15 +439,16 @@ public class FrmUser extends javax.swing.JFrame {
             }
         }
          fillTable();
+         this.clear();
     }//GEN-LAST:event_BtnEliminarActionPerformed
 
     private String checkPass() {
         Boolean flag = true;
-        while (flag) {
-            JTFPassword2.requestFocus();
-            if (this.JTFPassword2.getText().equals(this.JTFPassword2.getText())) {
+        if(flag) {
+            
+            if (String.valueOf(JTFPassword1.getText()).equals(String.valueOf(JTFPassword2.getText()))) {
                 flag = false;
-                return JTFPassword2.getText();
+                return String.valueOf(JTFPassword2.getText());
             } else {
                 JOptionPane.showMessageDialog(this, "Contraseñas inválidas",
                         "Vuelva a intentar", JOptionPane.WARNING_MESSAGE);
@@ -426,15 +456,18 @@ public class FrmUser extends javax.swing.JFrame {
                 this.clearPass();
             }
         }
-        return JTFPassword2.getText();
+        return String.valueOf(JTFPassword2.getText());
     }
 
     public Boolean checking() {
         Boolean flag = false;
-        if (this.JTFPassword2.getText().equals(this.JTFPassword2.getText()) &&
-                JTFPassword2.getText().length() != 0 &&
-                JTFPassword2.getText().length() != 0 ) {
-            flag = true;
+        if (String.valueOf(JTFPassword2.getText()).equals(String.valueOf(JTFPassword1.getText())) &&
+                String.valueOf(JTFPassword1.getText()).length() != 0 &&
+                String.valueOf(JTFPassword2.getText()).length() != 0) {
+            if( String.valueOf(JTFPassword2.getText()).length() == String.valueOf(JTFPassword1.getText()).length()){
+                flag = true;
+            }
+            
         }else{
             flag = false;
         }
@@ -447,7 +480,8 @@ public class FrmUser extends javax.swing.JFrame {
         try {
             User user = new User(this.jTFUsername.getText(),
                     this.jTFEmail.getText(), this.checkPass());
-            if (checking() == true && dUser.addUser(user)) {
+            if(checking() == true){
+                 if (dUser.addUser(user)) {
                 JOptionPane.showMessageDialog(this, "Registro Guardado",
                          "User", JOptionPane.INFORMATION_MESSAGE);
                 this.fillTable();
@@ -455,6 +489,8 @@ public class FrmUser extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(this, "Error al guardar");
             }
+            }
+           
         } catch (HeadlessException es) {
             System.out.println("Error al intentar guardar" + es.getMessage());
         }
@@ -465,7 +501,7 @@ public class FrmUser extends javax.swing.JFrame {
         this.verificarDatosVacios();
         User user = new User(this.jTFUsername.getText(),
                 this.jTFEmail.getText(), this.checkPass()); 
-        if(checking() == true && dUser.addUser(user)){
+        if(checking() == true && dUser.editUser(user)){
            JOptionPane.showMessageDialog(this, "Registro editado");
            fillTable();
            this.JTBP.setSelectedIndex(1);
@@ -504,8 +540,32 @@ public class FrmUser extends javax.swing.JFrame {
                 }
             }
         });
+        
+        BtnNuevo.setEnabled(false);
+        BtnGuardar.setEnabled(false);
     }//GEN-LAST:event_jTblRegMouseClicked
 
+    private void JTFPassword2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFPassword2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JTFPassword2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        jButton1.setVisible(false);
+        this.jButton2.setVisible(true);
+        this.JTFPassword1.setEchoChar((char)0);
+        this.JTFPassword2.setEchoChar((char)0);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        jButton1.setVisible(true);
+        this.jButton2.setVisible(false);
+        this.JTFPassword1.setEchoChar('°');
+        this.JTFPassword2.setEchoChar('°');
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    
     public JPanel getFondo() {
         return jMainPanelUser;
 
@@ -552,10 +612,12 @@ public class FrmUser extends javax.swing.JFrame {
     private javax.swing.JButton BtnGuardar;
     private javax.swing.JButton BtnNuevo;
     private javax.swing.JTabbedPane JTBP;
-    private javax.swing.JTextField JTFPassword1;
-    private javax.swing.JTextField JTFPassword2;
+    private javax.swing.JPasswordField JTFPassword1;
+    private javax.swing.JPasswordField JTFPassword2;
     private javax.swing.JPanel RegPanel;
     private javax.swing.JPanel dataPanel;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
