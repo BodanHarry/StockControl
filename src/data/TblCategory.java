@@ -220,14 +220,14 @@ public class TblCategory {
         try {
             this.getReg();
             while (rs.next()) {
-                if (Integer.parseInt(rs.getString("CategoryID")) == idCategory) {
+                if (rs.getInt("CategoryID") == idCategory) {
                     category = new Category(
-                            Integer.parseInt(rs.getString("CategoryID")),
+                            rs.getInt("CategoryID"),
                             rs.getString("ProductDescription"),
                             rs.getString("Producttype"),
                             rs.getString("Productsize")
                     );
-                    break;
+                    return category;
                 }
             }
         } catch (SQLException ex) {
@@ -261,14 +261,14 @@ public class TblCategory {
             this.getReg();
             while (rs.next()) {
                 actualName = rs.getString("Producttype") + rs.getString("Productsize");
-                if (actualName == name) {
+                if (actualName.equals(name)) {
                     category = new Category(
-                            Integer.parseInt(rs.getString("CategoryID")),
+                            rs.getInt("CategoryID"),
                             rs.getString("ProductDescription"),
                             rs.getString("Producttype"),
                             rs.getString("Productsize")
                     );
-                    break;
+                    return category;
                 }
             }
         } catch (SQLException ex) {
@@ -294,5 +294,4 @@ public class TblCategory {
         }
         return category;
     }
-    
 }

@@ -43,13 +43,13 @@ public class TblProduct {
         try {
             this.getReg();
             while (rs.next()) {
-                int idCategory = Integer.parseInt(rs.getString("CategoryID"));
+                int idCategory = rs.getInt("CategoryID");
                 category = categories.getCategory(idCategory);
                 list.add(new Product(
                         rs.getString("Productname"),
                         rs.getString("Productcolor"),
-                        Integer.parseInt(rs.getString("ProductID")),
-                        Double.parseDouble(rs.getString("Productprice")),
+                        rs.getInt("ProductID"),
+                        rs.getDouble("Productprice"),
                         category
                 )
                 );
@@ -82,13 +82,13 @@ public class TblProduct {
 
     public boolean addProduct(Product product) {
         boolean saved = false;
+        System.out.println(product);
         try {
             this.getReg();
             rs.moveToInsertRow();
-            float number = (float) product.getProductPrice();
             rs.updateString("Productname", product.getProductName());
             rs.updateString("Productcolor", product.getProductColor());
-            rs.updateFloat("productPrice", number);
+            rs.updateDouble("productPrice", product.getProductPrice());
             rs.updateInt("CategoryID", product.getM_Category().getIdCategory());
             rs.insertRow();
             rs.moveToCurrentRow();

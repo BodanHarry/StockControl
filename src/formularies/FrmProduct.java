@@ -74,7 +74,7 @@ public class FrmProduct extends javax.swing.JFrame {
     
     private void setCombo(String name){    
         for(int i = 0; i < combo.getSize(); i++){
-            if(name == String.valueOf(combo.getElementAt(i))){
+            if(name.equals(String.valueOf(combo.getElementAt(i)))){
                 combo.setSelectedItem(name);
             }
         }
@@ -101,12 +101,13 @@ public class FrmProduct extends javax.swing.JFrame {
         String titulos[] = {"ID", "Producto", "Color", "Precio", "Categoría"};
         dtm.setColumnIdentifiers(titulos);
         for (Product product : productList) {
+            String categories = product.getM_Category().getProductType() + product.getM_Category().getProductSize();
             Object[] row = new Object[]{
-                product.getIdProduct(),
+                String.valueOf(product.getIdProduct()),
                 product.getProductName(),
                 product.getProductColor(),
-                product.getProductPrice(),
-                product.getM_Category().getProductType() + product.getM_Category().getProductSize()
+                String.valueOf(product.getProductPrice()),
+                categories
             };
             dtm.addRow(row);
         }
