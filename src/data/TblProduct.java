@@ -25,7 +25,7 @@ public class TblProduct {
     public void getReg() throws SQLException {
         try {
             conn = Conexion.getConnection();
-            String tSQL = "Select * from Product";
+            String tSQL = "Select * from [stockControl].[dbo].[Product]";
             ps = conn.prepareStatement(tSQL, ResultSet.TYPE_SCROLL_SENSITIVE,
                     ResultSet.CONCUR_UPDATABLE
                     + ResultSet.HOLD_CURSORS_OVER_COMMIT
@@ -36,7 +36,7 @@ public class TblProduct {
         }
     }
 
-    public ArrayList<Product> productList() {
+    public ArrayList<Product> listProduct() {
         ArrayList<Product> list = new ArrayList<>();
         TblCategory categories = new TblCategory();
         Category category;
@@ -45,6 +45,7 @@ public class TblProduct {
             while (rs.next()) {
                 int idCategory = rs.getInt("CategoryID");
                 category = categories.getCategory(idCategory);
+                System.out.println(category);
                 list.add(new Product(
                         rs.getString("Productname"),
                         rs.getString("Productcolor"),
@@ -52,8 +53,7 @@ public class TblProduct {
                         rs.getDouble("Productprice"),
                         category,
                         rs.getInt("Productquantity")
-                )
-                );
+                ));
             }
         } catch (SQLException ex) {
             System.out.println("Error al listar el producto: " + ex.getMessage());
@@ -89,11 +89,12 @@ public class TblProduct {
             rs.moveToInsertRow();
             rs.updateString("Productname", product.getProductName());
             rs.updateString("Productcolor", product.getProductColor());
-            rs.updateDouble("productPrice", product.getProductPrice());
+            rs.updateDouble("ProductPrice", product.getProductPrice());
             rs.updateInt("CategoryID", product.getM_Category().getIdCategory());
-            rs.updateInt("ProductQuantity", product.getProductQuantity());
+            rs.updateInt("Productquantity", product.getProductQuantity());
             rs.insertRow();
             rs.moveToCurrentRow();
+            saved = true;
         } catch (SQLException ex) {
             System.out.println("Error al guardar el producto" + ex.getMessage());
         } finally {

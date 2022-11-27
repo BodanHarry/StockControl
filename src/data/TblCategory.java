@@ -66,6 +66,7 @@ public class TblCategory {
                 System.out.println(ex.getMessage());
             }
 
+            
         }
 
         return list;
@@ -223,7 +224,7 @@ public class TblCategory {
                 if (rs.getInt("CategoryID") == idCategory) {
                     category = new Category(
                             rs.getInt("CategoryID"),
-                            rs.getString("ProductDescription"),
+                            rs.getString("Productdescription"),
                             rs.getString("Producttype"),
                             rs.getString("Productsize")
                     );
@@ -264,7 +265,7 @@ public class TblCategory {
                 if (actualName.equals(name)) {
                     category = new Category(
                             rs.getInt("CategoryID"),
-                            rs.getString("ProductDescription"),
+                            rs.getString("Productdescription"),
                             rs.getString("Producttype"),
                             rs.getString("Productsize")
                     );

@@ -48,7 +48,8 @@ public class FrmProduct extends javax.swing.JFrame {
     public void clear() {
         this.jTFProductName.setText("");
         this.jTFProductColor.setText("");
-        this.jTFProductPrice.setText("");
+        this.jTFProductQuantity.setText("");
+        this.jTFProductQuantity.setText("");
         this.jTxtID.setText("");
         BtnGuardar.setEnabled(true);
         BtnEditar.setEnabled(false);
@@ -85,7 +86,7 @@ public class FrmProduct extends javax.swing.JFrame {
         if (!productList.isEmpty()) {
             productList.clear();
         }
-        productList = dProduct.productList();
+        productList = dProduct.listProduct();
     }
     
     
@@ -98,16 +99,18 @@ public class FrmProduct extends javax.swing.JFrame {
             }
         };
 
-        String titulos[] = {"ID", "Producto", "Color", "Precio", "Categoría"};
+        String titulos[] = {"ID", "Producto", "Color", "Precio", "Categoría", "Cantidad"};
         dtm.setColumnIdentifiers(titulos);
         for (Product product : productList) {
             String categories = product.getM_Category().getProductType() + product.getM_Category().getProductSize();
+            System.out.println(categories);
             Object[] row = new Object[]{
                 String.valueOf(product.getIdProduct()),
                 product.getProductName(),
                 product.getProductColor(),
                 String.valueOf(product.getProductPrice()),
-                categories
+                categories,
+                product.getProductQuantity()
             };
             dtm.addRow(row);
         }
@@ -125,7 +128,7 @@ public class FrmProduct extends javax.swing.JFrame {
         idProduct = productList.get(row).getIdProduct();
         this.jTFProductName.setText(productList.get(row).getProductName());
         this.jTFProductColor.setText(productList.get(row).getProductColor());
-        this.jTFProductPrice.setText(String.valueOf(productList.get(row).getProductPrice()));
+        this.jTFProductQuantity.setText(String.valueOf(productList.get(row).getProductPrice()));
         this.jTxtID.setText(String.valueOf(idProduct));
         String actualCategory = productList.get(row).getM_Category().getProductType() + productList.get(row).getM_Category().getProductSize();
         this.setCombo(actualCategory);
@@ -147,10 +150,10 @@ public class FrmProduct extends javax.swing.JFrame {
                     + "no este vacía.", "Descripción", JOptionPane.WARNING_MESSAGE);
             jTFProductColor.requestFocus();
         }
-        if (jTFProductPrice.getText().equals("") || jTFProductPrice.getText().length() == 0) {
+        if (jTFProductQuantity.getText().equals("") || jTFProductQuantity.getText().length() == 0) {
             JOptionPane.showMessageDialog(this, "Por favor verifique que el precio "
                     + "no este vacío.", "Tamaño", JOptionPane.WARNING_MESSAGE);
-            jTFProductPrice.requestFocus();
+            jTFProductQuantity.requestFocus();
         }
     }
 
@@ -161,14 +164,14 @@ public class FrmProduct extends javax.swing.JFrame {
         jMainPanelProducts = new javax.swing.JPanel();
         JTBP = new javax.swing.JTabbedPane();
         dataPanel = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        jTxtQuantity = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jTFProductName = new javax.swing.JTextField();
         jTFProductColor = new javax.swing.JTextField();
-        jTFProductPrice = new javax.swing.JTextField();
+        jTFProductQuantity = new javax.swing.JTextField();
         BtnGuardar = new javax.swing.JButton();
         BtnNuevo = new javax.swing.JButton();
         BtnEliminar = new javax.swing.JButton();
@@ -181,6 +184,9 @@ public class FrmProduct extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jTxtID = new javax.swing.JLabel();
         jSeparator5 = new javax.swing.JSeparator();
+        jLabel7 = new javax.swing.JLabel();
+        jTFProductPrice1 = new javax.swing.JTextField();
+        jSeparator6 = new javax.swing.JSeparator();
         RegPanel = new javax.swing.JPanel();
         jTFBuscar = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
@@ -208,11 +214,11 @@ public class FrmProduct extends javax.swing.JFrame {
         dataPanel.setForeground(new java.awt.Color(153, 153, 153));
         dataPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Inter SemiBold", 0, 18)); // NOI18N
-        jLabel1.setText("Categoría:");
-        jLabel1.setMaximumSize(new java.awt.Dimension(5000, 15));
-        jLabel1.setMinimumSize(new java.awt.Dimension(500, 15));
-        dataPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 290, 90, 40));
+        jTxtQuantity.setFont(new java.awt.Font("Inter SemiBold", 0, 18)); // NOI18N
+        jTxtQuantity.setText("Cantidad:");
+        jTxtQuantity.setMaximumSize(new java.awt.Dimension(5000, 15));
+        jTxtQuantity.setMinimumSize(new java.awt.Dimension(500, 15));
+        dataPanel.add(jTxtQuantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 360, 90, 40));
 
         jLabel2.setFont(new java.awt.Font("Inter SemiBold", 0, 24)); // NOI18N
         jLabel2.setText("INGRESE LOS DATOS DEL PRODUCTO");
@@ -248,10 +254,10 @@ public class FrmProduct extends javax.swing.JFrame {
         jTFProductColor.setCaretColor(new java.awt.Color(255, 255, 255));
         dataPanel.add(jTFProductColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 170, 450, 30));
 
-        jTFProductPrice.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
-        jTFProductPrice.setBorder(null);
-        jTFProductPrice.setCaretColor(new java.awt.Color(255, 255, 255));
-        dataPanel.add(jTFProductPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 230, 450, 30));
+        jTFProductQuantity.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        jTFProductQuantity.setBorder(null);
+        jTFProductQuantity.setCaretColor(new java.awt.Color(255, 255, 255));
+        dataPanel.add(jTFProductQuantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 360, 450, 30));
 
         BtnGuardar.setBackground(new java.awt.Color(0, 153, 153));
         BtnGuardar.setFont(new java.awt.Font("Inter Black", 0, 15)); // NOI18N
@@ -263,7 +269,7 @@ public class FrmProduct extends javax.swing.JFrame {
                 BtnGuardarActionPerformed(evt);
             }
         });
-        dataPanel.add(BtnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 380, 130, 40));
+        dataPanel.add(BtnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 430, 130, 40));
 
         BtnNuevo.setBackground(new java.awt.Color(0, 153, 153));
         BtnNuevo.setFont(new java.awt.Font("Inter Black", 0, 15)); // NOI18N
@@ -275,7 +281,7 @@ public class FrmProduct extends javax.swing.JFrame {
                 BtnNuevoActionPerformed(evt);
             }
         });
-        dataPanel.add(BtnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 380, 130, 40));
+        dataPanel.add(BtnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 430, 130, 40));
 
         BtnEliminar.setBackground(new java.awt.Color(0, 153, 153));
         BtnEliminar.setFont(new java.awt.Font("Inter Black", 0, 15)); // NOI18N
@@ -287,7 +293,7 @@ public class FrmProduct extends javax.swing.JFrame {
                 BtnEliminarActionPerformed(evt);
             }
         });
-        dataPanel.add(BtnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 380, 130, 40));
+        dataPanel.add(BtnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 430, 130, 40));
 
         BtnEditar.setBackground(new java.awt.Color(0, 153, 153));
         BtnEditar.setFont(new java.awt.Font("Inter Black", 0, 15)); // NOI18N
@@ -299,7 +305,7 @@ public class FrmProduct extends javax.swing.JFrame {
                 BtnEditarActionPerformed(evt);
             }
         });
-        dataPanel.add(BtnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 380, 130, 40));
+        dataPanel.add(BtnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 430, 130, 40));
 
         jSeparator1.setBackground(new java.awt.Color(0, 147, 147));
         jSeparator1.setForeground(new java.awt.Color(0, 147, 147));
@@ -312,7 +318,7 @@ public class FrmProduct extends javax.swing.JFrame {
 
         jSeparator4.setBackground(new java.awt.Color(0, 147, 147));
         jSeparator4.setForeground(new java.awt.Color(0, 147, 147));
-        dataPanel.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 260, 450, 20));
+        dataPanel.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 390, 450, 20));
 
         dataPanel.add(jComboBoxCategories, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 300, 450, 30));
 
@@ -334,6 +340,21 @@ public class FrmProduct extends javax.swing.JFrame {
 
         dataPanel.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 110, 80, 30));
         dataPanel.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 140, 80, 10));
+
+        jLabel7.setFont(new java.awt.Font("Inter SemiBold", 0, 18)); // NOI18N
+        jLabel7.setText("Categoría:");
+        jLabel7.setMaximumSize(new java.awt.Dimension(5000, 15));
+        jLabel7.setMinimumSize(new java.awt.Dimension(500, 15));
+        dataPanel.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 290, 90, 40));
+
+        jTFProductPrice1.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        jTFProductPrice1.setBorder(null);
+        jTFProductPrice1.setCaretColor(new java.awt.Color(255, 255, 255));
+        dataPanel.add(jTFProductPrice1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 230, 450, 30));
+
+        jSeparator6.setBackground(new java.awt.Color(0, 147, 147));
+        jSeparator6.setForeground(new java.awt.Color(0, 147, 147));
+        dataPanel.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 260, 450, 20));
 
         JTBP.addTab("Datos", dataPanel);
 
@@ -419,7 +440,7 @@ public class FrmProduct extends javax.swing.JFrame {
             String categoryName = String.valueOf(combo.getSelectedItem());
             Category productCategory = dCategory.findCategoryByName(categoryName);
             Product product = new Product(this.jTFProductName.getText(), this.jTFProductColor.getText()
-            ,0, Double.parseDouble(this.jTFProductPrice.getText()), productCategory);
+            ,0, Double.parseDouble(this.jTFProductQuantity.getText()), productCategory, Integer.parseInt(jTFProductQuantity.getText()));
             if (dProduct.addProduct(product)) {
                 JOptionPane.showMessageDialog(this, "Registro Guardado",
                     "Producto", JOptionPane.INFORMATION_MESSAGE);
@@ -462,7 +483,7 @@ public class FrmProduct extends javax.swing.JFrame {
         this.verificarDatosVacios();
         Category editableCategory = dCategory.findCategoryByName(String.valueOf(combo.getSelectedItem()));
         Product editableProduct = new Product(this.jTFProductName.getText()
-            ,this.jTFProductColor.getText(),idProduct, Double.parseDouble(this.jTFProductPrice.getText()), editableCategory);
+            ,this.jTFProductColor.getText(),idProduct, Double.parseDouble(this.jTFProductQuantity.getText()), editableCategory, Integer.parseInt(jTFProductQuantity.getText()));
         if(dProduct.editProduct(editableProduct)){
             JOptionPane.showMessageDialog(this, "Registro editado");
 
@@ -551,12 +572,12 @@ public class FrmProduct extends javax.swing.JFrame {
     private javax.swing.JPanel RegPanel;
     private javax.swing.JPanel dataPanel;
     private javax.swing.JComboBox<String> jComboBoxCategories;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jMainPanelProducts;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -566,11 +587,14 @@ public class FrmProduct extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JSeparator jSeparator6;
     private javax.swing.JTextField jTFBuscar;
     private javax.swing.JTextField jTFProductColor;
     private javax.swing.JTextField jTFProductName;
-    private javax.swing.JTextField jTFProductPrice;
+    private javax.swing.JTextField jTFProductPrice1;
+    private javax.swing.JTextField jTFProductQuantity;
     private javax.swing.JTable jTblReg;
     private javax.swing.JLabel jTxtID;
+    private javax.swing.JLabel jTxtQuantity;
     // End of variables declaration//GEN-END:variables
 }

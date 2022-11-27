@@ -221,7 +221,7 @@ public class FrmLogin extends javax.swing.JFrame {
         //}
         //jTfEmail.setText("");
         //jPfPassword.setText("");
-        checkUser(jTfEmail.getText(), String.valueOf(jPfPassword.getText()));
+        checkUser(jTfEmail.getText(), String.valueOf(jPfPassword.getPassword()));
     }//GEN-LAST:event_jBtnLoginMouseClicked
 
 
