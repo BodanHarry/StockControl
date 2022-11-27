@@ -209,57 +209,46 @@ public class FrmProduct extends javax.swing.JFrame {
         dataPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Inter SemiBold", 0, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Categoría:");
         jLabel1.setMaximumSize(new java.awt.Dimension(5000, 15));
         jLabel1.setMinimumSize(new java.awt.Dimension(500, 15));
         dataPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 290, 90, 40));
 
         jLabel2.setFont(new java.awt.Font("Inter SemiBold", 0, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("INGRESE LOS DATOS DEL PRODUCTO");
         jLabel2.setMaximumSize(new java.awt.Dimension(5000, 15));
         jLabel2.setMinimumSize(new java.awt.Dimension(500, 15));
         dataPanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 20, 450, 60));
 
         jLabel3.setFont(new java.awt.Font("Inter SemiBold", 0, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Nombre: ");
         jLabel3.setMaximumSize(new java.awt.Dimension(5000, 15));
         jLabel3.setMinimumSize(new java.awt.Dimension(500, 15));
         dataPanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 80, 40));
 
         jLabel4.setFont(new java.awt.Font("Inter SemiBold", 0, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Color:");
         jLabel4.setMaximumSize(new java.awt.Dimension(5000, 15));
         jLabel4.setMinimumSize(new java.awt.Dimension(500, 15));
         dataPanel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, -1, 40));
 
         jLabel5.setFont(new java.awt.Font("Inter SemiBold", 0, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Precio:");
         jLabel5.setMaximumSize(new java.awt.Dimension(5000, 15));
         jLabel5.setMinimumSize(new java.awt.Dimension(500, 15));
         dataPanel.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, 60, 40));
 
-        jTFProductName.setBackground(new java.awt.Color(255, 255, 255));
         jTFProductName.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
-        jTFProductName.setForeground(new java.awt.Color(0, 0, 0));
         jTFProductName.setBorder(null);
         jTFProductName.setCaretColor(new java.awt.Color(255, 255, 255));
         dataPanel.add(jTFProductName, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 110, 450, 30));
 
-        jTFProductColor.setBackground(new java.awt.Color(255, 255, 255));
         jTFProductColor.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
-        jTFProductColor.setForeground(new java.awt.Color(0, 0, 0));
         jTFProductColor.setBorder(null);
         jTFProductColor.setCaretColor(new java.awt.Color(255, 255, 255));
         dataPanel.add(jTFProductColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 170, 450, 30));
 
-        jTFProductPrice.setBackground(new java.awt.Color(255, 255, 255));
         jTFProductPrice.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
-        jTFProductPrice.setForeground(new java.awt.Color(0, 0, 0));
         jTFProductPrice.setBorder(null);
         jTFProductPrice.setCaretColor(new java.awt.Color(255, 255, 255));
         dataPanel.add(jTFProductPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 230, 450, 30));
@@ -330,7 +319,6 @@ public class FrmProduct extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 147, 147)));
 
-        jTxtID.setForeground(new java.awt.Color(0, 0, 0));
         jTxtID.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -369,7 +357,6 @@ public class FrmProduct extends javax.swing.JFrame {
         RegPanel.add(jTFBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 50, 450, 30));
 
         jLabel6.setFont(new java.awt.Font("Inter SemiBold", 0, 18)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Buscar: ");
         jLabel6.setMaximumSize(new java.awt.Dimension(5000, 15));
         jLabel6.setMinimumSize(new java.awt.Dimension(500, 15));

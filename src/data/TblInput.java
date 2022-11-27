@@ -40,18 +40,19 @@ public class TblInput {
     
     }
     
-    public ArrayList<Input> inputList() throws ParseException{
+    public ArrayList<Input> inputList() {
         ArrayList<Input> list = new ArrayList<>();
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy"); 
-        TblProduct products = new TblProduct();
-        Product product;
-        TblUser users = new TblUser();
-        User user;
+            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy"); 
+            TblProduct products = new TblProduct();
+            Product product;
+            TblUser users = new TblUser();
+            User user;
         
         try {
+            
             this.getReg();
             while (rs.next()) {
-                Date dataFormat = format.parse(rs.getString("Inputdate"));
+                Date dataFormat = format.parse(rs.getDate("Inputdate"));
                 int idProduct = Integer.parseInt(rs.getString("ProductID"));
                 product = products.getProduct(idProduct);
                 String username = rs.getString("Username");
