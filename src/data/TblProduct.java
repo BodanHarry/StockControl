@@ -160,7 +160,7 @@ public class TblProduct {
             this.getReg();
             rs.beforeFirst();
             while (rs.next()) {
-                if (Integer.parseInt(rs.getString("ProducID")) == product.getIdProduct()) {
+                if (rs.getInt("ProducID") == product.getIdProduct()) {
                     rs.updateString("Productname", product.getProductName());
                     rs.updateString("Productcolor", product.getProductColor());
                     rs.updateDouble("Productprice", product.getProductPrice());
@@ -168,8 +168,7 @@ public class TblProduct {
                     rs.updateInt("Productquantity", product.getProductQuantity());
                     rs.updateRow();
                     result = true;
-                    break;
-
+                    return result;
                 }
             }
         } catch (SQLException ex) {

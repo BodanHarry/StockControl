@@ -257,7 +257,6 @@ public class TblCategory {
         } catch (SQLException ex) {
             System.out.println("Error al buscar categoría: " + ex.getMessage());
         } finally {
-
             try {
                 if (rs != null) {
                     rs.close();
@@ -273,7 +272,6 @@ public class TblCategory {
             } catch (SQLException ex) {
                 System.out.println(ex.getMessage());
             }
-
         }
         return category;
     }

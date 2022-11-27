@@ -128,8 +128,9 @@ public class FrmProduct extends javax.swing.JFrame {
         idProduct = productList.get(row).getIdProduct();
         this.jTFProductName.setText(productList.get(row).getProductName());
         this.jTFProductColor.setText(productList.get(row).getProductColor());
-        this.jTFProductQuantity.setText(String.valueOf(productList.get(row).getProductPrice()));
+        this.jTFProductQuantity.setText(String.valueOf(productList.get(row).getProductQuantity()));
         this.jTxtID.setText(String.valueOf(idProduct));
+        this.jTFProductPrice.setText(String.valueOf(productList.get(row).getProductPrice()));
         String actualCategory = productList.get(row).getM_Category().getProductType() + productList.get(row).getM_Category().getProductSize();
         this.setCombo(actualCategory);
         this.JTBP.setSelectedIndex(0);
@@ -185,7 +186,7 @@ public class FrmProduct extends javax.swing.JFrame {
         jTxtID = new javax.swing.JLabel();
         jSeparator5 = new javax.swing.JSeparator();
         jLabel7 = new javax.swing.JLabel();
-        jTFProductPrice1 = new javax.swing.JTextField();
+        jTFProductPrice = new javax.swing.JTextField();
         jSeparator6 = new javax.swing.JSeparator();
         RegPanel = new javax.swing.JPanel();
         jTFBuscar = new javax.swing.JTextField();
@@ -347,10 +348,10 @@ public class FrmProduct extends javax.swing.JFrame {
         jLabel7.setMinimumSize(new java.awt.Dimension(500, 15));
         dataPanel.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 290, 90, 40));
 
-        jTFProductPrice1.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
-        jTFProductPrice1.setBorder(null);
-        jTFProductPrice1.setCaretColor(new java.awt.Color(255, 255, 255));
-        dataPanel.add(jTFProductPrice1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 230, 450, 30));
+        jTFProductPrice.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        jTFProductPrice.setBorder(null);
+        jTFProductPrice.setCaretColor(new java.awt.Color(255, 255, 255));
+        dataPanel.add(jTFProductPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 230, 450, 30));
 
         jSeparator6.setBackground(new java.awt.Color(0, 147, 147));
         jSeparator6.setForeground(new java.awt.Color(0, 147, 147));
@@ -482,13 +483,12 @@ public class FrmProduct extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.verificarDatosVacios();
         Category editableCategory = dCategory.findCategoryByName(String.valueOf(combo.getSelectedItem()));
-        Product editableProduct = new Product(this.jTFProductName.getText()
-            ,this.jTFProductColor.getText(),idProduct, Double.parseDouble(this.jTFProductQuantity.getText()), editableCategory, Integer.parseInt(jTFProductQuantity.getText()));
+        Product editableProduct = new Product(this.jTFProductName.getText(),this.jTFProductColor.getText(),idProduct, 
+                Double.parseDouble(this.jTFProductPrice.getText()), editableCategory, Integer.parseInt(jTFProductQuantity.getText()));
         if(dProduct.editProduct(editableProduct)){
             JOptionPane.showMessageDialog(this, "Registro editado");
-
         }else{
-            JOptionPane.showMessageDialog(this, "Error al editar");
+            JOptionPane.showMessageDialog(this, "Error al editar el registro");
         }
         fillTable();
     }//GEN-LAST:event_BtnEditarActionPerformed
@@ -591,7 +591,7 @@ public class FrmProduct extends javax.swing.JFrame {
     private javax.swing.JTextField jTFBuscar;
     private javax.swing.JTextField jTFProductColor;
     private javax.swing.JTextField jTFProductName;
-    private javax.swing.JTextField jTFProductPrice1;
+    private javax.swing.JTextField jTFProductPrice;
     private javax.swing.JTextField jTFProductQuantity;
     private javax.swing.JTable jTblReg;
     private javax.swing.JLabel jTxtID;
