@@ -68,8 +68,8 @@ GO
 CREATE TABLE [Input]
 (
 	[InputID] int NOT NULL,
-	[Inputdate] date NULL,
-	[Inputprice] decimal(2) NULL,
+	[Inputdate] nvarchar(20) NULL,
+	[Inputprice] decimal(30,2) NULL,
 	[Inputquantity] int NULL,
 	[ProductID] int NOT NULL,
 	[UserID] int NOT NULL
@@ -79,8 +79,8 @@ GO
 CREATE TABLE [Output]
 (
 	[OutputID] int NOT NULL,
-	[Outputdate] date NULL,
-	[Outputprice] decimal(2) NULL,
+	[Outputdate] nvarchar(20) NULL,
+	[Outputprice] decimal(30,2) NULL,
 	[Outputquantity] int NULL,
 	[ProductID] int NOT NULL,
 	[UserID] int NOT NULL
@@ -92,8 +92,9 @@ CREATE TABLE [Product]
 	[ProductID] int NOT NULL IDENTITY (1, 1),
 	[Productname] nvarchar(80) NULL,
 	[Productcolor] nvarchar(80) NULL,
-	[Productprice] decimal(2) NULL,
-	[CategoryID] int NOT NULL
+	[Productprice] decimal(10,2) NULL,
+	[CategoryID] int NOT NULL,
+	[Productquantity] int NULL
 )
 GO
 
