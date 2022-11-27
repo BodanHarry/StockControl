@@ -127,20 +127,45 @@ public class FrmInput extends javax.swing.JFrame {
             }
         };
 
-        String titulos[] = {"ID", "Producto", "Color", "Precio", "Categoría"};
+        String titulos[] = {"Fecha", "Monto", "Cantidad", "Usuario", "Producto"};
         dtm.setColumnIdentifiers(titulos);
-        for (Product product : productList) {
-            String categories = product.getM_Category().getProductType() + product.getM_Category().getProductSize();
+        for (Input input : inputList) {
+            String user = input.getM_User().getUserName();
+            String product = input.getM_Product().getProductName();
             Object[] row = new Object[]{
-                String.valueOf(product.getIdProduct()),
-                product.getProductName(),
-                product.getProductColor(),
-                String.valueOf(product.getProductPrice()),
-                categories
+                input.getInputDate(),
+                input.getInputPrice(),
+                input.getInputQuantity(),
+                user,
+                product
+                
             };
             dtm.addRow(row);
         }
         this.jTblReg.setModel(dtm);
+    }
+    
+    private void filtrarTabla() {
+        trsFiltro.setRowFilter(RowFilter.regexFilter(this.jTFBuscar.getText(), 0));
+
+    }
+    
+    private void foundData() {
+        int row = this.jTblReg.getSelectedRow();
+        userName = userList.get(row).getUserName();
+        idCategory = productList.get(row).getM_Category().getIdCategory();
+        idProduct = productList.get(row).getIdProduct();
+        this.jTFProductName.setText(productList.get(row).getProductName());
+        this.jTFProductColor.setText(productList.get(row).getProductColor());
+        this.jTFProductPrice.setText(String.valueOf(productList.get(row).getProductPrice()));
+        this.jTxtID.setText(String.valueOf(idProduct));
+        String actualCategory = productList.get(row).getM_Category().getProductType() + productList.get(row).getM_Category().getProductSize();
+        this.setCombo(actualCategory);
+        this.JTBP.setSelectedIndex(0);
+        BtnGuardar.setEnabled(true);
+        BtnEditar.setEnabled(true);
+        BtnEliminar.setEnabled(true);
+        jTFProductName.requestFocus();
     }
     
     /**
@@ -154,8 +179,8 @@ public class FrmInput extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jMainPanelinput = new javax.swing.JPanel();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel3 = new javax.swing.JPanel();
+        JTBP = new javax.swing.JTabbedPane();
+        RegPanel = new javax.swing.JPanel();
         jTFBuscar = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
@@ -254,34 +279,34 @@ public class FrmInput extends javax.swing.JFrame {
 
         jPanel4.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 430));
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+        javax.swing.GroupLayout RegPanelLayout = new javax.swing.GroupLayout(RegPanel);
+        RegPanel.setLayout(RegPanelLayout);
+        RegPanelLayout.setHorizontalGroup(
+            RegPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RegPanelLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(RegPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(RegPanelLayout.createSequentialGroup()
                         .addGap(100, 100, 100)
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
                         .addComponent(jTFBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 900, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+        RegPanelLayout.setVerticalGroup(
+            RegPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RegPanelLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(RegPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGroup(RegPanelLayout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(jTFBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(10, 10, 10)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jTabbedPane1.addTab("Registro", jPanel3);
+        JTBP.addTab("Registro", RegPanel);
 
         dataPanel.setBackground(new java.awt.Color(255, 255, 255));
         dataPanel.setForeground(new java.awt.Color(153, 153, 153));
@@ -410,9 +435,9 @@ public class FrmInput extends javax.swing.JFrame {
 
         dataPanel.add(jComboBoxProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 300, 450, 30));
 
-        jTabbedPane1.addTab("Datos", dataPanel);
+        JTBP.addTab("Datos", dataPanel);
 
-        jMainPanelinput.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 880, 520));
+        jMainPanelinput.add(JTBP, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 880, 520));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -546,6 +571,8 @@ public class FrmInput extends javax.swing.JFrame {
     private javax.swing.JButton BtnEliminar;
     private javax.swing.JButton BtnGuardar;
     private javax.swing.JButton BtnNuevo;
+    private javax.swing.JTabbedPane JTBP;
+    private javax.swing.JPanel RegPanel;
     private javax.swing.JPanel dataPanel;
     private javax.swing.JComboBox<String> jComboBoxProduct;
     private javax.swing.JComboBox<String> jComboBoxUser;
@@ -559,7 +586,6 @@ public class FrmInput extends javax.swing.JFrame {
     private javax.swing.JPanel jMainPanelinput;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
@@ -571,7 +597,6 @@ public class FrmInput extends javax.swing.JFrame {
     private javax.swing.JTextField jTFDate;
     private javax.swing.JTextField jTFInputPrice;
     private javax.swing.JTextField jTFInputQuantity;
-    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTblReg;
     private javax.swing.JLabel jTxtID;
     // End of variables declaration//GEN-END:variables

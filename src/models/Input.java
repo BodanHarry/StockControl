@@ -1,6 +1,5 @@
 package models;
 
-import java.util.Date;
 
 
 /**
@@ -11,7 +10,7 @@ import java.util.Date;
 public class Input {
 
 	private int idInput;
-	private Date inputDate;
+	private String inputDate;
 	private double inputPrice;
 	private int inputQuantity;
 	private Product m_Product;
@@ -21,7 +20,7 @@ public class Input {
 
 	}
 
-    public Input(int idInput, Date inputDate, double inputPrice, int inputQuantity, Product m_Product, User m_User) {
+    public Input(int idInput, String inputDate, double inputPrice, int inputQuantity, Product m_Product, User m_User) {
         this.idInput = idInput;
         this.inputDate = inputDate;
         this.inputPrice = inputPrice;
@@ -38,11 +37,11 @@ public class Input {
         this.idInput = idInput;
     }
 
-    public Date getInputDate() {
+    public String getInputDate() {
         return inputDate;
     }
 
-    public void setInputDate(Date inputDate) {
+    public void setInputDate(String inputDate) {
         this.inputDate = inputDate;
     }
 

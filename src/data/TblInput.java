@@ -10,9 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import models.Product;
 import models.User;
 /**
@@ -41,8 +39,7 @@ public class TblInput {
     }
     
     public ArrayList<Input> inputList() {
-        ArrayList<Input> list = new ArrayList<>();
-            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy"); 
+        ArrayList<Input> list = new ArrayList<>(); 
             TblProduct products = new TblProduct();
             Product product;
             TblUser users = new TblUser();
@@ -52,14 +49,14 @@ public class TblInput {
             
             this.getReg();
             while (rs.next()) {
-                Date dataFormat = format.parse(rs.getDate("Inputdate"));
+                String inputDate = rs.getString("Inputdate");
                 int idProduct = Integer.parseInt(rs.getString("ProductID"));
                 product = products.getProduct(idProduct);
                 String username = rs.getString("Username");
                 user = users.getUser(username);
                 list.add(new Input(
                         Integer.parseInt(rs.getString("InputID")),
-                        dataFormat,
+                        inputDate,
                         Double.parseDouble(rs.getString("Inputprice")),
                         Integer.parseInt(rs.getString("Inputquantity")),
                         product,
@@ -200,8 +197,7 @@ public class TblInput {
     }
     
     public Input getInput(int idInput) throws ParseException{
-        Input input = new Input();
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy"); 
+        Input input = new Input(); 
         TblProduct products = new TblProduct();
         Product product;
         TblUser users = new TblUser();
@@ -209,7 +205,7 @@ public class TblInput {
         try {
             this.getReg();
             while (rs.next()) {
-                Date dataFormat = format.parse(rs.getString("Inputdate"));
+                String inputDate = rs.getString("Inputdate");
                 int idProduct = Integer.parseInt(rs.getString("ProductID"));
                 product = products.getProduct(idProduct);
                 String username = rs.getString("Username");
@@ -217,7 +213,7 @@ public class TblInput {
                 user = users.getUser(username);
                 input = new Input(
                         Integer.parseInt(rs.getString("InputID")),
-                        dataFormat,
+                        inputDate,
                         Double.parseDouble(rs.getString("Inputprice")),
                         Integer.parseInt(rs.getString("Inputquantity")),
                         product,
