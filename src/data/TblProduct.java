@@ -50,7 +50,8 @@ public class TblProduct {
                         rs.getString("Productcolor"),
                         rs.getInt("ProductID"),
                         rs.getDouble("Productprice"),
-                        category
+                        category,
+                        rs.getInt("Productquantity")
                 )
                 );
             }
@@ -90,6 +91,7 @@ public class TblProduct {
             rs.updateString("Productcolor", product.getProductColor());
             rs.updateDouble("productPrice", product.getProductPrice());
             rs.updateInt("CategoryID", product.getM_Category().getIdCategory());
+            rs.updateInt("ProductQuantity", product.getProductQuantity());
             rs.insertRow();
             rs.moveToCurrentRow();
         } catch (SQLException ex) {
@@ -159,8 +161,9 @@ public class TblProduct {
                 if (Integer.parseInt(rs.getString("ProducID")) == product.getIdProduct()) {
                     rs.updateString("Productname", product.getProductName());
                     rs.updateString("Productcolor", product.getProductColor());
-                    rs.updateString("Productprice", String.valueOf(product.getProductPrice()));
-                    rs.updateString("CategoryID", String.valueOf(product.getM_Category().getIdCategory()));
+                    rs.updateDouble("Productprice", product.getProductPrice());
+                    rs.updateInt("CategoryID", product.getM_Category().getIdCategory());
+                    rs.updateInt("Productquantity", product.getProductQuantity());
                     rs.updateRow();
                     result = true;
                     break;
@@ -237,9 +240,10 @@ public class TblProduct {
                     product = new Product(
                             rs.getString("Productname"),
                             rs.getString("Productcolor"),
-                            Integer.parseInt(rs.getString("ProductID")),
-                            Double.parseDouble(rs.getString("Productprice")),
-                            category.getCategory(Integer.parseInt(rs.getString("CategoryID")))
+                            rs.getInt("ProductID"),
+                            rs.getDouble("Productprice"),
+                            category.getCategory(Integer.parseInt(rs.getString("CategoryID"))),
+                            rs.getInt("Productquantity")
                     );
                     break;
                 }
