@@ -23,7 +23,7 @@ public class TblCategory {
     public void getReg() throws SQLException {
         try {
             conn = Conexion.getConnection();
-            String tSQL = "Select * from Category";
+            String tSQL = "Select * from [stockControl].[dbo].[Category]";
             ps = conn.prepareStatement(tSQL, ResultSet.TYPE_SCROLL_SENSITIVE,
                     ResultSet.CONCUR_UPDATABLE
                     + ResultSet.HOLD_CURSORS_OVER_COMMIT
@@ -228,30 +228,12 @@ public class TblCategory {
                             rs.getString("Producttype"),
                             rs.getString("Productsize")
                     );
-                    return category;
+                    
                 }
             }
         } catch (SQLException ex) {
             System.out.println("Error al buscar categoría: " + ex.getMessage());
-        } finally {
-
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-
-                if (rs != null) {
-                    ps.close();
-                }
-
-                if (rs != null) {
-                    Conexion.closeConexion(conn);
-                }
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-            }
-
-        }
+        } 
         return category;
     }
     

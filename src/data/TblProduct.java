@@ -40,6 +40,7 @@ public class TblProduct {
         ArrayList<Product> list = new ArrayList<>();
         TblCategory categories = new TblCategory();
         Category category;
+        
         try {
             this.getReg();
             while (rs.next()) {
@@ -237,7 +238,7 @@ public class TblProduct {
         try {
             this.getReg();
             while (rs.next()) {
-                if (Integer.parseInt(rs.getString("CategoryID")) == idProduct) {
+                if (Integer.parseInt(rs.getString("ProductID")) == idProduct) {
                     product = new Product(
                             rs.getString("Productname"),
                             rs.getString("Productcolor"),
