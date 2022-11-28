@@ -67,7 +67,7 @@ public class FrmProduct extends javax.swing.JFrame {
         fillCategoryList();
   
         for (Category category : categoryList) {
-            combo.addElement(category.getProductType() + category.getProductSize());
+            combo.addElement(category.getProductType() + " " + category.getProductSize());
         }
         
         this.jComboBoxCategories.setModel(combo);
@@ -102,8 +102,7 @@ public class FrmProduct extends javax.swing.JFrame {
         String titulos[] = {"ID", "Producto", "Color", "Precio", "Categoría", "Cantidad"};
         dtm.setColumnIdentifiers(titulos);
         for (Product product : productList) {
-            String categories = product.getM_Category().getProductType() + product.getM_Category().getProductSize();
-            System.out.println(categories);
+            String categories = product.getM_Category().getProductType() + " " + product.getM_Category().getProductSize();
             Object[] row = new Object[]{
                 String.valueOf(product.getIdProduct()),
                 product.getProductName(),
@@ -131,7 +130,7 @@ public class FrmProduct extends javax.swing.JFrame {
         this.jTFProductQuantity.setText(String.valueOf(productList.get(row).getProductQuantity()));
         this.jTxtID.setText(String.valueOf(idProduct));
         this.jTFProductPrice.setText(String.valueOf(productList.get(row).getProductPrice()));
-        String actualCategory = productList.get(row).getM_Category().getProductType() + productList.get(row).getM_Category().getProductSize();
+        String actualCategory = productList.get(row).getM_Category().getProductType() + " " + productList.get(row).getM_Category().getProductSize();
         this.setCombo(actualCategory);
         this.JTBP.setSelectedIndex(0);
         BtnGuardar.setEnabled(true);

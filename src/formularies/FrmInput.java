@@ -56,8 +56,6 @@ public class FrmInput extends javax.swing.JFrame {
     LocalDate now = LocalDate.now();
     String nowString = String.valueOf(now);
     
-    boolean identifierID =  false;
-    
     /**
      * Creates new form FrmInput
      */
@@ -168,7 +166,7 @@ public class FrmInput extends javax.swing.JFrame {
     private void foundData() {
         int row = this.jTblReg.getSelectedRow();
         this.jTfInputPrice.setText(String.valueOf(inputList.get(row).getInputPrice()));
-        this.jTfInputTotalPrice.setText(dInput.getTotalPrice(inputList.get(row).getIdInput()));
+        this.jTxtID.setText(String.valueOf(inputList.get(row).getIdInput()));
         this.jTfInputQuantity.setText(String.valueOf(inputList.get(row).getInputQuantity()));
         idInput = inputList.get(row).getIdInput();
         String actualProduct = inputList.get(row).getM_Product().getProductName() + " " + inputList.get(row).getM_Product().getM_Category().getProductType() + " " + inputList.get(row).getM_Product().getM_Category().getProductSize() + " " + inputList.get(row).getM_Product().getProductColor();
@@ -205,7 +203,6 @@ public class FrmInput extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jTFDate = new javax.swing.JTextField();
         jTfInputQuantity = new javax.swing.JTextField();
@@ -214,7 +211,6 @@ public class FrmInput extends javax.swing.JFrame {
         BtnEliminar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
-        jSeparator3 = new javax.swing.JSeparator();
         jSeparator4 = new javax.swing.JSeparator();
         jComboBoxUser = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
@@ -224,11 +220,9 @@ public class FrmInput extends javax.swing.JFrame {
         jComboBoxProduct = new javax.swing.JComboBox<>();
         jSeparator6 = new javax.swing.JSeparator();
         jSeparator7 = new javax.swing.JSeparator();
-        jTfInputTotalPrice = new javax.swing.JLabel();
         jTfInputPrice = new javax.swing.JLabel();
         jSeparator8 = new javax.swing.JSeparator();
         jLabel8 = new javax.swing.JLabel();
-        BtnNuevaFactura = new javax.swing.JButton();
         RegPanel = new javax.swing.JPanel();
         jTFBuscar = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
@@ -279,12 +273,6 @@ public class FrmInput extends javax.swing.JFrame {
         jLabel3.setMinimumSize(new java.awt.Dimension(500, 15));
         dataPanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 80, 40));
 
-        jLabel4.setFont(new java.awt.Font("Inter SemiBold", 0, 18)); // NOI18N
-        jLabel4.setText("Total Entrada:");
-        jLabel4.setMaximumSize(new java.awt.Dimension(5000, 15));
-        jLabel4.setMinimumSize(new java.awt.Dimension(500, 15));
-        dataPanel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 170, 120, 30));
-
         jLabel5.setFont(new java.awt.Font("Inter SemiBold", 0, 18)); // NOI18N
         jLabel5.setText("Cantidad:");
         jLabel5.setMaximumSize(new java.awt.Dimension(5000, 15));
@@ -316,7 +304,7 @@ public class FrmInput extends javax.swing.JFrame {
                 BtnGuardarKeyTyped(evt);
             }
         });
-        dataPanel.add(BtnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 430, 130, 40));
+        dataPanel.add(BtnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 430, 130, 40));
 
         BtnNuevo.setBackground(new java.awt.Color(0, 153, 153));
         BtnNuevo.setFont(new java.awt.Font("Inter Black", 0, 15)); // NOI18N
@@ -340,16 +328,12 @@ public class FrmInput extends javax.swing.JFrame {
                 BtnEliminarActionPerformed(evt);
             }
         });
-        dataPanel.add(BtnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 430, 130, 40));
+        dataPanel.add(BtnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 430, 130, 40));
 
         jSeparator1.setBackground(new java.awt.Color(0, 147, 147));
         jSeparator1.setForeground(new java.awt.Color(0, 147, 147));
         dataPanel.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 140, 450, 20));
         dataPanel.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 200, -1, -1));
-
-        jSeparator3.setBackground(new java.awt.Color(0, 147, 147));
-        jSeparator3.setForeground(new java.awt.Color(0, 147, 147));
-        dataPanel.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 200, 100, 20));
 
         jSeparator4.setBackground(new java.awt.Color(0, 147, 147));
         jSeparator4.setForeground(new java.awt.Color(0, 147, 147));
@@ -392,33 +376,18 @@ public class FrmInput extends javax.swing.JFrame {
         jSeparator7.setForeground(new java.awt.Color(0, 147, 147));
         dataPanel.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 330, 450, 20));
 
-        jTfInputTotalPrice.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        dataPanel.add(jTfInputTotalPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 170, 100, 30));
-
         jTfInputPrice.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        dataPanel.add(jTfInputPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 170, 100, 30));
+        dataPanel.add(jTfInputPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 170, 450, 30));
 
         jSeparator8.setBackground(new java.awt.Color(0, 147, 147));
         jSeparator8.setForeground(new java.awt.Color(0, 147, 147));
-        dataPanel.add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 200, 100, 20));
+        dataPanel.add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 200, 450, 20));
 
         jLabel8.setFont(new java.awt.Font("Inter SemiBold", 0, 18)); // NOI18N
         jLabel8.setText("Monto productos:");
         jLabel8.setMaximumSize(new java.awt.Dimension(5000, 15));
         jLabel8.setMinimumSize(new java.awt.Dimension(500, 15));
         dataPanel.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, 140, 30));
-
-        BtnNuevaFactura.setBackground(new java.awt.Color(0, 153, 153));
-        BtnNuevaFactura.setFont(new java.awt.Font("Inter Black", 0, 15)); // NOI18N
-        BtnNuevaFactura.setForeground(new java.awt.Color(255, 255, 255));
-        BtnNuevaFactura.setText("Nueva Factura");
-        BtnNuevaFactura.setBorder(null);
-        BtnNuevaFactura.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnNuevaFacturaActionPerformed(evt);
-            }
-        });
-        dataPanel.add(BtnNuevaFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 430, 130, 40));
 
         JTBP.addTab("Datos", dataPanel);
 
@@ -522,36 +491,29 @@ public class FrmInput extends javax.swing.JFrame {
         try {
             User user = dUser.getUser(String.valueOf(comboUser.getSelectedItem()));
             Product product = dProduct.getProductByName(String.valueOf(comboProduct.getSelectedItem()));
-            int actualID = dInput.getActualId();
-            
-            if(identifierID){
-                actualID +=1;
-                identifierID = false;
-            }
+            System.out.println(user);
+            System.out.println(product);
             
             Input input = new Input(
-                    actualID,
+                    0,
                     this.jTFDate.getText(),
-                    Double.parseDouble(this.jTfInputQuantity.getText()) * product.getProductPrice(),
+                    Integer.parseInt(this.jTfInputQuantity.getText()) * product.getProductPrice(),
                     Integer.parseInt(this.jTfInputQuantity.getText()),
                     product,
                     user
             
             );
             
-            if (dInput.addInput(input)) {
-                JOptionPane.showMessageDialog(this, "Registro Guardado",
-                    "Entrada", JOptionPane.INFORMATION_MESSAGE);
-                this.fillTable();
-                this.JTBP.setSelectedIndex(1);
-            } else {
+            if(dInput.addInput(input)){
+                JOptionPane.showMessageDialog(this, "Registro guardado", "Entrada", JOptionPane.INFORMATION_MESSAGE);
+            }else{
                 JOptionPane.showMessageDialog(this, "Error al guardar");
             }
+            
         } catch (HeadlessException es) {
             System.out.println("Error al intentar guardar" + es.getMessage());
-        } catch (SQLException ex) {
-            Logger.getLogger(FrmInput.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }//GEN-LAST:event_BtnGuardarActionPerformed
 
     private void BtnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNuevoActionPerformed
@@ -608,12 +570,6 @@ public class FrmInput extends javax.swing.JFrame {
         });
     }//GEN-LAST:event_jTblRegMouseClicked
 
-    private void BtnNuevaFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNuevaFacturaActionPerformed
-        clear();
-        this.JTBP.setSelectedIndex(0);
-        identifierID = true;
-    }//GEN-LAST:event_BtnNuevaFacturaActionPerformed
-
     private void BtnGuardarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnGuardarKeyTyped
         // TODO add your handling code here:
     }//GEN-LAST:event_BtnGuardarKeyTyped
@@ -659,7 +615,6 @@ public class FrmInput extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnEliminar;
     private javax.swing.JButton BtnGuardar;
-    private javax.swing.JButton BtnNuevaFactura;
     private javax.swing.JButton BtnNuevo;
     private javax.swing.JTabbedPane JTBP;
     private javax.swing.JPanel RegPanel;
@@ -669,7 +624,6 @@ public class FrmInput extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -681,7 +635,6 @@ public class FrmInput extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
@@ -692,7 +645,6 @@ public class FrmInput extends javax.swing.JFrame {
     private javax.swing.JTable jTblReg;
     private javax.swing.JLabel jTfInputPrice;
     private javax.swing.JTextField jTfInputQuantity;
-    private javax.swing.JLabel jTfInputTotalPrice;
     private javax.swing.JLabel jTxtID;
     // End of variables declaration//GEN-END:variables
 }

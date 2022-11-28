@@ -67,7 +67,7 @@ GO
 
 CREATE TABLE [Input]
 (
-	[InputID] int NOT NULL,
+	[InputID] int NOT NULL IDENTITY (1, 1),
 	[Inputdate] nvarchar(20) NULL,
 	[Inputprice] decimal(30,2) NULL,
 	[Inputquantity] int NULL,
@@ -78,7 +78,7 @@ GO
 
 CREATE TABLE [Output]
 (
-	[OutputID] int NOT NULL,
+	[OutputID] int NOT NULL IDENTITY (1, 1),
 	[Outputdate] nvarchar(20) NULL,
 	[Outputprice] decimal(30,2) NULL,
 	[Outputquantity] int NULL,

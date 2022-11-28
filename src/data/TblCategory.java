@@ -173,7 +173,7 @@ public class TblCategory {
         try {
             this.getReg();
             while (rs.next()) {
-                actualName = rs.getString("Producttype") + rs.getString("Productsize");
+                actualName = rs.getString("Producttype") + " " + rs.getString("Productsize");
                 if (actualName.equals(name)) {
                     category = new Category(
                             rs.getInt("CategoryID"),

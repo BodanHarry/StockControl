@@ -23,7 +23,7 @@ public class TblInput {
     private PreparedStatement ps = null;
     private ResultSet rs = null;
     
-    public boolean getReg() throws SQLException{
+    public void getReg() throws SQLException{
         try {
             conn = Conexion.getConnection();
             String tSQL = "Select * from Input";
@@ -34,9 +34,8 @@ public class TblInput {
             rs = ps.executeQuery();
         } catch (SQLException ex) {
             System.out.println("Error al obtener entradas" + ex.getMessage());
-            return true;
+   
         }
-        return false;
     }
     
     public ArrayList<Input> inputList() {
@@ -72,33 +71,13 @@ public class TblInput {
         return list;   
     }
     
-    public int getActualId() throws SQLException{
-        int id = 0;
-        try{
-            
-            if(this.getReg()){
-                if(rs.isFirst()){
-                    id = 1;
-                    return id;
-                }else{
-                    rs.last();
-                    id = rs.getInt("InputID");
-                return id;
-            }
-            
-        }
-        }catch(SQLException ex){
-            System.out.println("Error al obtener idActual" + ex.getMessage());
-        }
-        return id;
-    }
+    
     
     public boolean addInput(Input input){
         boolean saved = false;
         try {
             this.getReg();
             rs.moveToInsertRow();
-            rs.updateInt("InputID", input.getIdInput());
             rs.updateString("Inputdate", input.getInputDate());
             rs.updateDouble("Inputprice", input.getInputPrice());
             rs.updateInt("Inputquantity", input.getInputQuantity());
@@ -106,6 +85,7 @@ public class TblInput {
             rs.updateString("UserID", String.valueOf(input.getM_User().getIdUser()));
             rs.insertRow();
             rs.moveToCurrentRow();
+            saved = true;
         } catch (SQLException ex) {
             System.out.println("Error al guardar la entrada" + ex.getMessage());
         } finally {
@@ -196,24 +176,5 @@ public class TblInput {
         return input;
         
     }
-    
-    public String getTotalPrice(int id){
-        Double price = 0.00;
-        String priceString = "";
-        
-        try {
-            this.getReg();
-            while (rs.next()) {
-                if(id == rs.getInt("InputID")){
-                    price = price + rs.getDouble("Inputprice");
-                }
-            }
-        } catch (SQLException ex) {
-            System.out.println("Error al buscar entrada: " + ex.getMessage());
-        }
-        
-        priceString = String.valueOf(priceString);
-        
-        return priceString;
-    }
+
 }
