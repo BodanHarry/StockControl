@@ -5,7 +5,8 @@ package models;
  * @created 14-nov-2022 9:08:52 PM
  */
 public class User {
-
+        
+        private int idUser;
 	private String userName;
 	private String userEmail;
 	private String userPassword;
@@ -14,12 +15,21 @@ public class User {
 
 	}
 
-    public User(String userName, String userEmail, String userPassword) {
+    public User(int idUser, String userName, String userEmail, String userPassword) {
+        this.idUser = idUser;
         this.userName = userName;
         this.userEmail = userEmail;
         this.userPassword = userPassword;
     }
-
+    
+    public int getIdUser(){
+        return idUser;
+    }
+    
+    public void serIdUser(int idUser){
+        this.idUser = idUser;
+    }
+    
     public String getUserName() {
         return userName;
     }
@@ -46,7 +56,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" + "userName=" + userName + ", userEmail=" + userEmail + ", userPassword=" + userPassword + '}';
+        return "User{" + "userName=" + userName + ", userEmail=" + userEmail + ", userPassword=" + userPassword + ", idUser=" + idUser + '}';
     }
     
 }//end User

@@ -478,7 +478,7 @@ public class FrmUser extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.verificarDatosVacios();
         try {
-            User user = new User(this.jTFUsername.getText(),
+            User user = new User(0, this.jTFUsername.getText(),
                     this.jTFEmail.getText(), this.checkPass());
             if(checking() == true){
                  if (dUser.addUser(user)) {
@@ -499,7 +499,7 @@ public class FrmUser extends javax.swing.JFrame {
     private void BtnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditarActionPerformed
         // TODO add your handling code here:
         this.verificarDatosVacios();
-        User user = new User(this.jTFUsername.getText(),
+        User user = new User(0, this.jTFUsername.getText(),
                 this.jTFEmail.getText(), this.checkPass()); 
         if(checking() == true && dUser.editUser(user)){
            JOptionPane.showMessageDialog(this, "Registro editado");

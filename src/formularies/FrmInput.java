@@ -4,6 +4,7 @@
  */
 package formularies;
 
+import data.TblCategory;
 import data.TblInput;
 import javax.swing.JPanel;
 import data.TblProduct;
@@ -11,8 +12,11 @@ import data.TblUser;
 import java.awt.HeadlessException;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -23,6 +27,7 @@ import javax.swing.table.TableRowSorter;
 import models.Input;
 import models.Product;
 import models.User;
+import models.Category;
 
 /**
  *
@@ -32,23 +37,33 @@ public class FrmInput extends javax.swing.JFrame {
     
     DefaultComboBoxModel comboProduct = new DefaultComboBoxModel();
     DefaultComboBoxModel comboUser = new DefaultComboBoxModel();
+    
     private TblProduct dProduct = new TblProduct();
     private TblUser dUser = new TblUser();
     private TblInput dInput = new TblInput();
+    private TblCategory dCategory = new TblCategory();
+            
     private ArrayList<Product> productList = new ArrayList<>();
     private ArrayList<User> userList = new ArrayList<>();
     private ArrayList<Input> inputList = new ArrayList<>();
+    
     private int idProduct;
     private int idInput;
     private int userName;
+    
     TableRowSorter trsFiltro;
+    
     LocalDate now = LocalDate.now();
+    String nowString = String.valueOf(now);
+    
+    boolean identifierID =  false;
+    
     /**
      * Creates new form FrmInput
      */
     public FrmInput() {
         initComponents();
-        String nowString = String.valueOf(now);
+        
         JTBP.setBorder(BorderFactory.createEmptyBorder());
         this.dataPanel.setBorder(BorderFactory.createEmptyBorder());
         this.RegPanel.setBorder(BorderFactory.createEmptyBorder());
@@ -57,12 +72,34 @@ public class FrmInput extends javax.swing.JFrame {
         this.fillComboBoxUser();
         this.fillTable();
         this.jTFDate.setText(nowString);
-        
+    }
+    
+    private void fillUserList(){
+        if (!userList.isEmpty()) {
+            userList.clear();
+        }
+        userList = dUser.listaUser();
+    }
+    
+    private void fillInputList(){
+        if (!inputList.isEmpty()) {
+            inputList.clear();
+        }
+        inputList = dInput.inputList();
+    
+    }
+    
+    private void fillProductList() {
+        if (!productList.isEmpty()) {
+            productList.clear();
+        }
+        productList = dProduct.listProduct();
     }
     
     public void clear() {
-        this.jTFInputPrice.setText("");
-        this.jTFInputQuantity.setText("");
+        this.jTFDate.setText(nowString);
+        this.jTfInputPrice.setText("");
+        this.jTfInputQuantity.setText("");
         this.jTxtID.setText("");
         BtnGuardar.setEnabled(true);
         BtnEliminar.setEnabled(false);
@@ -72,7 +109,7 @@ public class FrmInput extends javax.swing.JFrame {
         fillProductList();
   
         for (Product product : productList) {
-            comboProduct.addElement(product.getProductName());
+            comboProduct.addElement(product.getProductName() + " " + product.getM_Category().getProductType() + " " + product.getM_Category().getProductSize() + " " + product.getProductColor());
         }
         
         this.jComboBoxProduct.setModel(comboProduct);
@@ -94,28 +131,6 @@ public class FrmInput extends javax.swing.JFrame {
             }
         }
         
-    }
-    
-    private void fillProductList() {
-        if (!productList.isEmpty()) {
-            productList.clear();
-        }
-        productList = dProduct.productList();
-    }
-    
-    private void fillUserList(){
-        if (!userList.isEmpty()) {
-            userList.clear();
-        }
-        userList = dUser.listaUser();
-    }
-    
-    private void fillInputList(){
-        if (!inputList.isEmpty()) {
-            inputList.clear();
-        }
-        inputList = dInput.inputList();
-    
     }
     
     private void fillTable() {
@@ -152,20 +167,26 @@ public class FrmInput extends javax.swing.JFrame {
     
     private void foundData() {
         int row = this.jTblReg.getSelectedRow();
-        userName = userList.get(row).getUserName();
-        idCategory = productList.get(row).getM_Category().getIdCategory();
-        idProduct = productList.get(row).getIdProduct();
-        this.jTFProductName.setText(productList.get(row).getProductName());
-        this.jTFProductColor.setText(productList.get(row).getProductColor());
-        this.jTFProductPrice.setText(String.valueOf(productList.get(row).getProductPrice()));
-        this.jTxtID.setText(String.valueOf(idProduct));
-        String actualCategory = productList.get(row).getM_Category().getProductType() + productList.get(row).getM_Category().getProductSize();
-        this.setCombo(actualCategory);
+        this.jTfInputPrice.setText(String.valueOf(inputList.get(row).getInputPrice()));
+        this.jTfInputTotalPrice.setText(dInput.getTotalPrice(inputList.get(row).getIdInput()));
+        this.jTfInputQuantity.setText(String.valueOf(inputList.get(row).getInputQuantity()));
+        idInput = inputList.get(row).getIdInput();
+        String actualProduct = inputList.get(row).getM_Product().getProductName() + " " + inputList.get(row).getM_Product().getM_Category().getProductType() + " " + inputList.get(row).getM_Product().getM_Category().getProductSize() + " " + inputList.get(row).getM_Product().getProductColor();
+        this.setCombo(actualProduct, comboProduct);
+        String actualUser = inputList.get(row).getM_User().getUserName();
+        this.setCombo(actualUser, comboUser);
         this.JTBP.setSelectedIndex(0);
         BtnGuardar.setEnabled(true);
-        BtnEditar.setEnabled(true);
         BtnEliminar.setEnabled(true);
-        jTFProductName.requestFocus();
+        jTfInputQuantity.requestFocus();
+    }
+    
+    private void verificarDatosVacios() {
+            if (jTfInputQuantity.getText().equals("") || jTfInputQuantity.getText().length() == 0) {
+            JOptionPane.showMessageDialog(this, "Por favor verifique que la cantidad"
+                    + "no este vacía.", "Tipo", JOptionPane.WARNING_MESSAGE);
+            jTfInputQuantity.requestFocus();
+        }
     }
     
     /**
@@ -180,12 +201,6 @@ public class FrmInput extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jMainPanelinput = new javax.swing.JPanel();
         JTBP = new javax.swing.JTabbedPane();
-        RegPanel = new javax.swing.JPanel();
-        jTFBuscar = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTblReg = new javax.swing.JTable();
         dataPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -193,8 +208,7 @@ public class FrmInput extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jTFDate = new javax.swing.JTextField();
-        jTFInputPrice = new javax.swing.JTextField();
-        jTFInputQuantity = new javax.swing.JTextField();
+        jTfInputQuantity = new javax.swing.JTextField();
         BtnGuardar = new javax.swing.JButton();
         BtnNuevo = new javax.swing.JButton();
         BtnEliminar = new javax.swing.JButton();
@@ -208,6 +222,19 @@ public class FrmInput extends javax.swing.JFrame {
         jSeparator5 = new javax.swing.JSeparator();
         jLabel7 = new javax.swing.JLabel();
         jComboBoxProduct = new javax.swing.JComboBox<>();
+        jSeparator6 = new javax.swing.JSeparator();
+        jSeparator7 = new javax.swing.JSeparator();
+        jTfInputTotalPrice = new javax.swing.JLabel();
+        jTfInputPrice = new javax.swing.JLabel();
+        jSeparator8 = new javax.swing.JSeparator();
+        jLabel8 = new javax.swing.JLabel();
+        BtnNuevaFactura = new javax.swing.JButton();
+        RegPanel = new javax.swing.JPanel();
+        jTFBuscar = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTblReg = new javax.swing.JTable();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -229,6 +256,171 @@ public class FrmInput extends javax.swing.JFrame {
         jMainPanelinput.setMaximumSize(new java.awt.Dimension(880, 520));
         jMainPanelinput.setMinimumSize(new java.awt.Dimension(880, 520));
         jMainPanelinput.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        dataPanel.setBackground(new java.awt.Color(255, 255, 255));
+        dataPanel.setForeground(new java.awt.Color(153, 153, 153));
+        dataPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Inter SemiBold", 0, 18)); // NOI18N
+        jLabel1.setText("Usuario:");
+        jLabel1.setMaximumSize(new java.awt.Dimension(5000, 15));
+        jLabel1.setMinimumSize(new java.awt.Dimension(500, 15));
+        dataPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 370, 90, 40));
+
+        jLabel2.setFont(new java.awt.Font("Inter SemiBold", 0, 24)); // NOI18N
+        jLabel2.setText("INGRESE LOS DATOS DE ENTRADA");
+        jLabel2.setMaximumSize(new java.awt.Dimension(5000, 15));
+        jLabel2.setMinimumSize(new java.awt.Dimension(500, 15));
+        dataPanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 20, 450, 60));
+
+        jLabel3.setFont(new java.awt.Font("Inter SemiBold", 0, 18)); // NOI18N
+        jLabel3.setText("Fecha: ");
+        jLabel3.setMaximumSize(new java.awt.Dimension(5000, 15));
+        jLabel3.setMinimumSize(new java.awt.Dimension(500, 15));
+        dataPanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 80, 40));
+
+        jLabel4.setFont(new java.awt.Font("Inter SemiBold", 0, 18)); // NOI18N
+        jLabel4.setText("Total Entrada:");
+        jLabel4.setMaximumSize(new java.awt.Dimension(5000, 15));
+        jLabel4.setMinimumSize(new java.awt.Dimension(500, 15));
+        dataPanel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 170, 120, 30));
+
+        jLabel5.setFont(new java.awt.Font("Inter SemiBold", 0, 18)); // NOI18N
+        jLabel5.setText("Cantidad:");
+        jLabel5.setMaximumSize(new java.awt.Dimension(5000, 15));
+        jLabel5.setMinimumSize(new java.awt.Dimension(500, 15));
+        dataPanel.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 220, 80, 40));
+
+        jTFDate.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        jTFDate.setBorder(null);
+        jTFDate.setCaretColor(new java.awt.Color(255, 255, 255));
+        dataPanel.add(jTFDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 110, 450, 30));
+
+        jTfInputQuantity.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
+        jTfInputQuantity.setBorder(null);
+        jTfInputQuantity.setCaretColor(new java.awt.Color(255, 255, 255));
+        dataPanel.add(jTfInputQuantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 230, 450, 30));
+
+        BtnGuardar.setBackground(new java.awt.Color(0, 153, 153));
+        BtnGuardar.setFont(new java.awt.Font("Inter Black", 0, 15)); // NOI18N
+        BtnGuardar.setForeground(new java.awt.Color(255, 255, 255));
+        BtnGuardar.setText("Guardar");
+        BtnGuardar.setBorder(null);
+        BtnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnGuardarActionPerformed(evt);
+            }
+        });
+        BtnGuardar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                BtnGuardarKeyTyped(evt);
+            }
+        });
+        dataPanel.add(BtnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 430, 130, 40));
+
+        BtnNuevo.setBackground(new java.awt.Color(0, 153, 153));
+        BtnNuevo.setFont(new java.awt.Font("Inter Black", 0, 15)); // NOI18N
+        BtnNuevo.setForeground(new java.awt.Color(255, 255, 255));
+        BtnNuevo.setText("Nuevo Producto");
+        BtnNuevo.setBorder(null);
+        BtnNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnNuevoActionPerformed(evt);
+            }
+        });
+        dataPanel.add(BtnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 430, 130, 40));
+
+        BtnEliminar.setBackground(new java.awt.Color(0, 153, 153));
+        BtnEliminar.setFont(new java.awt.Font("Inter Black", 0, 15)); // NOI18N
+        BtnEliminar.setForeground(new java.awt.Color(255, 255, 255));
+        BtnEliminar.setText("Eliminar");
+        BtnEliminar.setBorder(null);
+        BtnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnEliminarActionPerformed(evt);
+            }
+        });
+        dataPanel.add(BtnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 430, 130, 40));
+
+        jSeparator1.setBackground(new java.awt.Color(0, 147, 147));
+        jSeparator1.setForeground(new java.awt.Color(0, 147, 147));
+        dataPanel.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 140, 450, 20));
+        dataPanel.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 200, -1, -1));
+
+        jSeparator3.setBackground(new java.awt.Color(0, 147, 147));
+        jSeparator3.setForeground(new java.awt.Color(0, 147, 147));
+        dataPanel.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 200, 100, 20));
+
+        jSeparator4.setBackground(new java.awt.Color(0, 147, 147));
+        jSeparator4.setForeground(new java.awt.Color(0, 147, 147));
+        dataPanel.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 400, 450, 20));
+
+        dataPanel.add(jComboBoxUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 370, 450, 30));
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 147, 147)));
+
+        jTxtID.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jTxtID, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jTxtID, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+        );
+
+        dataPanel.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 110, 80, 30));
+        dataPanel.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 140, 80, 10));
+
+        jLabel7.setFont(new java.awt.Font("Inter SemiBold", 0, 18)); // NOI18N
+        jLabel7.setText("Producto:");
+        jLabel7.setMaximumSize(new java.awt.Dimension(5000, 15));
+        jLabel7.setMinimumSize(new java.awt.Dimension(500, 15));
+        dataPanel.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 290, 80, 40));
+
+        dataPanel.add(jComboBoxProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 300, 450, 30));
+
+        jSeparator6.setBackground(new java.awt.Color(0, 147, 147));
+        jSeparator6.setForeground(new java.awt.Color(0, 147, 147));
+        dataPanel.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 260, 450, 20));
+
+        jSeparator7.setBackground(new java.awt.Color(0, 147, 147));
+        jSeparator7.setForeground(new java.awt.Color(0, 147, 147));
+        dataPanel.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 330, 450, 20));
+
+        jTfInputTotalPrice.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        dataPanel.add(jTfInputTotalPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 170, 100, 30));
+
+        jTfInputPrice.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        dataPanel.add(jTfInputPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 170, 100, 30));
+
+        jSeparator8.setBackground(new java.awt.Color(0, 147, 147));
+        jSeparator8.setForeground(new java.awt.Color(0, 147, 147));
+        dataPanel.add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 200, 100, 20));
+
+        jLabel8.setFont(new java.awt.Font("Inter SemiBold", 0, 18)); // NOI18N
+        jLabel8.setText("Monto productos:");
+        jLabel8.setMaximumSize(new java.awt.Dimension(5000, 15));
+        jLabel8.setMinimumSize(new java.awt.Dimension(500, 15));
+        dataPanel.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, 140, 30));
+
+        BtnNuevaFactura.setBackground(new java.awt.Color(0, 153, 153));
+        BtnNuevaFactura.setFont(new java.awt.Font("Inter Black", 0, 15)); // NOI18N
+        BtnNuevaFactura.setForeground(new java.awt.Color(255, 255, 255));
+        BtnNuevaFactura.setText("Nueva Factura");
+        BtnNuevaFactura.setBorder(null);
+        BtnNuevaFactura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnNuevaFacturaActionPerformed(evt);
+            }
+        });
+        dataPanel.add(BtnNuevaFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 430, 130, 40));
+
+        JTBP.addTab("Datos", dataPanel);
 
         jTFBuscar.setBackground(new java.awt.Color(0, 153, 153));
         jTFBuscar.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
@@ -308,135 +500,6 @@ public class FrmInput extends javax.swing.JFrame {
 
         JTBP.addTab("Registro", RegPanel);
 
-        dataPanel.setBackground(new java.awt.Color(255, 255, 255));
-        dataPanel.setForeground(new java.awt.Color(153, 153, 153));
-        dataPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setFont(new java.awt.Font("Inter SemiBold", 0, 18)); // NOI18N
-        jLabel1.setText("Usuario:");
-        jLabel1.setMaximumSize(new java.awt.Dimension(5000, 15));
-        jLabel1.setMinimumSize(new java.awt.Dimension(500, 15));
-        dataPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 370, 90, 40));
-
-        jLabel2.setFont(new java.awt.Font("Inter SemiBold", 0, 24)); // NOI18N
-        jLabel2.setText("INGRESE LOS DATOS DE ENTRADA");
-        jLabel2.setMaximumSize(new java.awt.Dimension(5000, 15));
-        jLabel2.setMinimumSize(new java.awt.Dimension(500, 15));
-        dataPanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 20, 450, 60));
-
-        jLabel3.setFont(new java.awt.Font("Inter SemiBold", 0, 18)); // NOI18N
-        jLabel3.setText("Fecha: ");
-        jLabel3.setMaximumSize(new java.awt.Dimension(5000, 15));
-        jLabel3.setMinimumSize(new java.awt.Dimension(500, 15));
-        dataPanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 80, 40));
-
-        jLabel4.setFont(new java.awt.Font("Inter SemiBold", 0, 18)); // NOI18N
-        jLabel4.setText("Monto:");
-        jLabel4.setMaximumSize(new java.awt.Dimension(5000, 15));
-        jLabel4.setMinimumSize(new java.awt.Dimension(500, 15));
-        dataPanel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(85, 160, 80, 40));
-
-        jLabel5.setFont(new java.awt.Font("Inter SemiBold", 0, 18)); // NOI18N
-        jLabel5.setText("Cantidad:");
-        jLabel5.setMaximumSize(new java.awt.Dimension(5000, 15));
-        jLabel5.setMinimumSize(new java.awt.Dimension(500, 15));
-        dataPanel.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 220, 90, 40));
-
-        jTFDate.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
-        jTFDate.setBorder(null);
-        jTFDate.setCaretColor(new java.awt.Color(255, 255, 255));
-        dataPanel.add(jTFDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 110, 450, 30));
-
-        jTFInputPrice.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
-        jTFInputPrice.setBorder(null);
-        jTFInputPrice.setCaretColor(new java.awt.Color(255, 255, 255));
-        dataPanel.add(jTFInputPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 170, 450, 30));
-
-        jTFInputQuantity.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
-        jTFInputQuantity.setBorder(null);
-        jTFInputQuantity.setCaretColor(new java.awt.Color(255, 255, 255));
-        dataPanel.add(jTFInputQuantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 230, 450, 30));
-
-        BtnGuardar.setBackground(new java.awt.Color(0, 153, 153));
-        BtnGuardar.setFont(new java.awt.Font("Inter Black", 0, 15)); // NOI18N
-        BtnGuardar.setForeground(new java.awt.Color(255, 255, 255));
-        BtnGuardar.setText("Guardar");
-        BtnGuardar.setBorder(null);
-        BtnGuardar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnGuardarActionPerformed(evt);
-            }
-        });
-        dataPanel.add(BtnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 430, 130, 40));
-
-        BtnNuevo.setBackground(new java.awt.Color(0, 153, 153));
-        BtnNuevo.setFont(new java.awt.Font("Inter Black", 0, 15)); // NOI18N
-        BtnNuevo.setForeground(new java.awt.Color(255, 255, 255));
-        BtnNuevo.setText("Nuevo");
-        BtnNuevo.setBorder(null);
-        BtnNuevo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnNuevoActionPerformed(evt);
-            }
-        });
-        dataPanel.add(BtnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 430, 130, 40));
-
-        BtnEliminar.setBackground(new java.awt.Color(0, 153, 153));
-        BtnEliminar.setFont(new java.awt.Font("Inter Black", 0, 15)); // NOI18N
-        BtnEliminar.setForeground(new java.awt.Color(255, 255, 255));
-        BtnEliminar.setText("Eliminar");
-        BtnEliminar.setBorder(null);
-        BtnEliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnEliminarActionPerformed(evt);
-            }
-        });
-        dataPanel.add(BtnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 430, 130, 40));
-
-        jSeparator1.setBackground(new java.awt.Color(0, 147, 147));
-        jSeparator1.setForeground(new java.awt.Color(0, 147, 147));
-        dataPanel.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 140, 450, 20));
-        dataPanel.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 200, -1, -1));
-
-        jSeparator3.setBackground(new java.awt.Color(0, 147, 147));
-        jSeparator3.setForeground(new java.awt.Color(0, 147, 147));
-        dataPanel.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 200, 450, 20));
-
-        jSeparator4.setBackground(new java.awt.Color(0, 147, 147));
-        jSeparator4.setForeground(new java.awt.Color(0, 147, 147));
-        dataPanel.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 260, 450, 20));
-
-        dataPanel.add(jComboBoxUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 370, 450, 30));
-
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 147, 147)));
-
-        jTxtID.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTxtID, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTxtID, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
-        );
-
-        dataPanel.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 110, 80, 30));
-        dataPanel.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 140, 80, 10));
-
-        jLabel7.setFont(new java.awt.Font("Inter SemiBold", 0, 18)); // NOI18N
-        jLabel7.setText("Producto:");
-        jLabel7.setMaximumSize(new java.awt.Dimension(5000, 15));
-        jLabel7.setMinimumSize(new java.awt.Dimension(500, 15));
-        dataPanel.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 290, 90, 40));
-
-        dataPanel.add(jComboBoxProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 300, 450, 30));
-
-        JTBP.addTab("Datos", dataPanel);
-
         jMainPanelinput.add(JTBP, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 880, 520));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -457,13 +520,28 @@ public class FrmInput extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.verificarDatosVacios();
         try {
-            String categoryName = String.valueOf(combo.getSelectedItem());
-            Category productCategory = dCategory.findCategoryByName(categoryName);
-            Product product = new Product(this.jTFDate.getText(), this.jTFInputPrice.getText()
-                ,0, Double.parseDouble(this.jTFInputQuantity.getText()), productCategory);
-            if (dProduct.addProduct(product)) {
+            User user = dUser.getUser(String.valueOf(comboUser.getSelectedItem()));
+            Product product = dProduct.getProductByName(String.valueOf(comboProduct.getSelectedItem()));
+            int actualID = dInput.getActualId();
+            
+            if(identifierID){
+                actualID +=1;
+                identifierID = false;
+            }
+            
+            Input input = new Input(
+                    actualID,
+                    this.jTFDate.getText(),
+                    Double.parseDouble(this.jTfInputQuantity.getText()) * product.getProductPrice(),
+                    Integer.parseInt(this.jTfInputQuantity.getText()),
+                    product,
+                    user
+            
+            );
+            
+            if (dInput.addInput(input)) {
                 JOptionPane.showMessageDialog(this, "Registro Guardado",
-                    "Producto", JOptionPane.INFORMATION_MESSAGE);
+                    "Entrada", JOptionPane.INFORMATION_MESSAGE);
                 this.fillTable();
                 this.JTBP.setSelectedIndex(1);
             } else {
@@ -471,6 +549,8 @@ public class FrmInput extends javax.swing.JFrame {
             }
         } catch (HeadlessException es) {
             System.out.println("Error al intentar guardar" + es.getMessage());
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmInput.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_BtnGuardarActionPerformed
 
@@ -484,14 +564,13 @@ public class FrmInput extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.verificarDatosVacios();
         int resp = JOptionPane.showConfirmDialog(this, "Desea eliminar este registro? ",
-            "Producto", JOptionPane.YES_NO_OPTION,
+            "Entrada", JOptionPane.YES_NO_OPTION,
             JOptionPane.QUESTION_MESSAGE);
         if (resp == 0){
-
-            if(dProduct.removeProduct(idProduct)){
-                JOptionPane.showMessageDialog(this, "Registro eliminado", "Autor" , JOptionPane.INFORMATION_MESSAGE);
+            if(dInput.removeInput(idInput)){
+                JOptionPane.showMessageDialog(this, "Entrada eliminada", "Entrada" , JOptionPane.INFORMATION_MESSAGE);
             }else{
-                JOptionPane.showMessageDialog(this, "Error al eliminar ", "Autor", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Error al eliminar ", "Entradar", JOptionPane.WARNING_MESSAGE);
             }
         }
         this.clear();
@@ -528,6 +607,16 @@ public class FrmInput extends javax.swing.JFrame {
             }
         });
     }//GEN-LAST:event_jTblRegMouseClicked
+
+    private void BtnNuevaFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNuevaFacturaActionPerformed
+        clear();
+        this.JTBP.setSelectedIndex(0);
+        identifierID = true;
+    }//GEN-LAST:event_BtnNuevaFacturaActionPerformed
+
+    private void BtnGuardarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnGuardarKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnGuardarKeyTyped
     
     public JPanel getFondo() {
         return jMainPanelinput;
@@ -570,6 +659,7 @@ public class FrmInput extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnEliminar;
     private javax.swing.JButton BtnGuardar;
+    private javax.swing.JButton BtnNuevaFactura;
     private javax.swing.JButton BtnNuevo;
     private javax.swing.JTabbedPane JTBP;
     private javax.swing.JPanel RegPanel;
@@ -583,6 +673,7 @@ public class FrmInput extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jMainPanelinput;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -593,11 +684,15 @@ public class FrmInput extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JSeparator jSeparator6;
+    private javax.swing.JSeparator jSeparator7;
+    private javax.swing.JSeparator jSeparator8;
     private javax.swing.JTextField jTFBuscar;
     private javax.swing.JTextField jTFDate;
-    private javax.swing.JTextField jTFInputPrice;
-    private javax.swing.JTextField jTFInputQuantity;
     private javax.swing.JTable jTblReg;
+    private javax.swing.JLabel jTfInputPrice;
+    private javax.swing.JTextField jTfInputQuantity;
+    private javax.swing.JLabel jTfInputTotalPrice;
     private javax.swing.JLabel jTxtID;
     // End of variables declaration//GEN-END:variables
 }

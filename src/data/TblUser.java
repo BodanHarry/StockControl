@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import models.Product;
 
 /**
  *
@@ -41,6 +42,7 @@ public class TblUser {
             this.getReg();
             while (rs.next()) {
                 list.add(new User(
+                        rs.getInt("UserID"),
                         rs.getString("Username"),
                         rs.getString("Useremail"),
                         rs.getString("Userpassword")
@@ -50,22 +52,7 @@ public class TblUser {
             System.out.println("Error al listar al usuario: " + ex.getMessage());
         } finally {
 
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-
-                if (rs != null) {
-                    ps.close();
-                }
-
-                if (rs != null) {
-                    Conexion.closeConexion(conn);
-                }
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-            }
-
+           
         }
 
         return list;
@@ -87,21 +74,7 @@ public class TblUser {
             System.out.println("Error al guardar autor" + ex.getMessage());
         } finally {
 
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-
-                if (rs != null) {
-                    ps.close();
-                }
-
-                if (rs != null) {
-                    Conexion.closeConexion(conn);
-                }
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-            }
+           
 
         }
         return guardado;
@@ -121,21 +94,7 @@ public class TblUser {
             System.out.println("Error al buscar autor: " + ex.getMessage());
         } finally {
 
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-
-                if (rs != null) {
-                    ps.close();
-                }
-
-                if (rs != null) {
-                    Conexion.closeConexion(conn);
-                }
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-            }
+            
 
         }
         return resp;
@@ -161,21 +120,7 @@ public class TblUser {
             System.out.println("Error al editar al usuario: " + ex.getMessage());
         } finally {
 
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-
-                if (rs != null) {
-                    ps.close();
-                }
-
-                if (rs != null) {
-                    Conexion.closeConexion(conn);
-                }
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-            }
+            
         }
 
         return resp;
@@ -198,21 +143,7 @@ public class TblUser {
             System.out.println("Error al eliminar al usuario: " + ex.getMessage());
         } finally {
 
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-
-                if (rs != null) {
-                    ps.close();
-                }
-
-                if (rs != null) {
-                    Conexion.closeConexion(conn);
-                }
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-            }
+            
         }
         return resp;
     }
@@ -224,6 +155,7 @@ public class TblUser {
             while (rs.next()) {
                 if (rs.getString("Username").equals(username)) {
                     user = new User(
+                            rs.getInt("UserID"),
                             rs.getString("Username"),
                             rs.getString("Useremail"),
                             rs.getString("Userpassword")
@@ -235,35 +167,20 @@ public class TblUser {
             System.out.println("Error al buscar usuario: " + ex.getMessage());
         } finally {
 
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-
-                if (rs != null) {
-                    ps.close();
-                }
-
-                if (rs != null) {
-                    Conexion.closeConexion(conn);
-                }
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-            }
+          
 
         }
         return user;
     }
 
     public String getUserName(String username) {
-        String valor = " ";
+        String value = " ";
         try {
 
             this.getReg();
             while (rs.next()) {
                 if (rs.getString("Username").equals(username)) {
-                    valor = rs.getString("Username");
-                    
+                    value = rs.getString("Username");
                     break;
 
                 }
@@ -275,34 +192,20 @@ public class TblUser {
             JOptionPane.showMessageDialog(null, "El correo es invalido ");
         } finally {
 
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-
-                if (rs != null) {
-                    ps.close();
-                }
-
-                if (rs != null) {
-                    Conexion.closeConexion(conn);
-                }
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-            }
+           
 
         }
 
-        return valor;
+        return value;
     }
 
     public String getUserPassword(String username) {
-        String valor = " ";
+        String value = " ";
         try {
             this.getReg();
             while (rs.next()) {
                 if (rs.getString("Username").equals(username)) {
-                    valor = rs.getString("Userpassword");
+                    value = rs.getString("Userpassword");
                     
                     break;
                 } 
@@ -314,24 +217,41 @@ public class TblUser {
             JOptionPane.showMessageDialog(null, "La contraseña es invalida ");
         } finally {
 
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-
-                if (rs != null) {
-                    ps.close();
-                }
-
-                if (rs != null) {
-                    Conexion.closeConexion(conn);
-                }
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-            }
+         
 
         }
 
-        return valor;
+        return value;
     }
+    
+    public User getUserByID(int idUser) {
+        User user = new User();
+        
+        try {
+            this.getReg();
+            while (rs.next()) {
+                if (rs.getInt("UserID") == idUser) {
+                    user = new User(
+                            rs.getInt("UserID"),
+                            rs.getString("Username"),
+                            rs.getString("Useremail"),
+                            rs.getString("Userpassword")
+                    );
+                    
+                    break;
+                } 
+                
+                
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al buscar usuario: " + ex.getMessage());
+        } finally {
+
+         
+
+        }
+
+        return user;
+    }
+    
 }

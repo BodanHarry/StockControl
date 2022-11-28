@@ -59,22 +59,6 @@ public class TblProduct {
             System.out.println("Error al listar el producto: " + ex.getMessage());
         } finally {
 
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-
-                if (rs != null) {
-                    ps.close();
-                }
-
-                if (rs != null) {
-                    Conexion.closeConexion(conn);
-                }
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-            }
-
         }
 
         return list;
@@ -98,21 +82,7 @@ public class TblProduct {
             System.out.println("Error al guardar el producto" + ex.getMessage());
         } finally {
 
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-
-                if (rs != null) {
-                    ps.close();
-                }
-
-                if (rs != null) {
-                    Conexion.closeConexion(conn);
-                }
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-            }
+           
 
         }
         return saved;
@@ -132,21 +102,7 @@ public class TblProduct {
             System.out.println("Error al buscar el producto: " + ex.getMessage());
         } finally {
 
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-
-                if (rs != null) {
-                    ps.close();
-                }
-
-                if (rs != null) {
-                    Conexion.closeConexion(conn);
-                }
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-            }
+            
 
         }
         return result;
@@ -173,21 +129,7 @@ public class TblProduct {
             System.out.println("Error al editar: " + ex.getMessage());
         } finally {
 
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-
-                if (rs != null) {
-                    ps.close();
-                }
-
-                if (rs != null) {
-                    Conexion.closeConexion(conn);
-                }
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-            }
+            
         }
 
         return result;
@@ -210,21 +152,7 @@ public class TblProduct {
             System.out.println("Error al eliminar Producto: " + ex.getMessage());
         } finally {
 
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-
-                if (rs != null) {
-                    ps.close();
-                }
-
-                if (rs != null) {
-                    Conexion.closeConexion(conn);
-                }
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-            }
+            
         }
         return result;
     }
@@ -251,23 +179,35 @@ public class TblProduct {
             System.out.println("Error al buscar producto: " + ex.getMessage());
         } finally {
 
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-
-                if (rs != null) {
-                    ps.close();
-                }
-
-                if (rs != null) {
-                    Conexion.closeConexion(conn);
-                }
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-            }
+            
 
         }
         return product;
+    }
+    
+    public Product getProductByName(String name){
+        TblCategory dCategory = new TblCategory();
+        Product product = new Product();
+       try {
+            this.getReg();
+            while (rs.next()) {
+                Category actualCategory = dCategory.getCategory(rs.getInt("CategoryID"));
+                String actualProductName = rs.getString("Productname") + " " + actualCategory.getProductType() + " " + actualCategory.getProductSize() + " " + rs.getString("Productcolor");
+                if (name.equals(actualProductName)) {
+                    product = new Product(
+                            rs.getString("Productname"),
+                            rs.getString("Productcolor"),
+                            rs.getInt("ProductID"),
+                            rs.getDouble("Productprice"),
+                            actualCategory,
+                            rs.getInt("Productquantity")
+                    );
+                    return product;
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al buscar producto: " + ex.getMessage());
+        }
+       return product;
     }
 }

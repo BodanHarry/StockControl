@@ -49,7 +49,7 @@ public class FrmProduct extends javax.swing.JFrame {
         this.jTFProductName.setText("");
         this.jTFProductColor.setText("");
         this.jTFProductQuantity.setText("");
-        this.jTFProductQuantity.setText("");
+        this.jTFProductPrice.setText("");
         this.jTxtID.setText("");
         BtnGuardar.setEnabled(true);
         BtnEditar.setEnabled(false);

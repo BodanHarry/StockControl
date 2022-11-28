@@ -50,21 +50,7 @@ public class TblCategory {
             System.out.println("Error al listar la categoría: " + ex.getMessage());
         } finally {
 
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-
-                if (rs != null) {
-                    ps.close();
-                }
-
-                if (rs != null) {
-                    Conexion.closeConexion(conn);
-                }
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-            }
+           
 
             
         }
@@ -88,21 +74,7 @@ public class TblCategory {
             System.out.println("Error al guardar categoría" + ex.getMessage());
         } finally {
 
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-
-                if (rs != null) {
-                    ps.close();
-                }
-
-                if (rs != null) {
-                    Conexion.closeConexion(conn);
-                }
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-            }
+            
 
         }
         return saved;
@@ -122,21 +94,7 @@ public class TblCategory {
             System.out.println("Error al buscar categoría: " + ex.getMessage());
         } finally {
 
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-
-                if (rs != null) {
-                    ps.close();
-                }
-
-                if (rs != null) {
-                    Conexion.closeConexion(conn);
-                }
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-            }
+            
 
         }
         return result;
@@ -160,21 +118,7 @@ public class TblCategory {
             System.out.println("Error al editar: " + ex.getMessage());
         } finally {
 
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-
-                if (rs != null) {
-                    ps.close();
-                }
-
-                if (rs != null) {
-                    Conexion.closeConexion(conn);
-                }
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-            }
+            
         }
 
         return result;
@@ -197,21 +141,7 @@ public class TblCategory {
             System.out.println("Error al eliminar categoría: " + ex.getMessage());
         } finally {
 
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-
-                if (rs != null) {
-                    ps.close();
-                }
-
-                if (rs != null) {
-                    Conexion.closeConexion(conn);
-                }
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-            }
+            
         }
         return result;
     }
@@ -257,21 +187,7 @@ public class TblCategory {
         } catch (SQLException ex) {
             System.out.println("Error al buscar categoría: " + ex.getMessage());
         } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-
-                if (rs != null) {
-                    ps.close();
-                }
-
-                if (rs != null) {
-                    Conexion.closeConexion(conn);
-                }
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-            }
+          
         }
         return category;
     }

@@ -23,7 +23,7 @@ public class TblInput {
     private PreparedStatement ps = null;
     private ResultSet rs = null;
     
-    public void getReg() throws SQLException{
+    public boolean getReg() throws SQLException{
         try {
             conn = Conexion.getConnection();
             String tSQL = "Select * from Input";
@@ -34,31 +34,31 @@ public class TblInput {
             rs = ps.executeQuery();
         } catch (SQLException ex) {
             System.out.println("Error al obtener entradas" + ex.getMessage());
+            return true;
         }
-    
+        return false;
     }
     
     public ArrayList<Input> inputList() {
         ArrayList<Input> list = new ArrayList<>(); 
-            TblProduct products = new TblProduct();
-            Product product;
-            TblUser users = new TblUser();
-            User user;
+        TblProduct products = new TblProduct();
+        Product product;
+        TblUser users = new TblUser();
+        User user;
         
         try {
             
             this.getReg();
             while (rs.next()) {
-                String inputDate = rs.getString("Inputdate");
                 int idProduct = Integer.parseInt(rs.getString("ProductID"));
                 product = products.getProduct(idProduct);
-                String username = rs.getString("Username");
-                user = users.getUser(username);
+                int idUser = rs.getInt("UserID");
+                user = users.getUserByID(idUser);
                 list.add(new Input(
-                        Integer.parseInt(rs.getString("InputID")),
-                        inputDate,
-                        Double.parseDouble(rs.getString("Inputprice")),
-                        Integer.parseInt(rs.getString("Inputquantity")),
+                        rs.getInt("InputID"),
+                        rs.getString("Inputdate"),
+                        rs.getDouble("Inputprice"),
+                        rs.getInt("Inputquantity"),
                         product,
                         user
                 ));
@@ -67,58 +67,50 @@ public class TblInput {
             System.out.println("Error al listar las entradas" + ex.getMessage());
         } finally {
 
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-
-                if (ps != null) {
-                    ps.close();
-                }
-
-                if (conn != null) {
-                    Conexion.closeConexion(conn);
-
-                }
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-            }
+            
         }
         return list;   
     }
     
-    public boolean addInput(Input input, Product product, User user){
+    public int getActualId() throws SQLException{
+        int id = 0;
+        try{
+            
+            if(this.getReg()){
+                if(rs.isFirst()){
+                    id = 1;
+                    return id;
+                }else{
+                    rs.last();
+                    id = rs.getInt("InputID");
+                return id;
+            }
+            
+        }
+        }catch(SQLException ex){
+            System.out.println("Error al obtener idActual" + ex.getMessage());
+        }
+        return id;
+    }
+    
+    public boolean addInput(Input input){
         boolean saved = false;
         try {
             this.getReg();
             rs.moveToInsertRow();
-            rs.updateString("InputID", String.valueOf(input.getIdInput()));
-            rs.updateString("Inputdate", String.valueOf(input.getInputDate()));
-            rs.updateString("Inputprice", String.valueOf(input.getInputPrice()));
-            rs.updateString("Inputquantity", String.valueOf(input.getInputQuantity()));
-            rs.updateString("ProductID", String.valueOf(product.getIdProduct()));
-            rs.updateString("UserID", String.valueOf(user.getUserName()));
+            rs.updateInt("InputID", input.getIdInput());
+            rs.updateString("Inputdate", input.getInputDate());
+            rs.updateDouble("Inputprice", input.getInputPrice());
+            rs.updateInt("Inputquantity", input.getInputQuantity());
+            rs.updateString("ProductID", String.valueOf(input.getM_Product().getIdProduct()));
+            rs.updateString("UserID", String.valueOf(input.getM_User().getIdUser()));
             rs.insertRow();
             rs.moveToCurrentRow();
         } catch (SQLException ex) {
             System.out.println("Error al guardar la entrada" + ex.getMessage());
         } finally {
 
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-
-                if (rs != null) {
-                    ps.close();
-                }
-
-                if (rs != null) {
-                    Conexion.closeConexion(conn);
-                }
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-            }
+            
 
         }
         return saved;
@@ -138,21 +130,7 @@ public class TblInput {
             System.out.println("Error al buscar la entrada: " + ex.getMessage());
         } finally {
 
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-
-                if (rs != null) {
-                    ps.close();
-                }
-
-                if (rs != null) {
-                    Conexion.closeConexion(conn);
-                }
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-            }
+           
 
         }
         return result;
@@ -176,21 +154,7 @@ public class TblInput {
             System.out.println("Error al eliminar entrada: " + ex.getMessage());
         } finally {
 
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-
-                if (rs != null) {
-                    ps.close();
-                }
-
-                if (rs != null) {
-                    Conexion.closeConexion(conn);
-                }
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-            }
+            
         }
         return result;
     
@@ -226,24 +190,30 @@ public class TblInput {
             System.out.println("Error al buscar entrada: " + ex.getMessage());
         } finally {
 
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-
-                if (rs != null) {
-                    ps.close();
-                }
-
-                if (rs != null) {
-                    Conexion.closeConexion(conn);
-                }
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-            }
+           
 
         }
         return input;
         
+    }
+    
+    public String getTotalPrice(int id){
+        Double price = 0.00;
+        String priceString = "";
+        
+        try {
+            this.getReg();
+            while (rs.next()) {
+                if(id == rs.getInt("InputID")){
+                    price = price + rs.getDouble("Inputprice");
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al buscar entrada: " + ex.getMessage());
+        }
+        
+        priceString = String.valueOf(priceString);
+        
+        return priceString;
     }
 }
