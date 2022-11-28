@@ -41,13 +41,13 @@ public class FrmInput extends javax.swing.JFrame {
     private TblProduct dProduct = new TblProduct();
     private TblUser dUser = new TblUser();
     private TblInput dInput = new TblInput();
-    private TblCategory dCategory = new TblCategory();
+    
             
     private ArrayList<Product> productList = new ArrayList<>();
     private ArrayList<User> userList = new ArrayList<>();
     private ArrayList<Input> inputList = new ArrayList<>();
     
-    private int idProduct;
+    
     private int idInput;
     private int userName;
     
@@ -259,7 +259,7 @@ public class FrmInput extends javax.swing.JFrame {
         jLabel1.setText("Usuario:");
         jLabel1.setMaximumSize(new java.awt.Dimension(5000, 15));
         jLabel1.setMinimumSize(new java.awt.Dimension(500, 15));
-        dataPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 370, 90, 40));
+        dataPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 370, 140, 40));
 
         jLabel2.setFont(new java.awt.Font("Inter SemiBold", 0, 24)); // NOI18N
         jLabel2.setText("INGRESE LOS DATOS DE ENTRADA");
@@ -271,13 +271,13 @@ public class FrmInput extends javax.swing.JFrame {
         jLabel3.setText("Fecha: ");
         jLabel3.setMaximumSize(new java.awt.Dimension(5000, 15));
         jLabel3.setMinimumSize(new java.awt.Dimension(500, 15));
-        dataPanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 80, 40));
+        dataPanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 90, 40));
 
         jLabel5.setFont(new java.awt.Font("Inter SemiBold", 0, 18)); // NOI18N
         jLabel5.setText("Cantidad:");
         jLabel5.setMaximumSize(new java.awt.Dimension(5000, 15));
         jLabel5.setMinimumSize(new java.awt.Dimension(500, 15));
-        dataPanel.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 220, 80, 40));
+        dataPanel.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, 110, 40));
 
         jTFDate.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         jTFDate.setBorder(null);
@@ -364,7 +364,7 @@ public class FrmInput extends javax.swing.JFrame {
         jLabel7.setText("Producto:");
         jLabel7.setMaximumSize(new java.awt.Dimension(5000, 15));
         jLabel7.setMinimumSize(new java.awt.Dimension(500, 15));
-        dataPanel.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 290, 80, 40));
+        dataPanel.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, 120, 40));
 
         dataPanel.add(jComboBoxProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 300, 450, 30));
 
@@ -387,7 +387,7 @@ public class FrmInput extends javax.swing.JFrame {
         jLabel8.setText("Monto productos:");
         jLabel8.setMaximumSize(new java.awt.Dimension(5000, 15));
         jLabel8.setMinimumSize(new java.awt.Dimension(500, 15));
-        dataPanel.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, 140, 30));
+        dataPanel.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 170, 30));
 
         JTBP.addTab("Datos", dataPanel);
 

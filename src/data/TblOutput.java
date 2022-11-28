@@ -40,9 +40,9 @@ public class TblOutput {
         }
     }
 
-    public ArrayList<Output> outputList() throws ParseException {
+    public ArrayList<Output> outputList() {
         ArrayList<Output> list = new ArrayList<>();
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy"); 
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         TblProduct products = new TblProduct();
         Product product;
         TblUser users = new TblUser();
@@ -51,16 +51,15 @@ public class TblOutput {
         try {
             this.getReg();
             while (rs.next()) {
-                Date dataFormat = format.parse(rs.getString("Outputdate"));
                 int idProduct = Integer.parseInt(rs.getString("ProductID"));
                 product = products.getProduct(idProduct);
-                String username = rs.getString("Username");
-                user = users.getUser(username);
+                int idUser = rs.getInt("UserID");
+                user = users.getUserByID(idUser);
                 list.add(new Output(
                         Integer.parseInt(rs.getString("OutputID")),
-                        dataFormat,
-                        Double.parseDouble(rs.getString("Outputprice")),
-                        Integer.parseInt(rs.getString("Outputquantity")),
+                        rs.getString("Outputdate"),
+                        rs.getDouble("Outputprice"),
+                        rs.getInt("Outputquantity"),
                         product,
                         user
                 ));
@@ -89,19 +88,20 @@ public class TblOutput {
         return list;
     }
 
-    public boolean addOutput(Output output, Product product, User user) {
+    public boolean addOutput(Output output) {
         boolean saved = false;
         try {
             this.getReg();
             rs.moveToInsertRow();
-            rs.updateString("OutputID", String.valueOf(output.getIdOutput()));
-            rs.updateString("Outputdate", String.valueOf(output.getOutputDate()));
-            rs.updateString("Outputprice", String.valueOf(output.getOutputPrice()));
-            rs.updateString("Outputquantity", String.valueOf(output.getOutputQuantity()));
-            rs.updateString("ProductID", String.valueOf(product.getIdProduct()));
-            rs.updateString("UserID", String.valueOf(user.getUserName()));
+            rs.updateString("Outputdate", output.getOutputDate());
+            rs.updateDouble("Outputprice", output.getOutputPrice());
+            rs.updateInt("Outputquantity", output.getOutputQuantity());
+            rs.updateString("ProductID", String.valueOf(output.getM_Product().getIdProduct()));
+            rs.updateString("UserID", String.valueOf(output.getM_User().getIdUser()));
             rs.insertRow();
             rs.moveToCurrentRow();
+            saved = true;
+
         } catch (SQLException ex) {
             System.out.println("Error al guardar la salida" + ex.getMessage());
         } finally {
@@ -125,8 +125,8 @@ public class TblOutput {
         }
         return saved;
     }
-    
-     public boolean existOuput(int idOutput){
+
+    public boolean existOuput(int idOutput) {
         boolean result = false;
         try {
             this.getReg();
@@ -158,10 +158,10 @@ public class TblOutput {
 
         }
         return result;
-    
+
     }
-     
-    public boolean removeOutput(int idOutput){
+
+    public boolean removeOutput(int idOutput) {
         boolean result = false;
         try {
             this.getReg();
@@ -195,34 +195,32 @@ public class TblOutput {
             }
         }
         return result;
-    
+
     }
-    
-    public Output getOutput(int idOutput) throws ParseException {
-        Output output =  new Output();
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy"); 
+
+    public Output getOutput(int idOutput)  {
+        Output output = new Output();
         TblProduct products = new TblProduct();
         Product product;
         TblUser users = new TblUser();
         User user;
         try {
             this.getReg();
-            while (rs.next()) {
-                Date dataFormat = format.parse(rs.getString("Outputdate"));
+            while (rs.next()) {  
                 int idProduct = Integer.parseInt(rs.getString("ProductID"));
                 product = products.getProduct(idProduct);
                 String username = rs.getString("Username");
-                if (Integer.parseInt(rs.getString("OutputID")) == idOutput){
-                user = users.getUser(username);
-                output = new Output(
-                        Integer.parseInt(rs.getString("OutputID")),
-                        dataFormat,
-                        Double.parseDouble(rs.getString("Outputprice")),
-                        Integer.parseInt(rs.getString("Outputquantity")),
-                        product,
-                        user
-                );
-                break;
+                if (Integer.parseInt(rs.getString("OutputID")) == idOutput) {
+                    user = users.getUser(username);
+                    output = new Output(
+                            Integer.parseInt(rs.getString("OutputID")),
+                            rs.getString("Outputdate"),
+                            Double.parseDouble(rs.getString("Outputprice")),
+                            Integer.parseInt(rs.getString("Outputquantity")),
+                            product,
+                            user
+                    );
+                    break;
                 }
             }
         } catch (SQLException ex) {

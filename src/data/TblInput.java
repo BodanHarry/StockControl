@@ -13,17 +13,18 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import models.Product;
 import models.User;
+
 /**
  *
  * @author MSI DRAGON
  */
 public class TblInput {
-    
+
     private Connection conn = null;
     private PreparedStatement ps = null;
     private ResultSet rs = null;
-    
-    public void getReg() throws SQLException{
+
+    public void getReg() throws SQLException {
         try {
             conn = Conexion.getConnection();
             String tSQL = "Select * from Input";
@@ -34,19 +35,19 @@ public class TblInput {
             rs = ps.executeQuery();
         } catch (SQLException ex) {
             System.out.println("Error al obtener entradas" + ex.getMessage());
-   
+
         }
     }
-    
+
     public ArrayList<Input> inputList() {
-        ArrayList<Input> list = new ArrayList<>(); 
+        ArrayList<Input> list = new ArrayList<>();
         TblProduct products = new TblProduct();
         Product product;
         TblUser users = new TblUser();
         User user;
-        
+
         try {
-            
+
             this.getReg();
             while (rs.next()) {
                 int idProduct = Integer.parseInt(rs.getString("ProductID"));
@@ -65,15 +66,28 @@ public class TblInput {
         } catch (SQLException ex) {
             System.out.println("Error al listar las entradas" + ex.getMessage());
         } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
 
-            
+                if (ps != null) {
+                    ps.close();
+                }
+
+                if (conn != null) {
+                    Conexion.closeConexion(conn);
+
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+
         }
-        return list;   
+        return list;
     }
-    
-    
-    
-    public boolean addInput(Input input){
+
+    public boolean addInput(Input input) {
         boolean saved = false;
         try {
             this.getReg();
@@ -89,14 +103,27 @@ public class TblInput {
         } catch (SQLException ex) {
             System.out.println("Error al guardar la entrada" + ex.getMessage());
         } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
 
-            
+                if (rs != null) {
+                    ps.close();
+                }
+
+                if (rs != null) {
+                    Conexion.closeConexion(conn);
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
 
         }
         return saved;
     }
-    
-    public boolean existInput(int idInput){
+
+    public boolean existInput(int idInput) {
         boolean result = false;
         try {
             this.getReg();
@@ -109,15 +136,27 @@ public class TblInput {
         } catch (SQLException ex) {
             System.out.println("Error al buscar la entrada: " + ex.getMessage());
         } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
 
-           
+                if (rs != null) {
+                    ps.close();
+                }
 
+                if (rs != null) {
+                    Conexion.closeConexion(conn);
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
         }
         return result;
-    
+
     }
-    
-    public boolean removeInput(int idInput){
+
+    public boolean removeInput(int idInput) {
         boolean result = false;
         try {
             this.getReg();
@@ -133,15 +172,28 @@ public class TblInput {
         } catch (SQLException ex) {
             System.out.println("Error al eliminar entrada: " + ex.getMessage());
         } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
 
-            
+                if (rs != null) {
+                    ps.close();
+                }
+
+                if (rs != null) {
+                    Conexion.closeConexion(conn);
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
         }
         return result;
-    
+
     }
-    
-    public Input getInput(int idInput) throws ParseException{
-        Input input = new Input(); 
+
+    public Input getInput(int idInput) {
+        Input input = new Input();
         TblProduct products = new TblProduct();
         Product product;
         TblUser users = new TblUser();
@@ -153,28 +205,40 @@ public class TblInput {
                 int idProduct = Integer.parseInt(rs.getString("ProductID"));
                 product = products.getProduct(idProduct);
                 String username = rs.getString("Username");
-                if (Integer.parseInt(rs.getString("InputID")) == idInput){
-                user = users.getUser(username);
-                input = new Input(
-                        Integer.parseInt(rs.getString("InputID")),
-                        inputDate,
-                        Double.parseDouble(rs.getString("Inputprice")),
-                        Integer.parseInt(rs.getString("Inputquantity")),
-                        product,
-                        user
-                );
-                break;
+                if (Integer.parseInt(rs.getString("InputID")) == idInput) {
+                    user = users.getUser(username);
+                    input = new Input(
+                            Integer.parseInt(rs.getString("InputID")),
+                            inputDate,
+                            Double.parseDouble(rs.getString("Inputprice")),
+                            Integer.parseInt(rs.getString("Inputquantity")),
+                            product,
+                            user
+                    );
+                    break;
                 }
             }
         } catch (SQLException ex) {
             System.out.println("Error al buscar entrada: " + ex.getMessage());
         } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
 
-           
+                if (rs != null) {
+                    ps.close();
+                }
 
+                if (rs != null) {
+                    Conexion.closeConexion(conn);
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
         }
         return input;
-        
+
     }
 
 }

@@ -11,7 +11,7 @@ import java.util.Date;
 public class Output {
 
 	private int idOutput;
-	private Date outputDate;
+	private String outputDate;
 	private double outputPrice;
 	private int outputQuantity;
 	private Product m_Product;
@@ -21,7 +21,7 @@ public class Output {
 
 	}
 
-    public Output(int idOutput, Date outputDate, double outputPrice, int outputQuantity, Product m_Product, User m_User) {
+    public Output(int idOutput, String outputDate, double outputPrice, int outputQuantity, Product m_Product, User m_User) {
         this.idOutput = idOutput;
         this.outputDate = outputDate;
         this.outputPrice = outputPrice;
@@ -38,11 +38,11 @@ public class Output {
         this.idOutput = idOutput;
     }
 
-    public Date getOutputDate() {
+    public String getOutputDate() {
         return outputDate;
     }
 
-    public void setOutputDate(Date outputDate) {
+    public void setOutputDate(String outputDate) {
         this.outputDate = outputDate;
     }
 

@@ -218,7 +218,7 @@ public class FrmProduct extends javax.swing.JFrame {
         jTxtQuantity.setText("Cantidad:");
         jTxtQuantity.setMaximumSize(new java.awt.Dimension(5000, 15));
         jTxtQuantity.setMinimumSize(new java.awt.Dimension(500, 15));
-        dataPanel.add(jTxtQuantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 360, 90, 40));
+        dataPanel.add(jTxtQuantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 360, 120, 40));
 
         jLabel2.setFont(new java.awt.Font("Inter SemiBold", 0, 24)); // NOI18N
         jLabel2.setText("INGRESE LOS DATOS DEL PRODUCTO");
@@ -230,19 +230,19 @@ public class FrmProduct extends javax.swing.JFrame {
         jLabel3.setText("Nombre: ");
         jLabel3.setMaximumSize(new java.awt.Dimension(5000, 15));
         jLabel3.setMinimumSize(new java.awt.Dimension(500, 15));
-        dataPanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 80, 40));
+        dataPanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 100, 40));
 
         jLabel4.setFont(new java.awt.Font("Inter SemiBold", 0, 18)); // NOI18N
         jLabel4.setText("Color:");
         jLabel4.setMaximumSize(new java.awt.Dimension(5000, 15));
         jLabel4.setMinimumSize(new java.awt.Dimension(500, 15));
-        dataPanel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, -1, 40));
+        dataPanel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(84, 160, 80, 40));
 
         jLabel5.setFont(new java.awt.Font("Inter SemiBold", 0, 18)); // NOI18N
         jLabel5.setText("Precio:");
         jLabel5.setMaximumSize(new java.awt.Dimension(5000, 15));
         jLabel5.setMinimumSize(new java.awt.Dimension(500, 15));
-        dataPanel.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, 60, 40));
+        dataPanel.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 220, 90, 40));
 
         jTFProductName.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         jTFProductName.setBorder(null);
@@ -345,7 +345,7 @@ public class FrmProduct extends javax.swing.JFrame {
         jLabel7.setText("Categoría:");
         jLabel7.setMaximumSize(new java.awt.Dimension(5000, 15));
         jLabel7.setMinimumSize(new java.awt.Dimension(500, 15));
-        dataPanel.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 290, 90, 40));
+        dataPanel.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 290, 120, 40));
 
         jTFProductPrice.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         jTFProductPrice.setBorder(null);
