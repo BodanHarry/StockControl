@@ -46,7 +46,6 @@ public class TblProduct {
             while (rs.next()) {
                 int idCategory = rs.getInt("CategoryID");
                 category = categories.getCategory(idCategory);
-                System.out.println(category);
                 list.add(new Product(
                         rs.getString("Productname"),
                         rs.getString("Productcolor"),
@@ -84,7 +83,6 @@ public class TblProduct {
 
     public boolean addProduct(Product product) {
         boolean saved = false;
-        System.out.println(product);
         try {
             this.getReg();
             rs.moveToInsertRow();
@@ -160,7 +158,7 @@ public class TblProduct {
             this.getReg();
             rs.beforeFirst();
             while (rs.next()) {
-                if (rs.getInt("ProducID") == product.getIdProduct()) {
+                if (rs.getInt("ProductID") == product.getIdProduct()) {
                     rs.updateString("Productname", product.getProductName());
                     rs.updateString("Productcolor", product.getProductColor());
                     rs.updateDouble("Productprice", product.getProductPrice());

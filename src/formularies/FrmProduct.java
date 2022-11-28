@@ -442,6 +442,7 @@ public class FrmProduct extends javax.swing.JFrame {
             Category productCategory = dCategory.findCategoryByName(categoryName);
             Product product = new Product(this.jTFProductName.getText(), this.jTFProductColor.getText()
             ,0, Double.parseDouble(this.jTFProductQuantity.getText()), productCategory, Integer.parseInt(jTFProductQuantity.getText()));
+            
             if (dProduct.addProduct(product)) {
                 JOptionPane.showMessageDialog(this, "Registro Guardado",
                     "Producto", JOptionPane.INFORMATION_MESSAGE);
@@ -485,6 +486,7 @@ public class FrmProduct extends javax.swing.JFrame {
         Category editableCategory = dCategory.findCategoryByName(String.valueOf(combo.getSelectedItem()));
         Product editableProduct = new Product(this.jTFProductName.getText(),this.jTFProductColor.getText(),idProduct, 
                 Double.parseDouble(this.jTFProductPrice.getText()), editableCategory, Integer.parseInt(jTFProductQuantity.getText()));
+        System.out.println(editableProduct);
         if(dProduct.editProduct(editableProduct)){
             JOptionPane.showMessageDialog(this, "Registro editado");
         }else{

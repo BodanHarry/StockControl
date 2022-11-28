@@ -4,6 +4,7 @@
  */
 package formularies;
 
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 /**
@@ -11,12 +12,12 @@ import javax.swing.JPanel;
  * @author hebod
  */
 public class FrmNews extends javax.swing.JFrame {
-
     /**
      * Creates new form FrmNewa
      */
     public FrmNews() {
         initComponents();
+        jImages.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/China.gif")));
     }
 
     /**
@@ -29,7 +30,7 @@ public class FrmNews extends javax.swing.JFrame {
     private void initComponents() {
 
         jMainPanelNews = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        jImages = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(880, 520));
@@ -41,11 +42,13 @@ public class FrmNews extends javax.swing.JFrame {
         jMainPanelNews.setMinimumSize(new java.awt.Dimension(880, 520));
         jMainPanelNews.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel1.setFont(new java.awt.Font("SansSerif", 3, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("News");
-        jMainPanelNews.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 230, -1, -1));
+        jImages.setBackground(new java.awt.Color(0, 0, 0));
+        jImages.setFont(new java.awt.Font("SansSerif", 3, 24)); // NOI18N
+        jImages.setForeground(new java.awt.Color(0, 0, 0));
+        jImages.setMaximumSize(new java.awt.Dimension(880, 520));
+        jImages.setMinimumSize(new java.awt.Dimension(880, 520));
+        jImages.setPreferredSize(new java.awt.Dimension(880, 520));
+        jMainPanelNews.add(jImages, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 880, 520));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -103,7 +106,7 @@ public class FrmNews extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jImages;
     private javax.swing.JPanel jMainPanelNews;
     // End of variables declaration//GEN-END:variables
 }
