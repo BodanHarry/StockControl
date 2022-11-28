@@ -506,6 +506,8 @@ public class FrmInput extends javax.swing.JFrame {
             
             if(dInput.addInput(input)){
                 JOptionPane.showMessageDialog(this, "Registro guardado", "Entrada", JOptionPane.INFORMATION_MESSAGE);
+                this.fillTable();
+                this.JTBP.setSelectedIndex(1);
             }else{
                 JOptionPane.showMessageDialog(this, "Error al guardar");
             }
