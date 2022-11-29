@@ -467,7 +467,7 @@ public class FrmProduct extends javax.swing.JFrame {
             Category productCategory = dCategory.findCategoryByName(categoryName);
             Product product = new Product(this.jTfProductName.getText(), this.jTfProductColor.getText(),
                      0, Double.parseDouble(this.jTfProductQuantity.getText()), productCategory, Integer.parseInt(jTfProductQuantity.getText()));
-
+            
             if (dProduct.addProduct(product)) {
                 JOptionPane.showMessageDialog(this, "Registro Guardado",
                         "Producto", JOptionPane.INFORMATION_MESSAGE);

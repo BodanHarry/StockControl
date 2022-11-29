@@ -110,7 +110,7 @@ public class FrmInput extends javax.swing.JFrame {
         this.jTfInputPrice.setText("");
         this.jTfInputQuantity.setText("");
         this.jTxtID.setText("");
-        BtnGuardar.setEnabled(true);
+        jBtnSave.setEnabled(true);
         BtnEliminar.setEnabled(false);
     }
 
@@ -185,7 +185,7 @@ public class FrmInput extends javax.swing.JFrame {
         String actualUser = inputList.get(row).getM_User().getUserName();
         this.setCombo(actualUser, comboUser);
         this.JTBP.setSelectedIndex(0);
-        BtnGuardar.setEnabled(true);
+        jBtnSave.setEnabled(true);
         BtnEliminar.setEnabled(true);
         jTfInputQuantity.requestFocus();
     }
@@ -217,7 +217,7 @@ public class FrmInput extends javax.swing.JFrame {
         jLbQuantity = new javax.swing.JLabel();
         jTfDate = new javax.swing.JTextField();
         jTfInputQuantity = new javax.swing.JTextField();
-        BtnGuardar = new javax.swing.JButton();
+        jBtnSave = new javax.swing.JButton();
         BtnNuevo = new javax.swing.JButton();
         BtnEliminar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
@@ -300,27 +300,27 @@ public class FrmInput extends javax.swing.JFrame {
         jTfInputQuantity.setCaretColor(new java.awt.Color(255, 255, 255));
         dataPanel.add(jTfInputQuantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 230, 450, 30));
 
-        BtnGuardar.setBackground(new java.awt.Color(0, 153, 153));
-        BtnGuardar.setFont(new java.awt.Font("Inter Black", 0, 15)); // NOI18N
-        BtnGuardar.setForeground(new java.awt.Color(255, 255, 255));
-        BtnGuardar.setText("Guardar");
-        BtnGuardar.setBorder(null);
-        BtnGuardar.addActionListener(new java.awt.event.ActionListener() {
+        jBtnSave.setBackground(new java.awt.Color(0, 153, 153));
+        jBtnSave.setFont(new java.awt.Font("Inter Black", 0, 15)); // NOI18N
+        jBtnSave.setForeground(new java.awt.Color(255, 255, 255));
+        jBtnSave.setText("Guardar");
+        jBtnSave.setBorder(null);
+        jBtnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnGuardarActionPerformed(evt);
+                jBtnSaveActionPerformed(evt);
             }
         });
-        BtnGuardar.addKeyListener(new java.awt.event.KeyAdapter() {
+        jBtnSave.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                BtnGuardarKeyTyped(evt);
+                jBtnSaveKeyTyped(evt);
             }
         });
-        dataPanel.add(BtnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 430, 130, 40));
+        dataPanel.add(jBtnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 430, 130, 40));
 
         BtnNuevo.setBackground(new java.awt.Color(0, 153, 153));
         BtnNuevo.setFont(new java.awt.Font("Inter Black", 0, 15)); // NOI18N
         BtnNuevo.setForeground(new java.awt.Color(255, 255, 255));
-        BtnNuevo.setText("Nuevo Producto");
+        BtnNuevo.setText("Nueva entrada");
         BtnNuevo.setBorder(null);
         BtnNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -496,14 +496,15 @@ public class FrmInput extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGuardarActionPerformed
+    private void jBtnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSaveActionPerformed
         // TODO add your handling code here:
         this.verificarDatosVacios();
         try {
             User user = dUser.getUser(String.valueOf(comboUser.getSelectedItem()));
             Product product = dProduct.getProductByName(String.valueOf(comboProduct.getSelectedItem()));
-            System.out.println(user);
-            System.out.println(product);
+            product.setProductQuantity(product.getProductQuantity() + Integer.parseInt(jTfInputQuantity.getText()));
+            dProduct.editProduct(product);
+            
 
             Input input = new Input(
                     0,
@@ -526,7 +527,7 @@ public class FrmInput extends javax.swing.JFrame {
             System.out.println("Error al intentar guardar" + es.getMessage());
         }
 
-    }//GEN-LAST:event_BtnGuardarActionPerformed
+    }//GEN-LAST:event_jBtnSaveActionPerformed
 
     private void BtnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNuevoActionPerformed
         // TODO add your handling code here:
@@ -582,9 +583,9 @@ public class FrmInput extends javax.swing.JFrame {
         });
     }//GEN-LAST:event_jTblRegMouseClicked
 
-    private void BtnGuardarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnGuardarKeyTyped
+    private void jBtnSaveKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jBtnSaveKeyTyped
         // TODO add your handling code here:
-    }//GEN-LAST:event_BtnGuardarKeyTyped
+    }//GEN-LAST:event_jBtnSaveKeyTyped
 
     public JPanel getFondo() {
         return jMainPanelinput;
@@ -627,10 +628,10 @@ public class FrmInput extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnEliminar;
-    private javax.swing.JButton BtnGuardar;
     private javax.swing.JButton BtnNuevo;
     private javax.swing.JTabbedPane JTBP;
     private javax.swing.JPanel dataPanel;
+    private javax.swing.JButton jBtnSave;
     private javax.swing.JComboBox<String> jComboBoxProduct;
     private javax.swing.JComboBox<String> jComboBoxUser;
     private javax.swing.JLabel jLbAmount;

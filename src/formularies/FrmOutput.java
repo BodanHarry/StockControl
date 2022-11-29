@@ -138,10 +138,10 @@ public class FrmOutput extends javax.swing.JFrame {
         jLbUser.setText("Usuario:");
         jLbUser.setMaximumSize(new java.awt.Dimension(5000, 15));
         jLbUser.setMinimumSize(new java.awt.Dimension(500, 15));
-        dataPanel.add(jLbUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 370, 140, 40));
+        dataPanel.add(jLbUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 360, 70, 40));
 
         jLbPrincipal.setFont(new java.awt.Font("Inter SemiBold", 0, 24)); // NOI18N
-        jLbPrincipal.setText("INGRESE LOS DATOS DE ENTRADA");
+        jLbPrincipal.setText("INGRESE LOS DATOS DE SALIDA");
         jLbPrincipal.setMaximumSize(new java.awt.Dimension(5000, 15));
         jLbPrincipal.setMinimumSize(new java.awt.Dimension(500, 15));
         dataPanel.add(jLbPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 20, 450, 60));
@@ -156,7 +156,7 @@ public class FrmOutput extends javax.swing.JFrame {
         jLbQuantity.setText("Cantidad:");
         jLbQuantity.setMaximumSize(new java.awt.Dimension(5000, 15));
         jLbQuantity.setMinimumSize(new java.awt.Dimension(500, 15));
-        dataPanel.add(jLbQuantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, 110, 40));
+        dataPanel.add(jLbQuantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 220, -1, 40));
 
         jTfDate.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         jTfDate.setBorder(null);
@@ -188,7 +188,7 @@ public class FrmOutput extends javax.swing.JFrame {
         jBtnNew.setBackground(new java.awt.Color(0, 153, 153));
         jBtnNew.setFont(new java.awt.Font("Inter Black", 0, 15)); // NOI18N
         jBtnNew.setForeground(new java.awt.Color(255, 255, 255));
-        jBtnNew.setText("Nuevo Producto");
+        jBtnNew.setText("Nueva Salida");
         jBtnNew.setBorder(null);
         jBtnNew.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -243,7 +243,7 @@ public class FrmOutput extends javax.swing.JFrame {
         jLbProduct.setText("Producto:");
         jLbProduct.setMaximumSize(new java.awt.Dimension(5000, 15));
         jLbProduct.setMinimumSize(new java.awt.Dimension(500, 15));
-        dataPanel.add(jLbProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, 120, 40));
+        dataPanel.add(jLbProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 290, 80, 40));
 
         dataPanel.add(jComboBoxProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 300, 450, 30));
 
@@ -266,7 +266,7 @@ public class FrmOutput extends javax.swing.JFrame {
         jLbAmount.setText("Monto productos:");
         jLbAmount.setMaximumSize(new java.awt.Dimension(5000, 15));
         jLbAmount.setMinimumSize(new java.awt.Dimension(500, 15));
-        dataPanel.add(jLbAmount, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 170, 30));
+        dataPanel.add(jLbAmount, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 140, 30));
 
         JTBP.addTab("Datos", dataPanel);
 
@@ -484,13 +484,19 @@ public class FrmOutput extends javax.swing.JFrame {
     private void jBtnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSaveActionPerformed
         // TODO add your handling code here:
         this.verificarDatosVacios();
-        try {
+        try{
+            
             User user = dUser.getUser(String.valueOf(comboUser.getSelectedItem()));
             Product product = dProduct.getProductByName(String.valueOf(comboProduct.getSelectedItem()));
-            System.out.println(user);
-            System.out.println(product);
+            
+            if(product.getProductQuantity() - Integer.parseInt(jTfOutputQuantity.getText()) < 0){
+                JOptionPane.showMessageDialog(this, "La cantidad no debe ser mayor que la existencia: " + product.getProductQuantity(), "Salida", JOptionPane.INFORMATION_MESSAGE);
+                this.clear();
+            }else{
+                product.setProductQuantity(product.getProductQuantity() - Integer.parseInt(jTfOutputQuantity.getText()));
+                dProduct.editProduct(product);
 
-            Output output = new Output(
+                Output output = new Output(
                     0,
                     this.jTfDate.getText(),
                     Integer.parseInt(this.jTfOutputQuantity.getText()) * product.getProductPrice(),
@@ -507,6 +513,9 @@ public class FrmOutput extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Error al guardar");
             }
 
+            
+            }
+            
         } catch (HeadlessException es) {
             System.out.println("Error al intentar guardar" + es.getMessage());
         }

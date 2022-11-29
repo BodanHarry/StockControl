@@ -51,7 +51,7 @@ public class FrmCategory extends javax.swing.JFrame {
         jLbPrincipal.setForeground(foregroundColor);
         jLbType.setForeground(foregroundColor);
         jLbDescription.setForeground(foregroundColor);
-        jLbType.setForeground(foregroundColor);
+        jLbSize.setForeground(foregroundColor);
         jLbSearch.setForeground(foregroundColor);
         jTfProductType.setBackground(principalColor);
         jTfProductType.setForeground(foregroundColor);
