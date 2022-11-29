@@ -56,6 +56,12 @@ GO
 
 /* Create Tables */
 
+CREATE TABLE [ColorIdentifier]
+(
+	[ColorID] int NOT NULL,
+)
+GO
+
 CREATE TABLE [Category]
 (
 	[CategoryID] int NOT NULL IDENTITY (1, 1),
@@ -155,3 +161,6 @@ GO
 ALTER TABLE [Product] ADD CONSTRAINT [FK_Product_Category]
 	FOREIGN KEY ([CategoryID]) REFERENCES [Category] ([CategoryID]) ON DELETE No Action ON UPDATE No Action
 GO
+
+INSERT INTO ColorIdentifier
+    VALUES (0)
