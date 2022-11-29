@@ -449,6 +449,7 @@ public class FrmRegister extends javax.swing.JFrame {
             System.out.println("Error al intentar guardar" + es.getMessage());
         }finally{
             main.setVisible(true);
+            this.dispose();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
