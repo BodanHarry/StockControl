@@ -91,7 +91,7 @@ public class FrmUser extends javax.swing.JFrame {
         userList = dUser.listaUser();
     }
 
-    private void fillTable() {
+    public void fillTable() {
         fillList();
         DefaultTableModel dtm = new DefaultTableModel() {
             @Override

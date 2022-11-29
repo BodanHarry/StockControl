@@ -8,14 +8,14 @@ import javax.swing.JPanel;
 
 public class FrmCreateAccount extends javax.swing.JFrame {
 
+    FrmRegister registro = new FrmRegister();
     Color principalColor;
     Color foregroundColor;
-    
+
     SendEmail sendEmail = new SendEmail();
-    
+
     private final TblMode dMode = new TblMode();
 
-    
     public FrmCreateAccount() {
         initComponents();
 
@@ -35,7 +35,6 @@ public class FrmCreateAccount extends javax.swing.JFrame {
 
     }
 
-  
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -202,10 +201,21 @@ public class FrmCreateAccount extends javax.swing.JFrame {
     }//GEN-LAST:event_jTfCreateUserActionPerformed
 
     private void jBtnVerifyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnVerifyMouseClicked
-        JOptionPane.showMessageDialog(this, "Intento de login con los datos:\nUsuario: " + jTfCreateUser.getText() + "\nCorreo: " + String.valueOf(jTfCreateEmail.getText()));
-        String email = jTfCreateEmail.getText();
-        String temporaryPassword = sendEmail.createEmail(email);
-        sendEmail.SendEmail();
+        try {
+            JOptionPane.showMessageDialog(this, "Intento de login con los datos:\nUsuario: " + jTfCreateUser.getText() + "\nCorreo: " + String.valueOf(jTfCreateEmail.getText()));
+            String email = jTfCreateEmail.getText();
+            String user = jTfCreateUser.getText();
+            String temporaryPassword = sendEmail.createEmail(email);
+            
+            sendEmail.SendEmail();
+            
+            registro.setVisible(true);
+            registro.setUserEmail(user, email);
+            registro.setLocationRelativeTo(null);
+        }catch(Exception ex){
+            System.out.println("Error al conectar con el correo " + ex);
+        }
+
     }//GEN-LAST:event_jBtnVerifyMouseClicked
 
     private void jBtnVerifyMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnVerifyMouseEntered
@@ -239,7 +249,7 @@ public class FrmCreateAccount extends javax.swing.JFrame {
     public JPanel getFondo() {
         return jMainPanelCreateAccount;
     }
-    
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
