@@ -118,7 +118,10 @@ public class FrmInput extends javax.swing.JFrame {
         fillProductList();
 
         for (Product product : productList) {
-            comboProduct.addElement(product.getProductName() + " " + product.getM_Category().getProductType() + " " + product.getM_Category().getProductSize() + " " + product.getProductColor());
+            comboProduct.addElement(product.getProductName() + " "
+                    + product.getM_Category().getProductType() + " "
+                    + product.getM_Category().getProductSize() + " "
+                    + product.getProductColor());
         }
 
         this.jComboBoxProduct.setModel(comboProduct);
@@ -180,7 +183,10 @@ public class FrmInput extends javax.swing.JFrame {
         this.jTxtID.setText(String.valueOf(inputList.get(row).getIdInput()));
         this.jTfInputQuantity.setText(String.valueOf(inputList.get(row).getInputQuantity()));
         idInput = inputList.get(row).getIdInput();
-        String actualProduct = inputList.get(row).getM_Product().getProductName() + " " + inputList.get(row).getM_Product().getM_Category().getProductType() + " " + inputList.get(row).getM_Product().getM_Category().getProductSize() + " " + inputList.get(row).getM_Product().getProductColor();
+        String actualProduct = inputList.get(row).getM_Product().getProductName()
+                + " " + inputList.get(row).getM_Product().getM_Category().getProductType()
+                + " " + inputList.get(row).getM_Product().getM_Category().getProductSize()
+                + " " + inputList.get(row).getM_Product().getProductColor();
         this.setCombo(actualProduct, comboProduct);
         String actualUser = inputList.get(row).getM_User().getUserName();
         this.setCombo(actualUser, comboUser);
@@ -270,7 +276,7 @@ public class FrmInput extends javax.swing.JFrame {
         jLbUser.setText("Usuario:");
         jLbUser.setMaximumSize(new java.awt.Dimension(5000, 15));
         jLbUser.setMinimumSize(new java.awt.Dimension(500, 15));
-        dataPanel.add(jLbUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 370, 140, 40));
+        dataPanel.add(jLbUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 370, 120, 40));
 
         jLbPrincipal.setFont(new java.awt.Font("Inter SemiBold", 0, 24)); // NOI18N
         jLbPrincipal.setText("INGRESE LOS DATOS DE ENTRADA");
@@ -282,13 +288,13 @@ public class FrmInput extends javax.swing.JFrame {
         jLbDate.setText("Fecha: ");
         jLbDate.setMaximumSize(new java.awt.Dimension(5000, 15));
         jLbDate.setMinimumSize(new java.awt.Dimension(500, 15));
-        dataPanel.add(jLbDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 90, 40));
+        dataPanel.add(jLbDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, 90, 40));
 
         jLbQuantity.setFont(new java.awt.Font("Inter SemiBold", 0, 18)); // NOI18N
         jLbQuantity.setText("Cantidad:");
         jLbQuantity.setMaximumSize(new java.awt.Dimension(5000, 15));
         jLbQuantity.setMinimumSize(new java.awt.Dimension(500, 15));
-        dataPanel.add(jLbQuantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, 110, 40));
+        dataPanel.add(jLbQuantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 230, 110, 40));
 
         jTfDate.setFont(new java.awt.Font("Inter Medium", 0, 14)); // NOI18N
         jTfDate.setBorder(null);
@@ -375,9 +381,9 @@ public class FrmInput extends javax.swing.JFrame {
         jLbProduct.setText("Producto:");
         jLbProduct.setMaximumSize(new java.awt.Dimension(5000, 15));
         jLbProduct.setMinimumSize(new java.awt.Dimension(500, 15));
-        dataPanel.add(jLbProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, 120, 40));
+        dataPanel.add(jLbProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 170, 120, 40));
 
-        dataPanel.add(jComboBoxProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 300, 450, 30));
+        dataPanel.add(jComboBoxProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 170, 450, 30));
 
         jSeparator6.setBackground(new java.awt.Color(0, 147, 147));
         jSeparator6.setForeground(new java.awt.Color(0, 147, 147));
@@ -388,7 +394,7 @@ public class FrmInput extends javax.swing.JFrame {
         dataPanel.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 330, 450, 20));
 
         jTfInputPrice.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        dataPanel.add(jTfInputPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 170, 450, 30));
+        dataPanel.add(jTfInputPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 300, 450, 30));
 
         jSeparator8.setBackground(new java.awt.Color(0, 147, 147));
         jSeparator8.setForeground(new java.awt.Color(0, 147, 147));
@@ -398,7 +404,7 @@ public class FrmInput extends javax.swing.JFrame {
         jLbAmount.setText("Monto productos:");
         jLbAmount.setMaximumSize(new java.awt.Dimension(5000, 15));
         jLbAmount.setMinimumSize(new java.awt.Dimension(500, 15));
-        dataPanel.add(jLbAmount, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 170, 30));
+        dataPanel.add(jLbAmount, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, 170, 30));
 
         JTBP.addTab("Datos", dataPanel);
 
@@ -502,25 +508,32 @@ public class FrmInput extends javax.swing.JFrame {
         try {
             User user = dUser.getUser(String.valueOf(comboUser.getSelectedItem()));
             Product product = dProduct.getProductByName(String.valueOf(comboProduct.getSelectedItem()));
-            product.setProductQuantity(product.getProductQuantity() + Integer.parseInt(jTfInputQuantity.getText()));
-            dProduct.editProduct(product);
-            
-
-            Input input = new Input(
-                    0,
-                    this.jTfDate.getText(),
-                    Integer.parseInt(this.jTfInputQuantity.getText()) * product.getProductPrice(),
-                    Integer.parseInt(this.jTfInputQuantity.getText()),
-                    product,
-                    user
-            );
-
-            if (dInput.addInput(input)) {
-                JOptionPane.showMessageDialog(this, "Registro guardado", "Entrada", JOptionPane.INFORMATION_MESSAGE);
-                this.fillTable();
-                this.JTBP.setSelectedIndex(1);
+            if (Integer.parseInt(jTfInputQuantity.getText()) < 0) {
+                JOptionPane.showMessageDialog(this, "La cantidad no puede ser un número negativo");
+                this.clear();
             } else {
-                JOptionPane.showMessageDialog(this, "Error al guardar");
+                product.setProductQuantity(product.getProductQuantity()
+                        + Integer.parseInt(jTfInputQuantity.getText()));
+                dProduct.editProduct(product);
+                Input input = new Input(
+                        0,
+                        this.jTfDate.getText(),
+                        Integer.parseInt(this.jTfInputQuantity.getText())
+                        * product.getProductPrice(),
+                        Integer.parseInt(this.jTfInputQuantity.getText()),
+                        product,
+                        user
+                );
+                if (Integer.parseInt(jTfInputQuantity.getText()) > 0) {
+                    if (dInput.addInput(input)) {
+                        JOptionPane.showMessageDialog(this, "Registro guardado",
+                                "Entrada", JOptionPane.INFORMATION_MESSAGE);
+                        this.fillTable();
+                        this.JTBP.setSelectedIndex(1);
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Error al guardar");
+                    }
+                }
             }
 
         } catch (HeadlessException es) {
@@ -543,9 +556,11 @@ public class FrmInput extends javax.swing.JFrame {
                 JOptionPane.QUESTION_MESSAGE);
         if (resp == 0) {
             if (dInput.removeInput(idInput)) {
-                JOptionPane.showMessageDialog(this, "Entrada eliminada", "Entrada", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Entrada eliminada",
+                        "Entrada", JOptionPane.INFORMATION_MESSAGE);
             } else {
-                JOptionPane.showMessageDialog(this, "Error al eliminar ", "Entradar", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Error al eliminar ",
+                        "Entradar", JOptionPane.WARNING_MESSAGE);
             }
         }
         this.clear();

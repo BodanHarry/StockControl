@@ -91,7 +91,7 @@ public class TblUser {
                 }
             }
         } catch (SQLException ex) {
-            System.out.println("Error al buscar autor: " + ex.getMessage());
+            System.out.println("Error al buscar usuario: " + ex.getMessage());
         } finally {
 
             

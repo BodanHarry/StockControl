@@ -243,9 +243,9 @@ public class FrmOutput extends javax.swing.JFrame {
         jLbProduct.setText("Producto:");
         jLbProduct.setMaximumSize(new java.awt.Dimension(5000, 15));
         jLbProduct.setMinimumSize(new java.awt.Dimension(500, 15));
-        dataPanel.add(jLbProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 290, 80, 40));
+        dataPanel.add(jLbProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, 130, 40));
 
-        dataPanel.add(jComboBoxProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 300, 450, 30));
+        dataPanel.add(jComboBoxProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 170, 450, 30));
 
         jSeparator6.setBackground(new java.awt.Color(0, 147, 147));
         jSeparator6.setForeground(new java.awt.Color(0, 147, 147));
@@ -256,7 +256,7 @@ public class FrmOutput extends javax.swing.JFrame {
         dataPanel.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 330, 450, 20));
 
         jTfInputPrice.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        dataPanel.add(jTfInputPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 170, 450, 30));
+        dataPanel.add(jTfInputPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 300, 450, 30));
 
         jSeparator8.setBackground(new java.awt.Color(0, 147, 147));
         jSeparator8.setForeground(new java.awt.Color(0, 147, 147));
@@ -266,7 +266,7 @@ public class FrmOutput extends javax.swing.JFrame {
         jLbAmount.setText("Monto productos:");
         jLbAmount.setMaximumSize(new java.awt.Dimension(5000, 15));
         jLbAmount.setMinimumSize(new java.awt.Dimension(500, 15));
-        dataPanel.add(jLbAmount, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 140, 30));
+        dataPanel.add(jLbAmount, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, 160, 30));
 
         JTBP.addTab("Datos", dataPanel);
 
@@ -398,7 +398,10 @@ public class FrmOutput extends javax.swing.JFrame {
         fillProductList();
 
         for (Product product : productList) {
-            comboProduct.addElement(product.getProductName() + " " + product.getM_Category().getProductType() + " " + product.getM_Category().getProductSize() + " " + product.getProductColor());
+            comboProduct.addElement(product.getProductName() +
+                    " " + product.getM_Category().getProductType() + 
+                    " " + product.getM_Category().getProductSize() +
+                    " " + product.getProductColor());
         }
 
         this.jComboBoxProduct.setModel(comboProduct);
@@ -489,11 +492,17 @@ public class FrmOutput extends javax.swing.JFrame {
             User user = dUser.getUser(String.valueOf(comboUser.getSelectedItem()));
             Product product = dProduct.getProductByName(String.valueOf(comboProduct.getSelectedItem()));
             
-            if(product.getProductQuantity() - Integer.parseInt(jTfOutputQuantity.getText()) < 0){
-                JOptionPane.showMessageDialog(this, "La cantidad no debe ser mayor que la existencia: " + product.getProductQuantity(), "Salida", JOptionPane.INFORMATION_MESSAGE);
+            if(product.getProductQuantity() - Integer.parseInt(jTfOutputQuantity.getText()) < 0 ){
+                JOptionPane.showMessageDialog(this, "La cantidad no debe ser mayor que la existencia: "
+                        + product.getProductQuantity(), "Salida", JOptionPane.INFORMATION_MESSAGE);
                 this.clear();
-            }else{
-                product.setProductQuantity(product.getProductQuantity() - Integer.parseInt(jTfOutputQuantity.getText()));
+            }else if(Integer.parseInt(jTfOutputQuantity.getText()) < 0){
+               JOptionPane.showMessageDialog(this, "La cantidad no puede ser un número negativo");
+
+            }
+            else{
+                product.setProductQuantity(product.getProductQuantity() - 
+                        Integer.parseInt(jTfOutputQuantity.getText()));
                 dProduct.editProduct(product);
 
                 Output output = new Output(

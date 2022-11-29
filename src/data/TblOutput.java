@@ -9,10 +9,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+
 import models.Product;
 import models.User;
 
@@ -42,7 +42,6 @@ public class TblOutput {
 
     public ArrayList<Output> outputList() {
         ArrayList<Output> list = new ArrayList<>();
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         TblProduct products = new TblProduct();
         Product product;
         TblUser users = new TblUser();

@@ -439,21 +439,24 @@ public class FrmRegister extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Registro Guardado",
                          "User", JOptionPane.INFORMATION_MESSAGE);
                 usuario.fillTable();
-                
+                 main.setVisible(true);
+                this.dispose();
             } else {
                 JOptionPane.showMessageDialog(this, "Error al guardar");
+                clearPass();
             }
             }
            
         } catch (HeadlessException es) {
             System.out.println("Error al intentar guardar" + es.getMessage());
-        }finally{
-            main.setVisible(true);
-            this.dispose();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    
+    private void clearPass(){
+         jPf1.setText("");
+                jPf2.setText("");
+                jPf1.requestFocus();
+    }
     private String checkPass() {
         Boolean flag = true;
         if(flag) {
@@ -465,7 +468,7 @@ public class FrmRegister extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Contraseñas inválidas",
                         "Vuelva a intentar", JOptionPane.WARNING_MESSAGE);
                 flag = true;
-                usuario.clearPass();
+                clearPass();
             }
         }
         return String.valueOf(jPf2.getText());

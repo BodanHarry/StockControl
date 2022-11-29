@@ -140,17 +140,17 @@ public class FrmUser extends javax.swing.JFrame {
             jTfUsername.requestFocus();
         }
         if (jTfEmail.getText().equals("") || jTfEmail.getText().length() == 0) {
-            JOptionPane.showMessageDialog(this, "Por favor verifique los apellidos "
+            JOptionPane.showMessageDialog(this, "Por favor verifique el email "
                     + "no esten vacios.", "Autor", JOptionPane.WARNING_MESSAGE);
             jTfEmail.requestFocus();
         }
         if (jPfPassword2.getText().equals("") || jPfPassword2.getText().length() == 0) {
-            JOptionPane.showMessageDialog(this, "Por favor verifique los apellidos "
+            JOptionPane.showMessageDialog(this, "Por favor verifique la contraseña "
                     + "no esten vacios.", "Autor", JOptionPane.WARNING_MESSAGE);
             jPfPassword2.requestFocus();
         }
         if (jPfPassword2.getText().equals("") || jPfPassword2.getText().length() == 0) {
-            JOptionPane.showMessageDialog(this, "Por favor verifique los apellidos "
+            JOptionPane.showMessageDialog(this, "Por favor verifique la contraseña "
                     + "no esten vacios.", "Autor", JOptionPane.WARNING_MESSAGE);
             jPfPassword2.requestFocus();
         }
