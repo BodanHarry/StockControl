@@ -25,6 +25,8 @@ public class FrmOptions extends javax.swing.JFrame {
 
         jMainPanelOptions.setBackground(principalColor);
         jLbOptions.setForeground(foregroundColor);
+        jLbMessage1.setForeground(foregroundColor);
+        jLbMessage2.setForeground(foregroundColor);
     }
 
     @SuppressWarnings("unchecked")
@@ -44,6 +46,8 @@ public class FrmOptions extends javax.swing.JFrame {
         jBtnSpanish = new javax.swing.JButton();
         jBtnEnglish = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jLbMessage1 = new javax.swing.JLabel();
+        jLbMessage2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(880, 520));
@@ -106,7 +110,7 @@ public class FrmOptions extends javax.swing.JFrame {
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
-        jMainPanelOptions.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 280, 50));
+        jMainPanelOptions.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 280, 50));
 
         jPanel2.setBackground(new java.awt.Color(0, 147, 147));
 
@@ -156,7 +160,7 @@ public class FrmOptions extends javax.swing.JFrame {
                 jBtnSpanishActionPerformed(evt);
             }
         });
-        jMainPanelOptions.add(jBtnSpanish, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 280, -1, -1));
+        jMainPanelOptions.add(jBtnSpanish, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 320, -1, -1));
 
         jBtnEnglish.setBackground(new java.awt.Color(1, 97, 112));
         jBtnEnglish.setForeground(new java.awt.Color(255, 255, 255));
@@ -166,7 +170,7 @@ public class FrmOptions extends javax.swing.JFrame {
                 jBtnEnglishActionPerformed(evt);
             }
         });
-        jMainPanelOptions.add(jBtnEnglish, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 280, -1, -1));
+        jMainPanelOptions.add(jBtnEnglish, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 320, -1, -1));
 
         jButton2.setBackground(new java.awt.Color(0, 147, 147));
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
@@ -177,6 +181,12 @@ public class FrmOptions extends javax.swing.JFrame {
             }
         });
         jMainPanelOptions.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 420, 200, -1));
+
+        jLbMessage1.setText("Al cambiar de modo, la aplicación se cerrará.");
+        jMainPanelOptions.add(jLbMessage1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, -1, -1));
+
+        jLbMessage2.setText("Vuelva a ejecutar al aplicación y notará los cambios");
+        jMainPanelOptions.add(jLbMessage2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -194,16 +204,15 @@ public class FrmOptions extends javax.swing.JFrame {
 
     private void jBtnChangeModeDarkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnChangeModeDarkActionPerformed
         if (dMode.changeMode(1)) {
-            System.out.println("Éxito");
+            System.exit(0);
         }
-        this.repaint();
     }//GEN-LAST:event_jBtnChangeModeDarkActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (dMode.changeMode(0)) {
-            System.out.println("Éxito");
+            System.exit(0);
         }
-        this.repaint();
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jBtnSpanishActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSpanishActionPerformed
@@ -265,6 +274,8 @@ public class FrmOptions extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLbMessage1;
+    private javax.swing.JLabel jLbMessage2;
     private javax.swing.JLabel jLbOptions;
     private javax.swing.JPanel jMainPanelOptions;
     private javax.swing.JPanel jPanel1;

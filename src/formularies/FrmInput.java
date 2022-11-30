@@ -508,8 +508,8 @@ public class FrmInput extends javax.swing.JFrame {
         try {
             User user = dUser.getUser(String.valueOf(comboUser.getSelectedItem()));
             Product product = dProduct.getProductByName(String.valueOf(comboProduct.getSelectedItem()));
-            if (Integer.parseInt(jTfInputQuantity.getText()) < 0) {
-                JOptionPane.showMessageDialog(this, "La cantidad no puede ser un número negativo");
+            if (Integer.parseInt(jTfInputQuantity.getText()) < 0 || product.getProductQuantity() < Integer.parseInt(jTfInputQuantity.getText())) {
+                JOptionPane.showMessageDialog(this, "La cantidad no puede debitarse; este error se puede dar porque la cantidad ingresada es mayor que la existencia o debido a que escribiste un número negativo");
                 this.clear();
             } else {
                 product.setProductQuantity(product.getProductQuantity()
